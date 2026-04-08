@@ -37,7 +37,6 @@ parser.add_argument("--photfile", required=True,type=str, help='phot.data file')
 parser.add_argument("--singleproc",action="store_true")
 parser.add_argument("--sector",type=int,required=True)
 parser.add_argument("--N",type=int, default=4)
-parser.add_argument("--bursttab", type=str)
 args = parser.parse_args()
 
 cam = int(args.photfile.replace("/phot.data","").split("/")[-1][3])
@@ -51,7 +50,7 @@ def ctstomag(cts):
     # return cts
 # Burst time in TJD
 alldates = ""
-for datesfile in glob.glob(f"/lustre/scratch/sarchast/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/dates"):
+for datesfile in glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/dates"):
     thisorbit = datesfile.split("/")[-3]
     with open(datesfile, "r") as f:
         for line in f:
@@ -85,12 +84,11 @@ def plot(lcfile,dat):
     ybkg = d[:,6]
     tdiff = np.amin(np.round((xvals[1:] - xvals[:-1])*24*60*60).astype(int))
     srcname = lcfile.split('/')[-1]
-    GRBname = srcname.split("_")[1]
-    tburst = Time(dat['Trigger'][dat['GCN Name']==GRBname].to_numpy().astype(str)).jd-2457000
+    tpeak = xvals[np.nanargmax(yvals)]
     tdiffdays = tdiff/60/60/24.0
-    detorbit = dates['detorbit'][((tburst - dates['dates']) <= tdiffdays) & ((tburst - dates['dates']) > 0)][0]
-    src = sourcedata[np.isin([s+"_cleaned" for s in sourcedata['fname'].astype(str)],f"lcGRB/{srcname}")]
-    orbitfolders = [o.split("/")[-1] for o in glob.glob(f"/lustre/scratch/sarchast/s{args.sector:04}/cam{cam}-ccd{ccd}/o??")]
+    detorbit = dates['detorbit'][((tpeak - dates['dates']) <= tdiffdays) & ((tpeak - dates['dates']) > 0)][0]
+    src = sourcedata[np.isin([s+"_cleaned" for s in sourcedata['fname'].astype(str)], f"lcGRB/{srcname}")]
+    orbitfolders = [o.split("/")[-1] for o in glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/o??")]
     orbitnames = np.array(orbitfolders)
     xlims = []
     ylims = []
@@ -154,9 +152,9 @@ def plot(lcfile,dat):
         except ValueError:
             nosetlims = True 
         # recalculate rms, exclude negatives
-        inROI =  ((xvals-tburst) > (-0.5/24)) & ((xvals - tburst) < (1/24))  
+        inROI =  ((xvals-tpeak) > (-0.5/24)) & ((xvals - tpeak) < (1/24))  
         if np.sum(inROI)==0:
-            raise Exception("No data near Tburst")
+            raise Exception("No data near Peak")
         outROI = ~inROI
         subxvals = xvals[inROI]
         subyvals = yvals[inROI]
@@ -167,12 +165,12 @@ def plot(lcfile,dat):
         otherflux = yvals[(~np.isin(yvals,subyvals)) & (~np.isin(xvals,flaggedtimes))]
         otherrms = np.sqrt(np.average(otherflux**2))
         rms = np.sqrt(np.average(subyvals[subyvals>0]**2))
-        ctssensitivity = 3*np.sqrt(np.average(subyvals[(tburst-subxvals)>(200/60/60/24)]**2))
+        ctssensitivity = 3*np.sqrt(np.average(subyvals[(tpeak-subxvals)>(200/60/60/24)]**2))
         magsensitivity = ctstomag(ctssensitivity)
-        xmax = subxvals[np.amin(np.abs(subxvals-tburst))==np.abs(subxvals-tburst)]
+        xmax = subxvals[np.amin(np.abs(subxvals-tpeak))==np.abs(subxvals-tpeak)]
         ymax = subyvals[subxvals==xmax]
-        flagaroundmax = np.sum((flaggedtimes > (tburst-(2/24))) & (flaggedtimes < (tburst + (2/24))))
-        if (rms<(3*(otherrms))) or (flagaroundmax > 0) or (otherrms > rms) or (np.abs(xmax-tburst)*24*60*60 > 400):
+        flagaroundmax = np.sum((flaggedtimes > (tpeak-(2/24))) & (flaggedtimes < (tpeak + (2/24))))
+        if (rms<(3*(otherrms))) or (flagaroundmax > 0) or (otherrms > rms) or (np.abs(xmax-tpeak)*24*60*60 > 400):
              prefix="flag_"
         else:
              prefix=""
@@ -180,7 +178,7 @@ def plot(lcfile,dat):
         if errmax.size>1:
             errmax = errmax[0]
         ax.errorbar(xmax,ymax,errmax,ls='none',color='black',marker='*')
-        ax.axvline(tburst,ls='--',label="T Burst")
+        ax.axvline(tpeak,ls='--',label="Peak")
         ax.legend()
         if ylims:
             ax.set_ylim(ylims[0],ylims[1])
@@ -190,7 +188,7 @@ def plot(lcfile,dat):
         ax = fig.add_subplot(gs[-2,:])
         ax.scatter(xvals[~np.isin(xvals,flaggedtimes)],ybkg[~np.isin(xvals,flaggedtimes)],color='black')
         ax.scatter(xvals[np.isin(xvals,flaggedtimes)],ybkg[np.isin(xvals,flaggedtimes)],color='red',marker='X',label='flagged')
-        ax.axvline(tburst,ls='--',label="T Burst")
+        ax.axvline(tpeak,ls='--',label="Peak")
         ax.set_ylabel('Flux (counts/second)')
         ax.legend()
         if ylims:
@@ -202,7 +200,7 @@ def plot(lcfile,dat):
         axmag = fig.add_subplot(gs[-1,:])
         axmag.invert_yaxis()
                     
-        axmag.axvline(tburst,ls='--',label="T Burst")
+        axmag.axvline(tpeak,ls='--',label="Peak")
                #  if orbits is not None:
                #      orbitGAPlabel = ["o1a->o1b","o1b->o2a","o2a->o2b"]
                #      for o,olabel in zip(orbits,orbitGAPlabel):
@@ -212,11 +210,11 @@ def plot(lcfile,dat):
         maglimity = np.array([magsensitivity for m in maglimitx])
         axmag.scatter(xvals[(yvals>0) & (~np.isin(xvals,flaggedtimes)) & (~np.isin(xvals,maglimitx))],ctstomag(yvals[(yvals>0) & (~np.isin(xvals,flaggedtimes)) & (~np.isin(xvals,maglimitx))]),color='black')
         # subxmag = subxvals[(subyvals >0) & (subxvals > (xmax - (1/24))) & (subxvals < (xmax + 1/24))]
-        regxmag = subxmag[((tburst-subxmag) < (0.5/24)) & ((subxmag-tburst) < 1/24)]
-        regymag = subymag[((tburst-subxmag) < (0.5/24)) & ((subxmag-tburst) < 1/24)]
-        axmag.scatter(regxmag[~np.isin(regxmag,maglimitx)],regymag[~np.isin(regxmag,maglimitx)],color='blue',label=f"Near Tburst")
-        detxmag = subxmag[(subymag < ctstomag(3*otherrms)) & ((tburst-subxmag) < (0.5/24)) & ((subxmag-tburst) < 1/24)]
-        detymag = subymag[(subymag < ctstomag(3*otherrms)) & ((tburst-subxmag) < (0.5/24)) & ((subxmag-tburst) < 1/24)]
+        regxmag = subxmag[((tpeak-subxmag) < (0.5/24)) & ((subxmag-tpeak) < 1/24)]
+        regymag = subymag[((tpeak-subxmag) < (0.5/24)) & ((subxmag-tpeak) < 1/24)]
+        axmag.scatter(regxmag[~np.isin(regxmag,maglimitx)],regymag[~np.isin(regxmag,maglimitx)],color='blue',label=f"Near Peak")
+        detxmag = subxmag[(subymag < ctstomag(3*otherrms)) & ((tpeak-subxmag) < (0.5/24)) & ((subxmag-tpeak) < 1/24)]
+        detymag = subymag[(subymag < ctstomag(3*otherrms)) & ((tpeak-subxmag) < (0.5/24)) & ((subxmag-tpeak) < 1/24)]
         axmag.scatter(detxmag,detymag,color='goldenrod',label=f"mag < {ctstomag(3*otherrms)}")
         axmag.scatter(maglimitx,maglimity,color='black',marker='v',label=f"mag > {magsensitivity}")
         if len(detxmag)==1:
@@ -226,7 +224,7 @@ def plot(lcfile,dat):
         if numpts==0:
             prefix = "flag_"
            
-        axmag.set_xlim(tburst-(1/24),tburst+(2/24))
+        axmag.set_xlim(tpeak-(1/24),tpeak+(2/24))
         try:
             axmag.set_ylim(20,0.9*detymag.min())
         except Exception as e:
@@ -234,7 +232,7 @@ def plot(lcfile,dat):
                 
             
         axmag.legend() 
-        trigcand = Time(tburst+2457000,format='jd').iso
+        trigcand = Time(tpeak+2457000,format='jd').iso
        
         # plt.gca().set_xlabel('JD $-$ 2,457,000 (days)')
         axmag.set_xlabel('TJD (days)')
@@ -243,22 +241,22 @@ def plot(lcfile,dat):
         # ax.set_xlim(0.1,0.25)
         # ax.set_xscale("log")
 
-        mindiff = np.amin(np.abs(dates['dates'] - tburst))
-        thisFILE = dates['name'][np.abs(dates['dates'] - tburst)==mindiff]
+        mindiff = np.amin(np.abs(dates['dates'] - tpeak))
+        thisFILE = dates['name'][np.abs(dates['dates'] - tpeak)==mindiff]
         thisINDEX = np.where(dates['name']==thisFILE)[0]
         IMSIZE=20
         axs = [fig.add_subplot(gs[0,-2]),fig.add_subplot(gs[0,-1]),fig.add_subplot(gs[1,-2]),fig.add_subplot(gs[1,-1])]
         ax = axs[0]
         ax.set_title("data")
         try:
-            for curfile in glob.glob(f"/lustre/scratch/sarchast/s{args.sector:04}/cam{cam}-ccd{ccd}/{dates['detorbit'][thisINDEX][0]}/slice*/*{dates['name'][thisINDEX][0]}"):
+            for curfile in glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/{dates['detorbit'][thisINDEX][0]}/slice*/*{dates['name'][thisINDEX][0]}"):
                 if "conv_" in curfile:
                     thisCONV = curfile
                 if "interp_" in curfile:
                     thisINTERP = curfile
         except Exception as e:
             print(e)
-            print(f"/lustre/scratch/sarchast/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/",thisFILE)
+            print(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/",thisFILE)
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             with fits.open(thisINTERP) as hdul:
@@ -457,8 +455,8 @@ def plot(lcfile,dat):
            #      avg = np.zeros((15,15))
            #      sq = np.zeros((15,15))
            #      N = 0
-           #      for datenear in dates[((dates['dates'] - tburst)>(-0.5/24)) & ((dates['dates'] - tburst)< (1/24)) ]:
-           #          for curfile in glob.glob(f"/lustre/scratch/sarchast/s{args.sector:04}/cam{cam}-ccd{ccd}/{datenear['detorbit']}/slice*/*{datenear['name']}"): 
+           #      for datenear in dates[((dates['dates'] - tpeak)>(-0.5/24)) & ((dates['dates'] - tpeak)< (1/24)) ]:
+           #          for curfile in glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/{datenear['detorbit']}/slice*/*{datenear['name']}"): 
            #              if datenear['dates'].astype(float) not in flaggedtimes:
            #                  with fits.open(curfile) as hdul:
            #                      avg += hdul[0].data[(irow-7):(irow+8),(icol-7):(icol+8)]
@@ -495,19 +493,11 @@ def plot(lcfile,dat):
 def strip_spaces(a_str_with_spaces):
     return a_str_with_spaces.replace(' ', '')
 if __name__=="__main__":
-    fulldat = pd.read_csv(args.bursttab,converters={'GCN Name': strip_spaces})
-    dat = fulldat[(fulldat["TESS Sector"]==int(args.sector)) & (fulldat["Enclosed Probability"] > 0)].copy(deep=True)
-    dat['GCN Name'] = dat['GCN Name'].fillna('')
-    dat.loc[dat["GCN Name"]=="","GCN Name"]=dat.loc[dat["GCN Name"]=="","Fermi Name"]
-    for ind,row in dat.iterrows():
-        lcfiles = glob.glob(f"{args.photfile.replace('phot.data','')}/lcGRB/lc_{row['GCN Name'].replace(' ','')}*_cleaned")
-        tburst = Time(row['Trigger']).jd - 2457000
- 
-        if args.singleproc:
-            for lc in tqdm(lcfiles):
-                print(lc)
-                plot(lc,dat)
-        else:
-            with Pool(args.N) as pool:
-                pool.starmap(plot,[(lc,dat) for lc in lcfiles])
-
+    lcfiles = sorted(glob.glob(f"{args.photfile.replace('phot.data','')}/lcGRB/outcatrms_*_cleaned"))
+    if args.singleproc:
+        for lc in tqdm(lcfiles):
+            print(lc)
+            plot(lc, None)
+    else:
+        with Pool(args.N) as pool:
+            pool.starmap(plot, [(lc, None) for lc in lcfiles])

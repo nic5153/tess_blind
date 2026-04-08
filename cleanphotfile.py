@@ -12,12 +12,16 @@ print(cwd)
 sector = cwd.split("sector")[-1].replace("/","")
 for pf in args.photfile:
     newpf = ""
-    lcfiles = glob.glob(pf.replace("phot.data","")+"/"+"**/lc_*",recursive=True)
+    lcfiles = glob.glob(pf.replace("phot.data","")+"/"+"**/outcatrms_*",recursive=True)
     validlcf = []
     with open(pf,"r") as pfh:
         for line in pfh:
-            col,row,icol,irow,lcfile,flag = line.split(" ")
-            if ((float(col)>48) or (float(col)<2080)) and ((float(row)>30) and (float(row)<2040)):
+            parts = line.split()
+            if len(parts) != 6:
+                print("skipping malformed line:", repr(line))
+                continue
+            col,row,icol,irow,lcfile,flag = parts
+            if ((float(col)>48) and (float(col)<2080)) and ((float(row)>30) and (float(row)<2040)):
                 newpf= newpf+line
                 validlcf.append(lcfile.split("/")[-1])
             else:
