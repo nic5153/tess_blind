@@ -18,11 +18,11 @@ source /home/${USER}/setup_vars.sh
 
 
 ## Clean phot file
-python /home/sarchast/tesstools/cleanphotfile.py c*/phot.data
+python ../cleanphotfile.py c*/phot.data
 ## Make coords.txt
 python /home/sarchast/tesstools/phot2coords.py c*/phot.data
 ## Only get times with bkg and source
-python /home/sarchast/tesstools/matchbkgtolc.py c*/lcGRB/lc_*
+python /home/sarchast/tesstools/matchbkgtolc.py c*/lcGRB/outcatrms_*
 
 for cam in {1..4}
 do
@@ -36,11 +36,11 @@ do
       fluxcal.py --photfile ./phot.data --infiles /lustre/research/mfausnau/data/tica/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits 
       mv ref_gaussian_psf_flux.txt "$indir"/ref_gaussian_psf_flux.txt
       
-      ${PIPELINE_DIR}/util/clean_handmade_lc.py  $indir/lc_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal
+      python ../../clean_handmade_lc.py  $indir/outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal
       
 
       cd .. 
-      python /home/sarchast/tesstools/complicatedplot.py --sector $sector --photfile ./cam${cam}_ccd${ccd}/phot.data --singleproc --bursttab ../fermiGRB.csv
+      python ../complicatedplot.py --sector $sector --photfile ./cam${cam}_ccd${ccd}/phot.data --singleproc
     fi
   done
 done
@@ -52,10 +52,8 @@ mkdir single
 mkdir multiple
 mkdir flag
 mv cam*/plots/flag*cleaned*jpg flag/
-mv cam*/plots/single*cleaned*jpg single/
-mv cam*/plots/lc_*cleaned*jpg multiple/
+mv cam*/plots/single*outcatrms*jpg single/
+mv cam*/plots/outcatrms*jpg multiple/
 
-mkdir plotpage
-cd plotpage
-cp ../*/*lc*jpg . 
-python /home/sarchast/tesstools/make_plotpage.py --sector $sector --bursttab ../fermiGRB.csv
+echo "Plot page generation skipped (no burst table)."
+echo "Plots remain in cam*/plots and the single/ multiple/ flag/ folders."
