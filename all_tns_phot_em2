@@ -1,0 +1,307 @@
+#!/usr/bin/env bash
+
+#gotta loop through sectors and do lc_discovery, lc_prediscovery, and lc_postdiscovery
+
+#main command is python make_phot_data_TNS --sector X --doall --mag 20 --outdir /scratch/faus/image_sub/ --tminus t1 --tplus t2
+
+set -uo
+
+function run_phot(){
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    for o in o1a o1b o2a o2b; do
+ 		cd cam${cam}-ccd${ccd}/${o}
+		cp ../phot.data .
+		for slice in $(ls -d slice*); do
+		    cd $slice
+
+		    for p in $(ls ../psf_file*fits); do 
+			[[ -e ${p:3} ]] || { ln -s $p ; }
+		    done
+		    [[ -e psf_table ]] || { ln -s ../psf_table ; }
+		    if [ -d lc ] ; then
+			echo "lc dir already exists"
+		    else
+			mkdir lc
+		    fi
+		    
+		    n=$(wc ../phot.data | awk '{print $1}')
+
+		    if [ $n -gt "0" ] ; then
+			if [ -e dates ]; then
+
+			    [[ -e images.tar ]] && { tar -xf images.tar ; }
+			    [[ -e kernel_data.tgz ]] && { tar -xzf kernel_data.tgz; }
+			    
+			    srun --job-name="phot2_cam${cam}-ccd${ccd}" \
+				 --output=${LOG_DIR}/%x.o%j --error=${LOG_DIR}/%x.e%j \
+				 --partition=nocona \
+				 --account=${ACCOUNT} \
+				 --nodes 1 --cpus-per-task 1 \
+				 --ntasks-per-node=1\
+				 ${ISIS_DIR}/phot2.csh &
+			    [[ -e 'kernel_data.tgz' ]] || {
+				srun --job-name="phot2_cam${cam}-ccd${ccd}" \
+				     --output=/dev/null --error=/dev/null \
+				     --partition=nocona \
+				     --account=${ACCOUNT} \
+				     --nodes 1 --cpus-per-task 1 \
+				     --ntasks-per-node=1\
+				     tar -czf kernel_data.tgz {kt_,kc_}*fits &
+			    }
+			fi
+		    fi
+		    cd ..
+		done
+		wait
+
+		#clean up kernel files
+		for slice in $(ls -d slilce*); do
+		    cd "$slice"
+		    rm kt_*fits
+		    rm kc_*fits
+		    rm {interp,conv,bkg}*fits
+		    cd ..
+		done
+		
+		cd ../../
+	    done
+	done
+    done
+}
+
+
+function run_bkg_phot(){
+
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    for o in o1a o1b o2a o2b; do
+		cd "cam$cam""-ccd$ccd""/$o"
+
+		for slice in $(ls -d slice*); do 
+		    cd $slice 
+		    if [ ! -d bkg_phot ]; then
+			mkdir bkg_phot
+			cd bkg_phot
+			bash $PIPELINE_DIR/setup/make_bkg_phot_dir_em2
+		    else
+			cd bkg_phot
+		    fi
+
+		    if [ -d lc ] ; then
+			echo "lc dir already exists"
+		    else
+			mkdir lc
+		    fi
+
+
+		    n=$(wc ../../phot.data | awk '{print $1}')
+		
+		    if [ $n -gt "0" ]; then
+			if [ -e dates ]; then
+			    [[ -e kernel_data.tgz ]] && { tar -xzf kernel_data.tgz; }
+			    srun --job-name="bkg_phot2_cam${cam}-ccd${ccd}" \
+                                 --output=${LOG_DIR}/%x.o%j --error=${LOG_DIR}/%x.e%j \
+                                 --partition=nocona \
+				 --account=${ACCOUNT} \
+                                 --nodes 1 --cpus-per-task 1 \
+                                 --ntasks-per-node=1\
+				 ${ISIS_DIR}/phot2.csh &
+
+			    [[ -e 'kernel_data.tgz' ]] || {
+				srun --job-name="phot2_cam${cam}-ccd${ccd}" \
+                                     --output=/dev/null --error=/dev/null \
+                                     --partition=nocona \
+                                     --account=${ACCOUNT} \
+                                     --nodes 1 --cpus-per-task 1 \
+                                     --ntasks-per-node=1\
+                                     tar -czf kernel_data.tgz {kt_,kc_}*fits &
+			    }
+			    
+			fi
+		    fi
+		    cd ../../
+		done
+		wait
+
+		#clean up kernel files
+		for slice in $(ls -d slilce*); do
+		    cd "$slice"/bkg_phot
+		    rm kt_*fits kc_*fits
+		    cd ../../
+		done
+		
+		cd ../../
+	    done
+	done
+    done
+}
+
+
+function clean_phot(){
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    for o in o1a o1b o2a o2b; do
+		cd cam${cam}-ccd${ccd}/${o}
+                for slice in $(ls -d slice*); do
+                    cd $slice
+		    [[ -d "$1" ]] ||{ mkdir $1 ;}
+		    if [ -e dates ]; then
+			pwd
+			mv lc/* $1
+			#mkdir lc
+		    fi
+		    cd .. 
+		done
+		cd ../../
+	    done
+	done
+    done   
+}
+
+function clean_bkg_phot(){
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    for o in o1a o1b o2a o2b; do 
+		cd "cam$cam""-ccd$ccd""/$o"
+                for slice in $(ls -d slice*); do
+                    cd "$slice""/bkg_phot"
+		    [[ -d "$1" ]] || { mkdir $1 ;}
+		    if [ -e dates ]; then 
+			mv lc/* $1
+		    fi		    
+		    cd ../../
+		done
+		cd ../../
+	    done
+	done
+    done   
+}
+
+
+function concat_phot(){
+    for cam in 1 2 3 4; do
+        for ccd in 1 2 3 4; do
+	    cd "cam$cam""-ccd$ccd";
+	    pwd;
+	    cwd=$(pwd)
+	    dtarget="$cwd"
+	    echo "dtarget is:" $dtarget
+
+	    [[ -e "$1" ]] || { mkdir "$1" ; }
+	    [[ -e mkdir ]] || { mkdir  "bkg_phot" ; }
+	    cd bkg_phot
+	    [[ -e "$1" ]] || { mkdir "$1" ; }
+	    cd ../
+
+	    for o in o1a o1b o2a o2b; do
+		pwd
+		#rm "$o"/phot.data
+		for slice in $(ls -d "$o"/slice*); do
+		    echo $slice"/$1"
+		    if [ -d $slice"/$1" ]; then
+			cd $slice"/$1"
+			for f in $(ls lc_*); do 
+			    echo $f
+			    echo pwd
+			    cat $f >> "$dtarget""/$1""/$f" &
+			done
+			wait
+					    
+			cd ../bkg_phot/"$1"
+			for f in $(ls lc_*); do
+			    cat $f >> "$dtarget""/bkg_phot/""$1""/$f" &
+			done
+			wait
+			cd "$dtarget"
+		    fi
+		done
+		echo "location after looping slices:", $(pwd)
+	    done
+	    
+
+	    cd $dtarget"/$1"
+	    for f in $(ls lc_* | grep -v cleaned | grep -v png); do
+	    	sort -nuk1 $f > tmp
+	    	mv tmp $f
+	    done
+	    cd ..//bkg_phot/"$1"
+	    for f in $(ls lc_* | grep -v cleaned | grep -v png); do
+	    	sort -nuk1 $f > tmp
+	    	mv tmp $f
+	    done
+
+	    
+	    #back to cam?_ccd?
+	    cd $dtarget
+	    
+	    #grab the phot.data
+	    mv o1a/phot.data $1
+
+	    cd ../
+	done
+    done
+
+}
+
+
+duse=${DATA_DIR}
+#duse='/data/tess2/image_sub/'
+dscript=${PYTHONPATH}'/catalog2tess_px/scripts'
+
+#for sector in  84 85 86; do
+for sector in 93 94; do
+    ##lc discovery
+
+    srun --job-name="catalog2tess_pix_transient_phot_s$sector" \
+         --output=${LOG_DIR}/%x.o%j --error=${LOG_DIR}/%x.e%j \
+         --partition=nocona \
+         --account=${ACCOUNT} \
+         --nodes 1 --cpus-per-task 1 \
+         --ntasks-per-node=1\
+	 python ${dscript}/make_phot_data_TNS --sector $sector --doall --mag 28 --outdir $duse --tminus 5 --tplus 30
+    suse=$(printf "%.4d" ${sector})
+    cd "${duse}/s${suse}"
+    run_phot
+    run_bkg_phot
+    wait
+    clean_phot lc_discovery
+    clean_bkg_phot lc_discovery
+    concat_phot lc_discovery
+
+
+    #lc prediscovery
+    #t0=-30
+    #t1=1000000
+    #python ${dscript}/make_phot_data_TNS --sector $sector --doall --mag 28 --outdir $duse --tminus $t0 --tplus $t1
+    #cd "${duse}/sector${sector}"
+    #run_phot
+    #wait
+    #run_bkg_phot
+    #wait
+    #clean_phot lc_prediscovery
+    #clean_bkg_phot lc_prediscovery
+
+   # #lc postdiscovery
+   #if [ $sector -lt 14 ]; then
+   #	t0=$((27*(${sector#0} -1 ))) #gotta do that because of leading zeros will fail for sector = 9
+   #else
+   #	#year2
+   #	#t0=$((27*($sector -14 )))
+   #	#year 3
+   #	#t0=$((27*($sector - 27 )))
+   #	#updating for year 4
+   #	t0=$((40*($sector - 40)))
+   #fi
+   #
+   #t1=-27
+   #python ${dscript}/make_phot_data_TNS --sector $sector --doall --mag 28 --outdir $duse --tminus $t0 --tplus $t1
+   #cd "${duse}/sector${sector}"
+   #run_phot
+   #wait
+   #run_bkg_phot
+   #wait
+   #clean_phot lc_postdiscovery
+   #clean_bkg_phot lc_postdiscovery
+
+done

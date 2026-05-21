@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+#gotta loop through sectors and do lc_discovery, lc_prediscovery, and lc_postdiscovery
+
+#main command is python make_phot_data_TNS --sector X --doall --mag 20 --outdir /scratch/faus/image_sub/ --tminus t1 --tplus t2
+
+set -euo
+
+
+
+function concat_phot(){
+    for cam in 1 2 3 4; do
+        for ccd in 1 2 3 4; do
+	    cd "cam$cam""-ccd$ccd";
+	    pwd;
+	    cwd=$(pwd)
+	    dtarget="$cwd"
+	    echo "dtarget is:" $dtarget
+
+	    [[ -e "$1" ]] || { mkdir "$1"; }
+	    [[ -e "bkg_phot" ]] || { mkdir "bkg_phot" ; }
+	    cd bkg_phot
+	    [[ -e "$1" ]] || { mkdir "$1"; }
+	    cd ../
+
+	    for o in o1a o1b o2a o2b; do
+		pwd
+		#rm "$o"/phot.data
+		for slice in $(ls -d "$o"/slice*); do
+		    echo $slice"/$1"
+		    if [ -d $slice"/$1" ]; then
+			cd $slice"/$1"
+			for f in $(ls lc_*); do 
+			    echo $f
+			    pwd
+			    cat $f >> "$dtarget""/$1""/$f" &
+			done
+			wait
+					    
+			cd ../bkg_phot/"$1"
+			for f in $(ls lc_*); do
+			    cat $f >> "$dtarget""/bkg_phot/""$1""/$f" &
+			done
+			wait
+			cd "$dtarget"
+		    fi
+		done
+		echo "location after looping slices:", $(pwd)
+	    done
+	    
+
+	    cd $dtarget"/$1"
+	    for f in $(ls lc_* | grep -v cleaned | grep -v png); do
+	    	sort -nuk1 $f > tmp
+	    	mv tmp $f
+	    done
+	    cd ../bkg_phot/"$1"
+	    for f in $(ls lc_* | grep -v cleaned | grep -v png); do
+	    	sort -nuk1 $f > tmp
+	    	mv tmp $f
+	    done
+	    
+	    #back to cam?_ccd?
+	    cd $dtarget
+	    cd ../
+	done
+    done
+
+}
+
+concat_phot $1
+
+    #lc prediscovery
+    #t0=-30
+    #t1=1000000
+    #python ${dscript}/make_phot_data_TNS --sector $sector --doall --mag 28 --outdir $duse --tminus $t0 --tplus $t1
+    #cd "${duse}/sector${sector}"
+    #run_phot
+    #wait
+    #run_bkg_phot
+    #wait
+    #clean_phot lc_prediscovery
+    #clean_bkg_phot lc_prediscovery
+
+   # #lc postdiscovery
+   #if [ $sector -lt 14 ]; then
+   #	t0=$((27*(${sector#0} -1 ))) #gotta do that because of leading zeros will fail for sector = 9
+   #else
+   #	#year2
+   #	#t0=$((27*($sector -14 )))
+   #	#year 3
+   #	#t0=$((27*($sector - 27 )))
+   #	#updating for year 4
+   #	t0=$((40*($sector - 40)))
+   #fi
+   #
+   #t1=-27
+   #python ${dscript}/make_phot_data_TNS --sector $sector --doall --mag 28 --outdir $duse --tminus $t0 --tplus $t1
+   #cd "${duse}/sector${sector}"
+   #run_phot
+   #wait
+   #run_bkg_phot
+   #wait
+   #clean_phot lc_postdiscovery
+   #clean_bkg_phot lc_postdiscovery

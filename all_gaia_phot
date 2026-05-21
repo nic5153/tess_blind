@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+
+#gotta loop through sectors and do lc_discovery, lc_prediscovery, and lc_postdiscovery
+
+#main command is python make_phot_data_TNS --sector X --doall --mag 20 --outdir /scratch/faus/image_sub/ --tminus t1 --tplus t2
+
+function run_phot(){
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    cd cam${cam}_ccd${ccd}
+	    if [ -d lc ] ; then
+		echo "lc dir already exists"
+	    else
+		mkdir lc
+	    fi
+
+	    n=$(wc phot.data | awk '{print $1}')
+
+	    if [ $n -gt "0" ]; then
+		~/isis/phot2.csh &
+	    fi
+
+	    cd ..
+	done
+    done
+}
+
+
+function run_bkg_phot(){
+
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    cd "cam$cam""_ccd$ccd"
+
+	    if [ ! -d bkg_phot ]; then
+		mkdir bkg_phot
+		cd bkg_phot
+		bash /pdo/users/faus/image_sub/pipeline/setup/make_bkg_phot_dir
+	    else
+		cd bkg_phot
+		cp ../phot.data . 
+	    fi
+
+	    if [ -d lc ] ; then
+		echo "lc dir already exists"
+	    else
+		mkdir lc
+	    fi
+
+
+	    n=$(wc phot.data | awk '{print $1}')
+
+	    if [ $n -gt "0" ]; then
+		~/isis/phot2.csh &
+	    fi
+
+	    cd ../../
+	done
+    done
+}
+
+
+function clean_phot(){
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    cd cam${cam}_ccd${ccd}	    
+	    mv phot.data lc/
+	    mv lc $1
+	    mkdir lc
+	    cd ..
+	done
+    done   
+}
+
+function clean_bkg_phot(){
+    for cam in 1 2 3 4; do
+	for ccd in 1 2 3 4; do
+	    cd "cam$cam""_ccd$ccd""/bkg_phot"	    
+	    mv phot.data lc/
+	    mv lc $1
+	    mkdir lc
+	    cd ../../
+	done
+    done   
+}
+
+
+duse='/data/tess2/image_sub/' 
+dscript='/pdo/users/faus/python/catalog2tess_px/scripts'
+for sector in 24 25 26; do
+    ##lc discovery[
+    echo "python ${dscript}/make_phot_data_Gaia.py --sector $sector --doall --mag1 17 --outdir $duse"
+    python ${dscript}/make_phot_data_Gaia.py --sector $sector --doall --mag1 17 --outdir $duse
+    cd "${duse}/sector${sector}"
+    run_phot
+    wait
+    run_bkg_phot
+    wait
+    clean_phot lc_gaia_vars
+    clean_bkg_phot lc_gaia_vars
+
+done

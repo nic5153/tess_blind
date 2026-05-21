@@ -1,0 +1,98 @@
+import glob
+import argparse
+import os
+def strip_spaces(a_str_with_spaces):
+return a_str_with_spaces.replace(' ', '')
+parser = argparse.ArgumentParser()
+parser.add_argument("--root", type=str, default=".")
+args = parser.parse_args()
+
+cwd = os.path.abspath(args.root)
+os.chdir(cwd)
+
+val = "All_Candidates"
+numflag = 0
+nummult = 0
+numsingle = 0
+plotfiles = glob.glob("*jpg")
+flagfiles = []
+singlefiles = []
+multfiles = []
+for p in plotfiles:
+    basefile = p.split("/")[-1]
+    LCtype = basefile.split("_")[0]
+    if LCtype=="flag":
+        numflag += 1
+        flagfiles.append(basefile)
+    elif LCtype=="single":
+        numsingle += 1
+        singlefiles.append(basefile)
+    else:
+        nummult += 1
+        multfiles.append(basefile)
+    htmlsummary = f"""<html>
+<! -- -->
+
+<head>
+<title></title>
+<body bgcolor="#ffffff">
+<h2>{val} Candidates</h1></body>
+
+<a href=multipleplots.html>{nummult} multi-point candidates</a>
+<br>
+<a href=singleplots.html>{numsingle} single-point candidates (less likely)</a>
+<br>
+<a href=flagplots.html>{numflag} flagged candidates</a>
+
+</html>    
+"""
+    with open("index.html","w") as f:
+        f.write(htmlsummary)
+    htmlmult = f"""<html>
+<! -- -->
+
+<head>
+<title>Multi-point Candidates</title>
+<body bgcolor="#ffffff">
+<h2>{val}</h1></body>"""
+    for mf in multfiles:
+        htmlmult += f"""<figure>\n"""
+        htmlmult += f"""  <img src={mf}>\n"""
+        htmlmult += f"""  <figcaption>{mf}</figcaption>\n"""
+        htmlmult += f"""</figure>\n"""
+    htmlmult += """</html>"""
+    htmlsingle = f"""<html>
+<! -- -->
+
+<head>
+<title>Single Point Candidates</title>
+<body bgcolor="#ffffff">
+<h2>{val} Single Point</h1></body>"""
+    for sf in singlefiles:
+        htmlsingle += f"""<figure>\n"""
+        htmlsingle += f"""  <img src={sf}>\n"""
+        htmlsingle += f"""  <figcaption>{sf}</figcaption>\n"""
+        htmlsingle += f"""</figure>\n"""
+    htmlsingle += """</html>"""
+    htmlflag = f"""<html>
+<! -- -->
+
+<head>
+<title>Flagged Candidates</title>
+<body bgcolor="#ffffff">
+<h2>{val} Flagged Candidates</h1></body>"""
+    for ff in flagfiles:
+        htmlflag += f"""<figure>\n"""
+        htmlflag += f"""  <img src={ff}>\n"""
+        htmlflag += f"""  <figcaption>{ff}</figcaption>\n"""
+        htmlflag += f"""</figure>\n"""
+    htmlflag += """</html>"""
+    with open(f"multipleplots.html","w") as f:
+        f.write(htmlmult)
+    with open(f"singleplots.html","w") as f:
+        f.write(htmlsingle)
+    with open(f"flagplots.html","w") as f:
+        f.write(htmlflag)
+    
+
+
