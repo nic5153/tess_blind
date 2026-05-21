@@ -86,7 +86,11 @@ def plot(lcfile,dat):
     srcname = lcfile.split('/')[-1]
     tpeak = xvals[np.nanargmax(yvals)]
     tdiffdays = tdiff/60/60/24.0
-    detorbit = dates['detorbit'][((tpeak - dates['dates']) <= tdiffdays) & ((tpeak - dates['dates']) > 0)][0]
+    detmask = ((tpeak - dates['dates']) <= tdiffdays) & ((tpeak - dates['dates']) > 0)
+    if not np.any(detmask):
+        print(f"Skipping {lcfile}: no prior date match within cadence window")
+        return
+    detorbit = dates['detorbit'][detmask][0]
     src = sourcedata[np.isin([s+"_cleaned" for s in sourcedata['fname'].astype(str)], f"lcGRB/{srcname}")]
     orbitfolders = [o.split("/")[-1] for o in glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/o??")]
     orbitnames = np.array(orbitfolders)
@@ -124,6 +128,13 @@ def plot(lcfile,dat):
             
 
         flaggedtimes = np.array(flaggedlist)
+        bkgsegment = ((xvals-tpeak) > (-2/24)) & ((xvals-tpeak) < (-600/60/60/24)) & (~np.isin(xvals,flaggedtimes))
+        yvals_zeroed = (d[:,2] - d[:,7])
+        offset = np.nanmedian(yvals_zeroed[bkgsegment]) if np.any(bkgsegment) else 0.0
+        yvals_zeroed = yvals_zeroed - offset
+        with np.errstate(divide="ignore", invalid="ignore"):
+            ymag_zeroed = ctstomag(yvals_zeroed)
+            ymagerr_zeroed = np.abs(ctstomag(yvals_zeroed + yerr) - ctstomag(yvals_zeroed))
 
        #  for i in range(len(xvals)-rmslen):
        #      curxvals = xvals[i:i+rmslen]
@@ -143,9 +154,9 @@ def plot(lcfile,dat):
 
         #################### CTS PER SEC PLOT ################### 
         ax = fig.add_subplot(gs[-3,:])
-        ax.errorbar(xvals[~np.isin(xvals,flaggedtimes)],yvals[~np.isin(xvals,flaggedtimes)],yerr[~np.isin(xvals,flaggedtimes)],ls='none',color='black')
-        ax.errorbar(xvals[np.isin(xvals,flaggedtimes)],yvals[np.isin(xvals,flaggedtimes)],yerr[np.isin(xvals,flaggedtimes)],ls='none',color='red',marker='X',label='flagged')
-        negunflag = np.sum(yvals[~np.isin(xvals,flaggedtimes)] < 0 )
+        ax.errorbar(xvals[~np.isin(xvals,flaggedtimes)],yvals_zeroed[~np.isin(xvals,flaggedtimes)],yerr[~np.isin(xvals,flaggedtimes)],ls='none',color='black')
+        ax.errorbar(xvals[np.isin(xvals,flaggedtimes)],yvals_zeroed[np.isin(xvals,flaggedtimes)],yerr[np.isin(xvals,flaggedtimes)],ls='none',color='red',marker='X',label='flagged')
+        negunflag = np.sum(yvals_zeroed[~np.isin(xvals,flaggedtimes)] < 0 )
         try:
             xlims = (xvals.min()-(2/24), xvals.max()+(2/24))
             ylims = (yvals[~np.isin(xvals[(xvals>xlims[0]) & (xvals <xlims[1])],flaggedtimes)].min()-100,yvals[~np.isin(xvals[(xvals>xlims[0]) & (xvals <xlims[1])],flaggedtimes)].max()+100)
@@ -157,15 +168,15 @@ def plot(lcfile,dat):
             raise Exception("No data near Peak")
         outROI = ~inROI
         subxvals = xvals[inROI]
-        subyvals = yvals[inROI]
-        subymagvals = ymag[inROI]
+        subyvals = yvals_zeroed[inROI]
+        subymagvals = ymag_zeroed[inROI]
         subxmag = subxvals[(subyvals >0)]
-        subymag = ymag[np.isin(xvals,subxmag)]
+        subymag = ymag_zeroed[np.isin(xvals,subxmag)]
         orbits = None
-        otherflux = yvals[(~np.isin(yvals,subyvals)) & (~np.isin(xvals,flaggedtimes))]
+        otherflux = yvals_zeroed[(~np.isin(xvals,subxvals)) & (~np.isin(xvals,flaggedtimes))]
         otherrms = np.sqrt(np.average(otherflux**2))
         rms = np.sqrt(np.average(subyvals[subyvals>0]**2))
-        ctssensitivity = 3*np.sqrt(np.average(subyvals[(tpeak-subxvals)>(200/60/60/24)]**2))
+        ctssensitivity = 3*np.sqrt(np.average(yvals_zeroed[bkgsegment]**2)) if np.any(bkgsegment) else 3*np.sqrt(np.average(otherflux**2))
         magsensitivity = ctstomag(ctssensitivity)
         xmax = subxvals[np.amin(np.abs(subxvals-tpeak))==np.abs(subxvals-tpeak)]
         ymax = subyvals[subxvals==xmax]
@@ -174,7 +185,7 @@ def plot(lcfile,dat):
              prefix="flag_"
         else:
              prefix=""
-        errmax = yerr[yvals==ymax]
+        errmax = yerr[inROI][subxvals==xmax]
         if errmax.size>1:
             errmax = errmax[0]
         ax.errorbar(xmax,ymax,errmax,ls='none',color='black',marker='*')
@@ -206,9 +217,9 @@ def plot(lcfile,dat):
                #      for o,olabel in zip(orbits,orbitGAPlabel):
                #          ax.axvline(xvals[o],ls=':',label=olabel,color='black',alpha=0.5)
                #          axmag.axvline(xvals[o],ls=':',label=olabel,color='black',alpha=0.5)
-        maglimitx = xvals[(yvals<ctssensitivity)]
+        maglimitx = xvals[(yvals_zeroed<ctssensitivity)]
         maglimity = np.array([magsensitivity for m in maglimitx])
-        axmag.scatter(xvals[(yvals>0) & (~np.isin(xvals,flaggedtimes)) & (~np.isin(xvals,maglimitx))],ctstomag(yvals[(yvals>0) & (~np.isin(xvals,flaggedtimes)) & (~np.isin(xvals,maglimitx))]),color='black')
+        axmag.scatter(xvals[(yvals_zeroed>0) & (~np.isin(xvals,flaggedtimes)) & (~np.isin(xvals,maglimitx))],ctstomag(yvals_zeroed[(yvals_zeroed>0) & (~np.isin(xvals,flaggedtimes)) & (~np.isin(xvals,maglimitx))]),color='black')
         # subxmag = subxvals[(subyvals >0) & (subxvals > (xmax - (1/24))) & (subxvals < (xmax + 1/24))]
         regxmag = subxmag[((tpeak-subxmag) < (0.5/24)) & ((subxmag-tpeak) < 1/24)]
         regymag = subymag[((tpeak-subxmag) < (0.5/24)) & ((subxmag-tpeak) < 1/24)]

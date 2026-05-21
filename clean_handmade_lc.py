@@ -197,7 +197,7 @@ def clean_lc_parallel(intuple):
         bkg_model = np.array([np.nan]*len(x2))
 
 
-    x_correct = btjd_correction(x2 + exptime/2.0, metadata['RA'], metadata['DEC'] )
+    x_correct = x2 + exptime/2.0
 
     #adding this Nov 22, 2022. If fluxcal is set, we want magnitudes
     #and counts per second in the light curves
@@ -213,12 +213,12 @@ def clean_lc_parallel(intuple):
 
 
         inttime = exptime*0.8*0.99*86400
-        y2 = y2/inttime
-        z2 = z2/inttime
-        bkg2 = -bkg2/inttime
-        bkg_model = -bkg_model/inttime
-        y_bkg2 = -y_bkg2/inttime
-        z_bkg2 = z_bkg2/inttime
+	y2 = y2
+	z2 = z2
+	bkg2 = -bkg2
+	bkg_model = -bkg_model
+	y_bkg2 = -y_bkg2
+	z_bkg2 = z_bkg2
 
         mag = np.zeros(len(y2))
         emag = np.zeros(len(y2))        

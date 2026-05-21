@@ -40,6 +40,10 @@ if copyCAMCCD:
                 outpsfpath = f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}/{outpsf}"
                 if not os.path.exists(outpsfpath):
                     shutil.copy(psf_path,outpsfpath)
+            rms_src = f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/{orbit}/rms.fits"
+            rms_dst = f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}/rms.fits"
+            if os.path.exists(rms_src) and not os.path.exists(rms_dst):
+                shutil.copy(rms_src, rms_dst)
         if not os.path.exists(f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}/{curSLICE}"):
             shutil.copytree(sliceFOLDER,f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}/{curSLICE}",symlinks=False,ignore_dangling_symlinks=True)
 print("Untar images.tar")

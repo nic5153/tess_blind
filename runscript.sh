@@ -19,7 +19,7 @@ printf -v secstring "%04d" $sector
 [[ -e killjobs.sh ]] &&  rm -f killjobs.sh 
 # [[ -e prerun.txt ]] && rm -f prerun.txt
 # [[ -e postrun.txt ]] && rm -f postrun.txt
-# for s in /lustre/research/mfausnau/data/tica/s${secstring}/cam*/o*/slice*/kernel_data.tgz; do du -b ${s} >> prerun.txt ; echo $s; done
+for s in /lustre/research/mfausnau/data/tica/s${secstring}/cam*/o*/slice*/kernel_data.tgz; do du -b ${s} >> prerun.txt ; echo $s; done
 workdir=$(pwd)
 # The blind search goes over every cam and ccd combo
 # for cam in {1..4}
@@ -68,6 +68,6 @@ for cam in {1..4}
     fi
   done
 done 
-# echo "for s in /lustre/research/mfausnau/data/tica/s${secstring}/cam*/o*/slice*/kernel_data.tgz; do du -b ${s} >> postrun.txt ; done" >> cleanlogs.sbatch
-# echo 'diff prerun.txt postrun.txt' >> cleanlogs.sbatch
+for s in /lustre/research/mfausnau/data/tica/s${secstring}/cam*/o*/slice*/kernel_data.tgz; do du -b ${s} >> postrun.txt ; done
+echo 'diff prerun.txt postrun.txt' >> cleanlogs.sbatch
 sbatch --dependency=afterany:$(echo ${slurmids[*]} | tr ' ' :) cleanlogs.sbatch
