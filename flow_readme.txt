@@ -4,35 +4,26 @@ PRE PIPELINE:
 
 First: run make_dir.sbatch to create directories
 
-sbatch make_dir.sbatch sector76
+sbatch make_dir.sbatch <sector>
 
-Second: 
+Second: create daily rms images using make_rms_sbatch.sh
 
-1: create directory for sector
+sbatch make_rms_sbatch.sh <sector>
 
-for cam in {1..4} ; do for ccd in {1..4} ; do for orbit o1a o1b o2a o2b ; do mkdir -p cam${cam}_ccd${ccd}/${orbit} ; done ; done ; done
+PIPELINE:
 
-2: copy rms.fits
+1) run source.sbatch for the given <sector>:
 
-for cam in {1..4}; do for ccd in {1..4}; do for orbit in o1a o1b o2a o2b; do cp /lustre/research/mfausnau/data/tica/s00**/cam${cam}-ccd${ccd}/${orbit}/rms.fits cam${cam}_ccd${ccd}/${orbit}/; done; done; done
+sbatch source.sbatch <sector> (for entire sector)
 
-3: inside sector## dir, run do_photutils_extract.sbatch
+sbatch --array=0-0 source.sbatch <sector> <cam> <ccd> <orbit> (for specific cam/ccd/orbit)
 
-sbatch do_photutils_extract.sbatch --sector
+2) run photometry with submit_all.sbatch
 
-4: now run rms_source.py inside sector## dir
+3) run image_untar.sbatch to untar and produce the slice count image products
 
-sbatch rms_source.sbatch --sector
+sbatch images_untar.sbatch 101
 
-5: run copy_sector.sbatch
+4) perform analysis and make plots with analysis.sbatch
 
-sbatch copy_sector.sbatch --sector
-
-6. execute photometry using runscript.sh
-
-./runscript.sh --sector
-
-7. perform analysis, run analysis.sbatch
-
-sbatch analysis.sbatch --sector
-
+sbatch analysis.sbatch 101 

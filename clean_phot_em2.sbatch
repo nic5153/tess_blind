@@ -29,11 +29,14 @@ dtarget="$duse/$sectoruse/cam${cam}-ccd${ccd}"
 outbase="$dhome/sector${sector}/cam${cam}_ccd${ccd}"
 
 # Build file list excluding .png and already-cleaned files
+
+# Build file list excluding .png, already-cleaned files, and temp files
 mapfile -t infiles < <(
-    ls "$outbase/$lcdir/lc_"* 2>/dev/null \
+    find "$outbase/$lcdir" -maxdepth 1 -type f -name 'lc_*.txt' -printf '%f\n' 2>/dev/null \
     | grep -v "\.png$" \
     | grep -v "\.cleaned$" \
-    | awk -F"/" '{print $NF}'
+    | grep -v "\.tmp" \
+    | sort
 )
 nelements=${#infiles[@]}
 echo "Total lc files to process: $nelements"

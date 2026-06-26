@@ -5,8 +5,8 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=nocona
-#SBATCH --output=/lustre/scratch/nimcclur/rms_testing/logs/%x.o%A_%a
-#SBATCH --error=/lustre/scratch/nimcclur/rms_testing/logs/%x.e%A_%a
+#SBATCH --output=/lustre/work/nimcclur/logs/%x.o%A_%a
+#SBATCH --error=/lustre/work/nimcclur/logs/%x.e%A_%a
 
 if [ -z "$1" ]; then
     echo "Usage: sbatch untar_all_slices_live.sbatch <sector_number>"

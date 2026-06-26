@@ -75,9 +75,9 @@ def plot(lcfile,dat):
         raise Exception("Expected a _cleaned lcfile got instead:",lcfile)
     d = np.genfromtxt(lcfile)
     timesort = np.argsort(d[:,0])
-    d = d[timesort]
-    xvals = np.sort(d[:,0])
-    yvals = (d[:,2] - d[:,6])#  + (d[:,8] - d[:,6])
+    d = d[timesort]    
+    xvals = d[:,0]
+    yvals = d[:,2]
     yerr = d[:,3]
     ymag = d[:,4]
     ymagerr = d[:,5]
@@ -91,7 +91,7 @@ def plot(lcfile,dat):
         print(f"Skipping {lcfile}: no prior date match within cadence window")
         return
     detorbit = dates['detorbit'][detmask][0]
-    src = sourcedata[np.isin([s+"_cleaned" for s in sourcedata['fname'].astype(str)], f"lcGRB/{srcname}")]
+    src = sourcedata[np.isin([s+"_cleaned" for s in sourcedata['fname'].astype(str)], f"lc/{srcname}")]
     orbitfolders = [o.split("/")[-1] for o in glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/o??")]
     orbitnames = np.array(orbitfolders)
     xlims = []
@@ -113,9 +113,6 @@ def plot(lcfile,dat):
         for i in range(len(xvals)-rmslen):
             curybkg = ybkg[i:i+rmslen]
             curxvals = xvals[i:i+rmslen]
-            if ((curxvals.max() - curxvals.min())>1):
-                currms = np.nan
-            else:
                 currms = np.sqrt(np.average(curybkg**2))
             runrms.append((np.average(curxvals),currms))
             if currms > 100:
@@ -129,9 +126,8 @@ def plot(lcfile,dat):
 
         flaggedtimes = np.array(flaggedlist)
         bkgsegment = ((xvals-tpeak) > (-2/24)) & ((xvals-tpeak) < (-600/60/60/24)) & (~np.isin(xvals,flaggedtimes))
-        yvals_zeroed = (d[:,2] - d[:,7])
         offset = np.nanmedian(yvals_zeroed[bkgsegment]) if np.any(bkgsegment) else 0.0
-        yvals_zeroed = yvals_zeroed - offset
+        yvals_zeroed = yvals - offset
         with np.errstate(divide="ignore", invalid="ignore"):
             ymag_zeroed = ctstomag(yvals_zeroed)
             ymagerr_zeroed = np.abs(ctstomag(yvals_zeroed + yerr) - ctstomag(yvals_zeroed))
@@ -504,7 +500,7 @@ def plot(lcfile,dat):
 def strip_spaces(a_str_with_spaces):
     return a_str_with_spaces.replace(' ', '')
 if __name__=="__main__":
-    lcfiles = sorted(glob.glob(f"{args.photfile.replace('phot.data','')}/lcGRB/outcatrms_*_cleaned"))
+    lcfiles = sorted(glob.glob(f"{args.photfile.replace('phot.data','')}/lc/lc_outcatrms_*_cleaned"))
     if args.singleproc:
         for lc in tqdm(lcfiles):
             print(lc)

@@ -12,17 +12,18 @@
 sector=$1
 suse=$(printf "%04d"  $1)
 coordfile=coords.txt
-indir=lcGRB
+indir=lc
 
 source /home/${USER}/setup_vars.sh
 
+cd sector${sector}
 
 ## Clean phot file
-python ../cleanphotfile.py c*/phot.data
+python ../cleanphotfile.py cam*_ccd*/phot.data
 ## Make coords.txt
-python /home/sarchast/tesstools/phot2coords.py c*/phot.data
+python /home/sarchast/tesstools/phot2coords.py cam*_ccd*/phot.data
 ## Only get times with bkg and source
-python /home/sarchast/tesstools/matchbkgtolc.py c*/lcGRB/outcatrms_*
+python /home/sarchast/tesstools/matchbkgtolc.py cam*_ccd*/lc/lc_outcatrms_*
 
 for cam in {1..4}
 do
@@ -36,7 +37,7 @@ do
       fluxcal.py --photfile ./phot.data --infiles /lustre/research/mfausnau/data/tica/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits 
       mv ref_gaussian_psf_flux.txt "$indir"/ref_gaussian_psf_flux.txt
       
-      python ../../clean_handmade_lc.py  $indir/outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal
+      python ../../clean_handmade_lc.py  $indir/lc_outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal
       
 
       cd .. 

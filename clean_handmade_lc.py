@@ -59,6 +59,8 @@ def get_meta_data(ifile,metafile,decimal=False):
         rel_ifile,
         base_ifile,
         raw_base,
+        base_ifile[3:] if base_ifile.startswith("lc_") else base_ifile,
+        raw_base[3:] if raw_base.startswith("lc_") else raw_base,
     ]
 
     print('lookup candidates', candidates)
@@ -189,6 +191,22 @@ def clean_lc_parallel(intuple):
         #remove gaps
         x_bkg2,y_bkg2,z_bkg2   = cut_data(x_bkg, y_bkg,z_bkg, sector, cam, ccd)
         x_bkg2,bkg_bkg2,z_bkg2 = cut_data(x_bkg, bkg_bkg,z_bkg, sector, cam, ccd)
+        src_key = np.round(x2, 8)
+        bkg_key = np.round(x_bkg2, 8)
+        common_x, src_idx, bkg_idx = np.intersect1d(src_key, bkg_key, return_indices=True)
+
+        if len(common_x) != len(x2) or len(common_x) != len(x_bkg2):
+            print('aligning source/background by rounded time', ifile, len(x2), len(x_bkg2), len(common_x))
+
+        x2 = x2[src_idx]
+        y2 = y2[src_idx]
+        z2 = z2[src_idx]
+        bkg2 = bkg2[src_idx]
+
+        x_bkg2 = x_bkg2[bkg_idx]
+        y_bkg2 = y_bkg2[bkg_idx]
+        z_bkg2 = z_bkg2[bkg_idx]
+        bkg_bkg2 = bkg_bkg2[bkg_idx]
         bkg_model = median_filter(y_bkg2, size=48, mode='reflect')
     else:
         y_bkg2 =   np.array([np.nan]*len(x2))
@@ -213,13 +231,11 @@ def clean_lc_parallel(intuple):
 
 
         inttime = exptime*0.8*0.99*86400
-	y2 = y2
-	z2 = z2
-	bkg2 = -bkg2
-	bkg_model = -bkg_model
-	y_bkg2 = -y_bkg2
-	z_bkg2 = z_bkg2
-
+        bkg2 = -bkg2
+        bkg_model = -bkg_model
+        y_bkg2 = -y_bkg2
+        z_bkg2 = z_bkg2
+	
         mag = np.zeros(len(y2))
         emag = np.zeros(len(y2))        
 

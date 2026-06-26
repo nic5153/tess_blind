@@ -29,7 +29,7 @@ lcdir=$2
 sectoruse=$(printf "s%04d" "$sector")
 dhome=$(pwd)
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-logdir="${LOG_DIR:-/lustre/research/mfausnau/logs}"
+logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
 
 # ---- Sanity checks -----------------------------------------------------------
 for var in DATA_DIR ISIS_DIR PIPELINE_DIR; do

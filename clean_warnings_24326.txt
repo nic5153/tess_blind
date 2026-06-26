@@ -1,0 +1,60 @@
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326100_2:WARNING: lc_outcatrms_day_4101_cam1_ccd1_cand1.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326100_6:WARNING: lc_outcatrms_day_4102_cam1_ccd1_cand5.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326100_7:WARNING: lc_outcatrms_day_4102_cam1_ccd1_cand6.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326120_12:WARNING: lc_outcatrms_day_4102_cam1_ccd2_cand6.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326120_2:WARNING: lc_outcatrms_day_4101_cam1_ccd2_cand1.txt — main (11015) and bkg (0) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326120_3:WARNING: lc_outcatrms_day_4101_cam1_ccd2_cand1.txt.tmp — main (4931) and bkg (0) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326120_4:WARNING: lc_outcatrms_day_4104_cam1_ccd2_cand14.txt — aggregated (11015) != sum of slices (0). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326120_5:WARNING: lc_outcatrms_day_4104_cam1_ccd2_cand15.txt — aggregated (11015) != sum of slices (0). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326120_7:WARNING: lc_outcatrms_day_4102_cam1_ccd2_cand4.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326120_8:WARNING: lc_outcatrms_day_4107_cam1_ccd2_cand20.txt — aggregated (11015) != sum of slices (9437). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326130_13:WARNING: lc_outcatrms_day_4102_cam1_ccd3_cand13.txt — main (743) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326130_15:WARNING: lc_outcatrms_day_4102_cam1_ccd3_cand15.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326130_16:WARNING: lc_outcatrms_day_4102_cam1_ccd3_cand14.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326130_2:WARNING: lc_outcatrms_day_4101_cam1_ccd3_cand10.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326130_3:WARNING: lc_outcatrms_day_4101_cam1_ccd3_cand2.txt — main (11015) and bkg (0) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326130_6:WARNING: lc_outcatrms_day_4101_cam1_ccd3_cand2.txt.tmp — main (3145) and bkg (0) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326130_9:WARNING: lc_outcatrms_day_4101_cam1_ccd3_cand5.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326140_1:WARNING: lc_outcatrms_day_4101_cam1_ccd4_cand0.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326140_10:WARNING: lc_outcatrms_day_4102_cam1_ccd4_cand6.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326140_3:WARNING: lc_outcatrms_day_4101_cam1_ccd4_cand1.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326140_5:WARNING: lc_outcatrms_day_4108_cam1_ccd4_cand22.txt — aggregated (11015) != sum of slices (8423). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326150_8:WARNING: lc_outcatrms_day_4104_cam2_ccd1_cand6.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326150_9:WARNING: lc_outcatrms_day_4105_cam2_ccd1_cand7.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326175_1:WARNING: lc_outcatrms_day_4101_cam2_ccd2_cand0.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326185_10:WARNING: lc_outcatrms_day_4114_cam2_ccd3_cand25.txt — aggregated (11015) != sum of slices (10319). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326185_11:WARNING: lc_outcatrms_day_4104_cam2_ccd3_cand10.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326185_17:WARNING: lc_outcatrms_day_4106_cam2_ccd3_cand15.txt — main (2173) and bkg (0) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326185_8:WARNING: lc_outcatrms_day_4102_cam2_ccd3_cand7.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326195_1:WARNING: lc_outcatrms_day_4101_cam2_ccd4_cand0.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326195_4:WARNING: lc_outcatrms_day_4101_cam2_ccd4_cand2.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326265_4:WARNING: lc_outcatrms_day_4101_cam3_ccd2_cand9.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326265_5:WARNING: lc_outcatrms_day_4102_cam3_ccd2_cand19.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326265_7:WARNING: lc_outcatrms_day_4103_cam3_ccd2_cand20.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326324_10:WARNING: lc_outcatrms_day_4111_cam3_ccd3_cand27.txt — aggregated (11015) != sum of slices (9527). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326324_11:WARNING: lc_outcatrms_day_4103_cam3_ccd3_cand8.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326324_13:WARNING: lc_outcatrms_day_4114_cam3_ccd3_cand28.txt — aggregated (11015) != sum of slices (9539). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326324_16:WARNING: lc_outcatrms_day_4106_cam3_ccd3_cand13.txt — main (56) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326324_7:WARNING: lc_outcatrms_day_4102_cam3_ccd3_cand5.txt.tmp — main (230) and bkg (0) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326324_9:WARNING: lc_outcatrms_day_4102_cam3_ccd3_cand5.txt — aggregated (0) != sum of slices (11015). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326334_13:WARNING: lc_outcatrms_day_4103_cam3_ccd4_cand6.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326334_18:WARNING: lc_outcatrms_day_4104_cam3_ccd4_cand8.txt.tmp — main (10731) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326334_5:WARNING: lc_outcatrms_day_4110_cam3_ccd4_cand24.txt — aggregated (11015) != sum of slices (0). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326334_6:WARNING: lc_outcatrms_day_4102_cam3_ccd4_cand5.txt — main (112) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326334_7:WARNING: lc_outcatrms_day_4103_cam3_ccd4_cand6.txt — main (0) and bkg (11015) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326334_8:WARNING: lc_outcatrms_day_4116_cam3_ccd4_cand27.txt — aggregated (11015) != sum of slices (0). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326385_11:WARNING: lc_outcatrms_day_4114_cam4_ccd1_cand24.txt — aggregated (10729) != sum of slices (9543). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326385_14:WARNING: lc_outcatrms_day_4108_cam4_ccd1_cand10.txt — main (0) and bkg (10729) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326385_8:WARNING: lc_outcatrms_day_4105_cam4_ccd1_cand5.txt — aggregated (0) != sum of slices (10729). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326395_12:WARNING: lc_outcatrms_day_4103_cam4_ccd2_cand13.txt — main (0) and bkg (10736) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326395_15:WARNING: lc_outcatrms_day_4103_cam4_ccd2_cand9.txt — main (0) and bkg (10736) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326395_16:WARNING: lc_outcatrms_day_4104_cam4_ccd2_cand10.txt — main (0) and bkg (10736) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326395_3:WARNING: lc_outcatrms_day_4101_cam4_ccd2_cand2.txt — main (0) and bkg (10736) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326410_11:WARNING: lc_outcatrms_day_4106_cam4_ccd3_cand9.txt — main (2685) and bkg (6277) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326410_3:WARNING: lc_outcatrms_day_4103_cam4_ccd3_cand2.txt — main (0) and bkg (10778) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326410_9:WARNING: lc_outcatrms_day_4105_cam4_ccd3_cand6.txt — main (0) and bkg (10761) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326420_1:WARNING: lc_outcatrms_day_4102_cam4_ccd4_cand0.txt — main (0) and bkg (10920) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326420_14:WARNING: lc_outcatrms_day_4123_cam4_ccd4_cand50.txt — aggregated (10704) != sum of slices (186). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326420_15:WARNING: lc_outcatrms_day_4123_cam4_ccd4_cand51.txt — aggregated (10704) != sum of slices (150). Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326420_4:WARNING: lc_outcatrms_day_4102_cam4_ccd4_cand2.txt — main (0) and bkg (10778) line counts differ. Skipping deletion.
+/lustre/work/nimcclur/TESS/photometry/logs/clean_phot.o24326420_6:WARNING: lc_outcatrms_day_4102_cam4_ccd4_cand3.txt — main (0) and bkg (10754) line counts differ. Skipping deletion.
