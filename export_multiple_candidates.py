@@ -8,7 +8,11 @@ import re
 from pathlib import Path
 
 import numpy as np
-from tess_stars2px import tess_stars2px_reverse_function_entry
+
+try:
+    from tess_stars2px import tess_stars2px_reverse_function_entry
+except ImportError:
+    tess_stars2px_reverse_function_entry = None
 
 
 def parse_args():
@@ -29,6 +33,15 @@ def parse_args():
         "--html",
         default="multiple_candidates.html",
         help="Output HTML review page. Default: multiple_candidates.html",
+    )
+    parser.add_argument(
+        "--plot-root",
+        action="append",
+        default=[],
+        help=(
+            "Additional root containing a multiple/ plot directory. "
+            "Can be used more than once."
+        ),
     )
     return parser.parse_args()
 
@@ -121,10 +134,26 @@ def find_orbit(sector_dir, cam, ccd, rms_day):
     return os.path.basename(os.path.dirname(matches[0]))
 
 
+def collect_plot_files(root, extra_roots):
+    plot_files = []
+    plot_files.extend(glob.glob(os.path.join(root, "sector*", "multiple", "*.jpg")))
+
+    for plot_root in extra_roots:
+        abs_plot_root = os.path.abspath(plot_root)
+        plot_files.extend(glob.glob(os.path.join(abs_plot_root, "multiple", "*.jpg")))
+
+    return sorted(dict.fromkeys(plot_files))
+
+
+def html_image_path(plot_file, html_file):
+    html_dir = os.path.dirname(os.path.abspath(html_file)) or os.getcwd()
+    return os.path.relpath(plot_file, html_dir).replace("\\", "/")
+
+
 def main():
     args = parse_args()
     root = os.path.abspath(args.root)
-    plot_files = sorted(glob.glob(os.path.join(root, "sector*", "multiple", "*.jpg")))
+    plot_files = collect_plot_files(root, args.plot_root)
 
     rows = []
     scinfo_cache = {}
@@ -152,12 +181,15 @@ def main():
             fcol = float(phot_row["fcol"])
             frow = float(phot_row["frow"])
             lc_file = str(phot_row["fname"])
-            key = (sector, cam, ccd)
-            scinfo = scinfo_cache.get(key)
-            ra, dec, scinfo = tess_stars2px_reverse_function_entry(
-                sector, cam, ccd, fcol, frow, scInfo=scinfo
-            )
-            scinfo_cache[key] = scinfo
+            if tess_stars2px_reverse_function_entry is None:
+                ra = dec = ""
+            else:
+                key = (sector, cam, ccd)
+                scinfo = scinfo_cache.get(key)
+                ra, dec, scinfo = tess_stars2px_reverse_function_entry(
+                    sector, cam, ccd, fcol, frow, scInfo=scinfo
+                )
+                scinfo_cache[key] = scinfo
 
         rms_day = parse_rms_day(plot_file)
         orbit = find_orbit(sector_dir, cam, ccd, rms_day)
@@ -172,7 +204,7 @@ def main():
                 "dec": dec,
                 "suspected source type": "",
                 "notes": "",
-                "plot_file": os.path.relpath(plot_file, root).replace("\\", "/"),
+                "plot_file": html_image_path(plot_file, args.html),
                 "lc_file": lc_file,
                 "fcol": fcol,
                 "frow": frow,
@@ -220,6 +252,12 @@ def write_html(outfile, rows):
         if row["sector"] not in sectors:
             sectors.append(row["sector"])
 
+    total = len(rows)
+    nav_links = " ".join(
+        f"""<a href="#sector-{html_escape(sector)}">Sector {html_escape(sector)}</a>"""
+        for sector in sectors
+    )
+
     html = """<html>
 <! -- -->
 
@@ -227,20 +265,28 @@ def write_html(outfile, rows):
 <title>Multiple Candidates</title>
 <style>
 body { background: #ffffff; font-family: sans-serif; }
+nav { position: sticky; top: 0; background: #ffffff; border-bottom: 1px solid #cccccc; padding: 8px 0; margin-bottom: 1em; }
+nav a { display: inline-block; margin-right: 10px; padding: 4px 8px; border: 1px solid #cccccc; color: #000000; text-decoration: none; font-size: 14px; }
 img { max-width: 1000px; width: 100%; height: auto; }
 table { border-collapse: collapse; margin-bottom: 1em; }
 td, th { border: 1px solid #cccccc; padding: 4px 6px; font-size: 13px; }
+section { break-before: page; page-break-before: always; margin-bottom: 3em; }
+section:first-of-type { break-before: auto; page-break-before: auto; }
 figure { margin-bottom: 2em; }
 figcaption { font-size: 14px; }
 </style>
 </head>
 <body bgcolor="#ffffff">
-<h2>Multiple Candidates</h2>
 """
+    html += f"<h2>Multiple Candidates ({total})</h2>\n"
+    if nav_links:
+        html += f"<nav>{nav_links}</nav>\n"
 
     for sector in sectors:
         sector_rows = [r for r in rows if r["sector"] == sector]
-        html += f"<h3>Sector {html_escape(sector)} ({len(sector_rows)} candidates)</h3>\n"
+        html += f"""<section id="sector-{html_escape(sector)}">
+<h3>Sector {html_escape(sector)} ({len(sector_rows)} candidates)</h3>
+"""
         for row in sector_rows:
             html += "<figure>\n"
             html += f"""<figcaption>
@@ -261,6 +307,7 @@ figcaption { font-size: 14px; }
 </figcaption>\n"""
             html += f"""  <img src="{html_escape(row["plot_file"])}">\n"""
             html += "</figure>\n"
+        html += "</section>\n"
 
     html += "</body>\n</html>\n"
     with open(outfile, "w", newline="") as f:
