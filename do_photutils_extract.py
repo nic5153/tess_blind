@@ -23,7 +23,11 @@ sigma_clip = SigmaClip(sigma=3.0, maxiters=100)
 threshold = detect_threshold(data, nsigma = 2.0, sigma_clip=sigma_clip)
 segment_img = detect_sources(data, threshold, npixels=10)
 footprint = circular_footprint(radius=10)
-mask = segment_img.make_source_mask(footprint=footprint)
+if segment_img is None:
+    print("No segmentation sources found; continuing without source mask")
+    mask = None
+else:
+    mask = segment_img.make_source_mask(footprint=footprint)
 mean, median, std = sigma_clipped_stats(data, sigma=3.0, mask=mask)
 print(np.array((mean, median, std)))
 
@@ -69,6 +73,14 @@ else:
     daofind = DAOStarFinder(fwhm=fwhm, threshold=3*np.amin(bkg.background_rms),
                         exclude_border=True)
 phot = daofind(data)
+
+if phot is None or len(phot) == 0:
+    print("No DAOStarFinder sources found; writing empty outcat")
+    with open("outcat"+args.file.replace(".fits",".tsv"),"w") as outfile:
+        outfile.write("id\txcentroid\tycentroid\tsharpness\troundness1\troundness2\n")
+    plt.savefig(args.file.replace(".fits","")+"bkg_est.png")
+    plt.close()
+    raise SystemExit(0)
 
 phot['xcentroid']-=0.5
 phot['ycentroid']-=0.5

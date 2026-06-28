@@ -1,0 +1,40 @@
+========================================================
+ Error report for sector=s0104 cam=all ccd=all
+ lcdir=lc
+ Generated: Fri Jun 26 22:46:15 CDT 2026
+ do_phot job IDs:    24723810 24723812 24723814 24723816 24723820 24723822 24723824 24723826 24723830 24723832 24723834 24723836 24723840 24723842 24723844 24723846 24723850 24723852 24723854 24723856 24723860 24723862 24723864 24723866 24723870 24723872 24723874 24723876 24723880 24723882 24723884 24723886 24723890 24723892 24723894 24723896 24723900 24723902 24723904 24723906 24723910 24723912 24723914 24723916 24723920 24723922 24723924 24723926 24723930 24723932 24723934 24723936 24723940 24723942 24723944 24723946 24723950 24723952 24723954 24723956 24723960 24723962 24723964 24723966
+ copy_phot job IDs:  24723811 24723813 24723815 24723817 24723821 24723823 24723825 24723827 24723831 24723833 24723835 24723837 24723841 24723843 24723845 24723847 24723851 24723853 24723855 24723857 24723861 24723863 24723865 24723867 24723871 24723873 24723875 24723877 24723881 24723883 24723885 24723887 24723891 24723893 24723895 24723897 24723901 24723903 24723905 24723907 24723911 24723913 24723915 24723917 24723921 24723923 24723925 24723927 24723931 24723933 24723935 24723937 24723941 24723943 24723945 24723947 24723951 24723953 24723955 24723957 24723961 24723963 24723965 24723967
+ clean_phot job IDs: 24723818 24723828 24723838 24723848 24723858 24723868 24723878 24723888 24723898 24723908 24723918 24723928 24723938 24723948 24723958 24723968
+========================================================
+
+--- do_phot failures ---
+
+--- do_phot job 24723812, task 0 ---
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0104/cam1-ccd1/o1b/slice0473/lc (phot2.csh likely segfaulted)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+Segmentation fault (core dumped)
+

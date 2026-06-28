@@ -1,0 +1,1888 @@
+/lustre/work/nimcclur/TESS/photometry/sector103
+2082.8224	1349.6011	2083	1350	lc/lc_outcatrms_day_4163_cam1_ccd1_cand47.txt	1
+ removed
+2080.7229	1261.9525	2081	1262	lc/lc_outcatrms_day_4176_cam1_ccd1_cand68.txt	1
+ removed
+removing  cam1_ccd1/o1a/outcatrms_day_4156.tsv
+removing  cam1_ccd1/o1a/outcatrms_day_4155.tsv
+removing  cam1_ccd1/o1a/outcatrms_day_4153.tsv
+removing  cam1_ccd1/o1a/outcatrms_day_4157.tsv
+removing  cam1_ccd1/o1a/outcatrms_day_4154.tsv
+removing  cam1_ccd1/o1a/outcatrms_day_4158.tsv
+removing  cam1_ccd1/o2b/outcatrms_day_4173.tsv
+removing  cam1_ccd1/o2b/outcatrms_day_4172.tsv
+removing  cam1_ccd1/o2b/outcatrms_day_4176.tsv
+removing  cam1_ccd1/o2b/outcatrms_day_4177.tsv
+removing  cam1_ccd1/o2b/outcatrms_day_4174.tsv
+removing  cam1_ccd1/o2b/outcatrms_day_4175.tsv
+removing  cam1_ccd1/o1b/outcatrms_day_4161.tsv
+removing  cam1_ccd1/o1b/outcatrms_day_4160.tsv
+removing  cam1_ccd1/o1b/outcatrms_day_4163.tsv
+removing  cam1_ccd1/o1b/outcatrms_day_4159.tsv
+removing  cam1_ccd1/o1b/outcatrms_day_4162.tsv
+1201.5136	2040.8619	1202	2041	lc/lc_outcatrms_day_4157_cam1_ccd2_cand19.txt	1
+ removed
+2085.4227	672.0153	2085	672	lc/lc_outcatrms_day_4163_cam1_ccd2_cand54.txt	1
+ removed
+861.2644	 29.6833	861	30	lc/lc_outcatrms_day_4164_cam1_ccd2_cand56.txt	1
+ removed
+removing  cam1_ccd2/o1a/outcatrms_day_4156.tsv
+removing  cam1_ccd2/o1a/outcatrms_day_4155.tsv
+removing  cam1_ccd2/o1a/outcatrms_day_4153.tsv
+removing  cam1_ccd2/o1a/outcatrms_day_4157.tsv
+removing  cam1_ccd2/o1a/outcatrms_day_4154.tsv
+removing  cam1_ccd2/o1a/outcatrms_day_4158.tsv
+removing  cam1_ccd2/o2b/outcatrms_day_4173.tsv
+removing  cam1_ccd2/o2b/outcatrms_day_4172.tsv
+removing  cam1_ccd2/o2b/outcatrms_day_4176.tsv
+removing  cam1_ccd2/o2b/outcatrms_day_4174.tsv
+removing  cam1_ccd2/o2b/outcatrms_day_4175.tsv
+removing  cam1_ccd2/o1b/outcatrms_day_4161.tsv
+removing  cam1_ccd2/o1b/outcatrms_day_4160.tsv
+removing  cam1_ccd2/o1b/outcatrms_day_4163.tsv
+removing  cam1_ccd2/o1b/outcatrms_day_4159.tsv
+removing  cam1_ccd2/o1b/outcatrms_day_4162.tsv
+removing  cam1_ccd2/o1b/outcatrms_day_4164.tsv
+128.1858	 20.7308	128	21	lc/lc_outcatrms_day_4153_cam1_ccd3_cand0.txt	1
+ removed
+ 63.4883	 24.5573	63	25	lc/lc_outcatrms_day_4153_cam1_ccd3_cand64.txt	1
+ removed
+118.9913	 16.4800	119	16	lc/lc_outcatrms_day_4153_cam1_ccd3_cand89.txt	1
+ removed
+1304.4148	 19.7911	1304	20	lc/lc_outcatrms_day_4177_cam1_ccd3_cand90.txt	1
+ removed
+removing  cam1_ccd3/o1a/outcatrms_day_4156.tsv
+removing  cam1_ccd3/o1a/outcatrms_day_4155.tsv
+removing  cam1_ccd3/o1a/outcatrms_day_4153.tsv
+removing  cam1_ccd3/o1a/outcatrms_day_4157.tsv
+removing  cam1_ccd3/o1a/outcatrms_day_4154.tsv
+removing  cam1_ccd3/o1a/outcatrms_day_4158.tsv
+removing  cam1_ccd3/o2b/outcatrms_day_4173.tsv
+removing  cam1_ccd3/o2b/outcatrms_day_4172.tsv
+removing  cam1_ccd3/o2b/outcatrms_day_4176.tsv
+removing  cam1_ccd3/o2b/outcatrms_day_4177.tsv
+removing  cam1_ccd3/o2b/outcatrms_day_4174.tsv
+removing  cam1_ccd3/o2b/outcatrms_day_4175.tsv
+removing  cam1_ccd3/o1b/outcatrms_day_4161.tsv
+removing  cam1_ccd3/o1b/outcatrms_day_4160.tsv
+removing  cam1_ccd3/o1b/outcatrms_day_4163.tsv
+removing  cam1_ccd3/o1b/outcatrms_day_4159.tsv
+removing  cam1_ccd3/o1b/outcatrms_day_4162.tsv
+removing  cam1_ccd3/o1b/outcatrms_day_4164.tsv
+756.0829	2051.7438	756	2052	lc/lc_outcatrms_day_4160_cam1_ccd4_cand24.txt	1
+ removed
+1241.3446	 16.1585	1241	16	lc/lc_outcatrms_day_4163_cam1_ccd4_cand34.txt	1
+ removed
+removing  cam1_ccd4/o1a/outcatrms_day_4156.tsv
+removing  cam1_ccd4/o1a/outcatrms_day_4155.tsv
+removing  cam1_ccd4/o1a/outcatrms_day_4157.tsv
+removing  cam1_ccd4/o1a/outcatrms_day_4154.tsv
+removing  cam1_ccd4/o1a/outcatrms_day_4158.tsv
+removing  cam1_ccd4/o2b/outcatrms_day_4173.tsv
+removing  cam1_ccd4/o2b/outcatrms_day_4172.tsv
+removing  cam1_ccd4/o2b/outcatrms_day_4176.tsv
+removing  cam1_ccd4/o2b/outcatrms_day_4177.tsv
+removing  cam1_ccd4/o2b/outcatrms_day_4174.tsv
+removing  cam1_ccd4/o2b/outcatrms_day_4175.tsv
+removing  cam1_ccd4/o1b/outcatrms_day_4161.tsv
+removing  cam1_ccd4/o1b/outcatrms_day_4160.tsv
+removing  cam1_ccd4/o1b/outcatrms_day_4163.tsv
+removing  cam1_ccd4/o1b/outcatrms_day_4159.tsv
+removing  cam1_ccd4/o1b/outcatrms_day_4162.tsv
+1538.4748	2051.9908	1538	2052	lc/lc_outcatrms_day_4157_cam2_ccd1_cand12.txt	1
+ removed
+removing  cam2_ccd1/o1a/outcatrms_day_4156.tsv
+removing  cam2_ccd1/o1a/outcatrms_day_4155.tsv
+removing  cam2_ccd1/o1a/outcatrms_day_4153.tsv
+removing  cam2_ccd1/o1a/outcatrms_day_4157.tsv
+removing  cam2_ccd1/o1a/outcatrms_day_4154.tsv
+removing  cam2_ccd1/o1a/outcatrms_day_4158.tsv
+removing  cam2_ccd1/o2b/outcatrms_day_4173.tsv
+removing  cam2_ccd1/o2b/outcatrms_day_4172.tsv
+removing  cam2_ccd1/o2b/outcatrms_day_4176.tsv
+removing  cam2_ccd1/o2b/outcatrms_day_4177.tsv
+removing  cam2_ccd1/o2b/outcatrms_day_4174.tsv
+removing  cam2_ccd1/o2b/outcatrms_day_4175.tsv
+removing  cam2_ccd1/o1b/outcatrms_day_4161.tsv
+removing  cam2_ccd1/o1b/outcatrms_day_4160.tsv
+removing  cam2_ccd1/o1b/outcatrms_day_4163.tsv
+removing  cam2_ccd1/o1b/outcatrms_day_4159.tsv
+removing  cam2_ccd1/o1b/outcatrms_day_4162.tsv
+removing  cam2_ccd1/o1b/outcatrms_day_4164.tsv
+1350.7731	2052.2929	1351	2052	lc/lc_outcatrms_day_4176_cam2_ccd2_cand63.txt	1
+ removed
+removing  cam2_ccd2/o1a/outcatrms_day_4156.tsv
+removing  cam2_ccd2/o1a/outcatrms_day_4155.tsv
+removing  cam2_ccd2/o1a/outcatrms_day_4153.tsv
+removing  cam2_ccd2/o1a/outcatrms_day_4157.tsv
+removing  cam2_ccd2/o1a/outcatrms_day_4154.tsv
+removing  cam2_ccd2/o1a/outcatrms_day_4158.tsv
+removing  cam2_ccd2/o2b/outcatrms_day_4173.tsv
+removing  cam2_ccd2/o2b/outcatrms_day_4172.tsv
+removing  cam2_ccd2/o2b/outcatrms_day_4176.tsv
+removing  cam2_ccd2/o2b/outcatrms_day_4177.tsv
+removing  cam2_ccd2/o2b/outcatrms_day_4174.tsv
+removing  cam2_ccd2/o2b/outcatrms_day_4175.tsv
+removing  cam2_ccd2/o1b/outcatrms_day_4161.tsv
+removing  cam2_ccd2/o1b/outcatrms_day_4160.tsv
+removing  cam2_ccd2/o1b/outcatrms_day_4163.tsv
+removing  cam2_ccd2/o1b/outcatrms_day_4159.tsv
+removing  cam2_ccd2/o1b/outcatrms_day_4162.tsv
+removing  cam2_ccd2/o1b/outcatrms_day_4164.tsv
+559.0555	 22.4044	559	22	lc/lc_outcatrms_day_4153_cam2_ccd3_cand0.txt	1
+ removed
+570.1430	 29.9217	570	30	lc/lc_outcatrms_day_4153_cam2_ccd3_cand1.txt	1
+ removed
+134.2707	 21.2961	134	21	lc/lc_outcatrms_day_4153_cam2_ccd3_cand6.txt	1
+ removed
+161.4018	 29.4755	161	29	lc/lc_outcatrms_day_4153_cam2_ccd3_cand11.txt	1
+ removed
+567.2018	 23.0354	567	23	lc/lc_outcatrms_day_4153_cam2_ccd3_cand63.txt	1
+ removed
+136.2998	 24.9540	136	25	lc/lc_outcatrms_day_4153_cam2_ccd3_cand64.txt	1
+ removed
+removing  cam2_ccd3/o1a/outcatrms_day_4156.tsv
+removing  cam2_ccd3/o1a/outcatrms_day_4155.tsv
+removing  cam2_ccd3/o1a/outcatrms_day_4153.tsv
+removing  cam2_ccd3/o1a/outcatrms_day_4157.tsv
+removing  cam2_ccd3/o1a/outcatrms_day_4154.tsv
+removing  cam2_ccd3/o1a/outcatrms_day_4158.tsv
+removing  cam2_ccd3/o2b/outcatrms_day_4173.tsv
+removing  cam2_ccd3/o2b/outcatrms_day_4172.tsv
+removing  cam2_ccd3/o2b/outcatrms_day_4176.tsv
+removing  cam2_ccd3/o2b/outcatrms_day_4177.tsv
+removing  cam2_ccd3/o2b/outcatrms_day_4174.tsv
+removing  cam2_ccd3/o2b/outcatrms_day_4175.tsv
+removing  cam2_ccd3/o1b/outcatrms_day_4161.tsv
+removing  cam2_ccd3/o1b/outcatrms_day_4160.tsv
+removing  cam2_ccd3/o1b/outcatrms_day_4163.tsv
+removing  cam2_ccd3/o1b/outcatrms_day_4159.tsv
+removing  cam2_ccd3/o1b/outcatrms_day_4162.tsv
+removing  cam2_ccd3/o1b/outcatrms_day_4164.tsv
+removing  cam3_ccd1/o1a/outcatrms_day_4156.tsv
+removing  cam3_ccd1/o1a/outcatrms_day_4155.tsv
+removing  cam3_ccd1/o1a/outcatrms_day_4153.tsv
+removing  cam3_ccd1/o1a/outcatrms_day_4157.tsv
+removing  cam3_ccd1/o1a/outcatrms_day_4154.tsv
+removing  cam3_ccd1/o1a/outcatrms_day_4158.tsv
+removing  cam3_ccd1/o2b/outcatrms_day_4173.tsv
+removing  cam3_ccd1/o2b/outcatrms_day_4172.tsv
+removing  cam3_ccd1/o2b/outcatrms_day_4176.tsv
+removing  cam3_ccd1/o2b/outcatrms_day_4177.tsv
+removing  cam3_ccd1/o2b/outcatrms_day_4174.tsv
+removing  cam3_ccd1/o2b/outcatrms_day_4175.tsv
+removing  cam3_ccd1/o1b/outcatrms_day_4161.tsv
+removing  cam3_ccd1/o1b/outcatrms_day_4160.tsv
+removing  cam3_ccd1/o1b/outcatrms_day_4163.tsv
+removing  cam3_ccd1/o1b/outcatrms_day_4159.tsv
+removing  cam3_ccd1/o1b/outcatrms_day_4162.tsv
+removing  cam3_ccd1/o1b/outcatrms_day_4164.tsv
+2082.5037	1325.6440	2083	1326	lc/lc_outcatrms_day_4159_cam3_ccd2_cand41.txt	1
+ removed
+1658.8149	2045.5694	1659	2046	lc/lc_outcatrms_day_4163_cam3_ccd2_cand51.txt	1
+ removed
+removing  cam3_ccd2/o1a/outcatrms_day_4156.tsv
+removing  cam3_ccd2/o1a/outcatrms_day_4155.tsv
+removing  cam3_ccd2/o1a/outcatrms_day_4153.tsv
+removing  cam3_ccd2/o1a/outcatrms_day_4157.tsv
+removing  cam3_ccd2/o1a/outcatrms_day_4154.tsv
+removing  cam3_ccd2/o1a/outcatrms_day_4158.tsv
+removing  cam3_ccd2/o2b/outcatrms_day_4173.tsv
+removing  cam3_ccd2/o2b/outcatrms_day_4172.tsv
+removing  cam3_ccd2/o2b/outcatrms_day_4176.tsv
+removing  cam3_ccd2/o2b/outcatrms_day_4177.tsv
+removing  cam3_ccd2/o2b/outcatrms_day_4174.tsv
+removing  cam3_ccd2/o2b/outcatrms_day_4175.tsv
+removing  cam3_ccd2/o1b/outcatrms_day_4161.tsv
+removing  cam3_ccd2/o1b/outcatrms_day_4160.tsv
+removing  cam3_ccd2/o1b/outcatrms_day_4163.tsv
+removing  cam3_ccd2/o1b/outcatrms_day_4159.tsv
+removing  cam3_ccd2/o1b/outcatrms_day_4162.tsv
+removing  cam3_ccd2/o1b/outcatrms_day_4164.tsv
+1920.8553	2047.6226	1921	2048	lc/lc_outcatrms_day_4174_cam3_ccd3_cand63.txt	1
+ removed
+removing  cam3_ccd3/o1a/outcatrms_day_4156.tsv
+removing  cam3_ccd3/o1a/outcatrms_day_4155.tsv
+removing  cam3_ccd3/o1a/outcatrms_day_4153.tsv
+removing  cam3_ccd3/o1a/outcatrms_day_4157.tsv
+removing  cam3_ccd3/o1a/outcatrms_day_4154.tsv
+removing  cam3_ccd3/o1a/outcatrms_day_4158.tsv
+removing  cam3_ccd3/o2b/outcatrms_day_4173.tsv
+removing  cam3_ccd3/o2b/outcatrms_day_4172.tsv
+removing  cam3_ccd3/o2b/outcatrms_day_4176.tsv
+removing  cam3_ccd3/o2b/outcatrms_day_4177.tsv
+removing  cam3_ccd3/o2b/outcatrms_day_4174.tsv
+removing  cam3_ccd3/o2b/outcatrms_day_4175.tsv
+removing  cam3_ccd3/o1b/outcatrms_day_4161.tsv
+removing  cam3_ccd3/o1b/outcatrms_day_4160.tsv
+removing  cam3_ccd3/o1b/outcatrms_day_4163.tsv
+removing  cam3_ccd3/o1b/outcatrms_day_4159.tsv
+removing  cam3_ccd3/o1b/outcatrms_day_4162.tsv
+removing  cam3_ccd3/o1b/outcatrms_day_4164.tsv
+1690.0572	2040.7064	1690	2041	lc/lc_outcatrms_day_4172_cam3_ccd4_cand46.txt	1
+ removed
+1136.0364	 15.5384	1136	16	lc/lc_outcatrms_day_4173_cam3_ccd4_cand47.txt	1
+ removed
+2089.5718	989.2646	2090	989	lc/lc_outcatrms_day_4174_cam3_ccd4_cand52.txt	1
+ removed
+removing  cam3_ccd4/o1a/outcatrms_day_4156.tsv
+removing  cam3_ccd4/o1a/outcatrms_day_4155.tsv
+removing  cam3_ccd4/o1a/outcatrms_day_4153.tsv
+removing  cam3_ccd4/o1a/outcatrms_day_4157.tsv
+removing  cam3_ccd4/o1a/outcatrms_day_4154.tsv
+removing  cam3_ccd4/o1a/outcatrms_day_4158.tsv
+removing  cam3_ccd4/o2b/outcatrms_day_4173.tsv
+removing  cam3_ccd4/o2b/outcatrms_day_4172.tsv
+removing  cam3_ccd4/o2b/outcatrms_day_4176.tsv
+removing  cam3_ccd4/o2b/outcatrms_day_4177.tsv
+removing  cam3_ccd4/o2b/outcatrms_day_4174.tsv
+removing  cam3_ccd4/o2b/outcatrms_day_4175.tsv
+removing  cam3_ccd4/o1b/outcatrms_day_4161.tsv
+removing  cam3_ccd4/o1b/outcatrms_day_4160.tsv
+removing  cam3_ccd4/o1b/outcatrms_day_4163.tsv
+removing  cam3_ccd4/o1b/outcatrms_day_4159.tsv
+removing  cam3_ccd4/o1b/outcatrms_day_4162.tsv
+removing  cam3_ccd4/o1b/outcatrms_day_4164.tsv
+removing  cam4_ccd1/o1a/outcatrms_day_4156.tsv
+removing  cam4_ccd1/o1a/outcatrms_day_4155.tsv
+removing  cam4_ccd1/o1a/outcatrms_day_4153.tsv
+removing  cam4_ccd1/o1a/outcatrms_day_4157.tsv
+removing  cam4_ccd1/o1a/outcatrms_day_4154.tsv
+removing  cam4_ccd1/o1a/outcatrms_day_4158.tsv
+removing  cam4_ccd1/o2b/outcatrms_day_4173.tsv
+removing  cam4_ccd1/o2b/outcatrms_day_4172.tsv
+removing  cam4_ccd1/o2b/outcatrms_day_4176.tsv
+removing  cam4_ccd1/o2b/outcatrms_day_4177.tsv
+removing  cam4_ccd1/o2b/outcatrms_day_4174.tsv
+removing  cam4_ccd1/o2b/outcatrms_day_4175.tsv
+removing  cam4_ccd1/o1b/outcatrms_day_4161.tsv
+removing  cam4_ccd1/o1b/outcatrms_day_4160.tsv
+removing  cam4_ccd1/o1b/outcatrms_day_4163.tsv
+removing  cam4_ccd1/o1b/outcatrms_day_4159.tsv
+removing  cam4_ccd1/o1b/outcatrms_day_4162.tsv
+removing  cam4_ccd1/o1b/outcatrms_day_4164.tsv
+removing  cam4_ccd2/o1a/outcatrms_day_4156.tsv
+removing  cam4_ccd2/o1a/outcatrms_day_4155.tsv
+removing  cam4_ccd2/o1a/outcatrms_day_4153.tsv
+removing  cam4_ccd2/o1a/outcatrms_day_4157.tsv
+removing  cam4_ccd2/o1a/outcatrms_day_4154.tsv
+removing  cam4_ccd2/o1a/outcatrms_day_4158.tsv
+removing  cam4_ccd2/o2b/outcatrms_day_4173.tsv
+removing  cam4_ccd2/o2b/outcatrms_day_4172.tsv
+removing  cam4_ccd2/o2b/outcatrms_day_4176.tsv
+removing  cam4_ccd2/o2b/outcatrms_day_4177.tsv
+removing  cam4_ccd2/o2b/outcatrms_day_4174.tsv
+removing  cam4_ccd2/o2b/outcatrms_day_4175.tsv
+removing  cam4_ccd2/o1b/outcatrms_day_4161.tsv
+removing  cam4_ccd2/o1b/outcatrms_day_4160.tsv
+removing  cam4_ccd2/o1b/outcatrms_day_4163.tsv
+removing  cam4_ccd2/o1b/outcatrms_day_4159.tsv
+removing  cam4_ccd2/o1b/outcatrms_day_4162.tsv
+removing  cam4_ccd2/o1b/outcatrms_day_4164.tsv
+174.3967	 25.0726	174	25	lc/lc_outcatrms_day_4163_cam4_ccd3_cand13.txt	1
+ removed
+166.7228	 19.4735	167	19	lc/lc_outcatrms_day_4163_cam4_ccd3_cand240.txt	1
+ removed
+128.0572	 25.8796	128	26	lc/lc_outcatrms_day_4163_cam4_ccd3_cand259.txt	1
+ removed
+removing  cam4_ccd3/o1a/outcatrms_day_4156.tsv
+removing  cam4_ccd3/o1a/outcatrms_day_4155.tsv
+removing  cam4_ccd3/o1a/outcatrms_day_4153.tsv
+removing  cam4_ccd3/o1a/outcatrms_day_4157.tsv
+removing  cam4_ccd3/o1a/outcatrms_day_4154.tsv
+removing  cam4_ccd3/o1a/outcatrms_day_4158.tsv
+removing  cam4_ccd3/o2b/outcatrms_day_4173.tsv
+removing  cam4_ccd3/o2b/outcatrms_day_4172.tsv
+removing  cam4_ccd3/o2b/outcatrms_day_4176.tsv
+removing  cam4_ccd3/o2b/outcatrms_day_4177.tsv
+removing  cam4_ccd3/o2b/outcatrms_day_4174.tsv
+removing  cam4_ccd3/o2b/outcatrms_day_4175.tsv
+removing  cam4_ccd3/o1b/outcatrms_day_4161.tsv
+removing  cam4_ccd3/o1b/outcatrms_day_4160.tsv
+removing  cam4_ccd3/o1b/outcatrms_day_4163.tsv
+removing  cam4_ccd3/o1b/outcatrms_day_4159.tsv
+removing  cam4_ccd3/o1b/outcatrms_day_4162.tsv
+removing  cam4_ccd4/o1a/outcatrms_day_4156.tsv
+removing  cam4_ccd4/o1a/outcatrms_day_4155.tsv
+removing  cam4_ccd4/o1a/outcatrms_day_4157.tsv
+removing  cam4_ccd4/o1a/outcatrms_day_4154.tsv
+removing  cam4_ccd4/o1a/outcatrms_day_4158.tsv
+removing  cam4_ccd4/o2b/outcatrms_day_4173.tsv
+removing  cam4_ccd4/o2b/outcatrms_day_4172.tsv
+removing  cam4_ccd4/o2b/outcatrms_day_4176.tsv
+removing  cam4_ccd4/o2b/outcatrms_day_4177.tsv
+removing  cam4_ccd4/o2b/outcatrms_day_4174.tsv
+removing  cam4_ccd4/o2b/outcatrms_day_4175.tsv
+removing  cam4_ccd4/o1b/outcatrms_day_4161.tsv
+removing  cam4_ccd4/o1b/outcatrms_day_4160.tsv
+removing  cam4_ccd4/o1b/outcatrms_day_4163.tsv
+removing  cam4_ccd4/o1b/outcatrms_day_4159.tsv
+removing  cam4_ccd4/o1b/outcatrms_day_4162.tsv
+removing  cam4_ccd4/o1b/outcatrms_day_4164.tsv
+check:  103 0103 1 1 coords.txt lc
+1 1
+./cam1_ccd1//lc/lc_outcatrms_day_4153_cam1_ccd1_cand0.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4153_cam1_ccd1_cand1.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4154_cam1_ccd1_cand2.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4154_cam1_ccd1_cand3.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4154_cam1_ccd1_cand4.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4154_cam1_ccd1_cand5.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4154_cam1_ccd1_cand6.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4155_cam1_ccd1_cand10.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4155_cam1_ccd1_cand11.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4155_cam1_ccd1_cand12.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4155_cam1_ccd1_cand7.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4155_cam1_ccd1_cand8.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4155_cam1_ccd1_cand9.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4156_cam1_ccd1_cand13.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4156_cam1_ccd1_cand14.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4156_cam1_ccd1_cand15.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4156_cam1_ccd1_cand16.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4156_cam1_ccd1_cand17.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4157_cam1_ccd1_cand18.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4157_cam1_ccd1_cand19.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4157_cam1_ccd1_cand20.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4157_cam1_ccd1_cand21.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4157_cam1_ccd1_cand22.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4157_cam1_ccd1_cand23.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4158_cam1_ccd1_cand24.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4158_cam1_ccd1_cand25.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4158_cam1_ccd1_cand26.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4158_cam1_ccd1_cand27.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4159_cam1_ccd1_cand28.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4159_cam1_ccd1_cand29.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4159_cam1_ccd1_cand30.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4160_cam1_ccd1_cand31.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4160_cam1_ccd1_cand32.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4160_cam1_ccd1_cand33.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4161_cam1_ccd1_cand34.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4161_cam1_ccd1_cand35.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4161_cam1_ccd1_cand36.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4161_cam1_ccd1_cand37.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4161_cam1_ccd1_cand38.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4161_cam1_ccd1_cand39.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4162_cam1_ccd1_cand40.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4162_cam1_ccd1_cand41.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4162_cam1_ccd1_cand42.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4162_cam1_ccd1_cand43.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4163_cam1_ccd1_cand44.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4163_cam1_ccd1_cand45.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4163_cam1_ccd1_cand46.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4163_cam1_ccd1_cand47.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4163_cam1_ccd1_cand47.txt
+
+./cam1_ccd1//lc/lc_outcatrms_day_4172_cam1_ccd1_cand48.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4172_cam1_ccd1_cand49.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4172_cam1_ccd1_cand50.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4172_cam1_ccd1_cand51.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4172_cam1_ccd1_cand52.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4173_cam1_ccd1_cand53.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4173_cam1_ccd1_cand54.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4173_cam1_ccd1_cand55.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4174_cam1_ccd1_cand56.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4174_cam1_ccd1_cand57.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4174_cam1_ccd1_cand58.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4174_cam1_ccd1_cand59.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4174_cam1_ccd1_cand60.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4175_cam1_ccd1_cand61.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4175_cam1_ccd1_cand62.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4175_cam1_ccd1_cand63.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4175_cam1_ccd1_cand64.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4176_cam1_ccd1_cand65.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4176_cam1_ccd1_cand66.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4176_cam1_ccd1_cand67.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4176_cam1_ccd1_cand68.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4176_cam1_ccd1_cand68.txt
+
+./cam1_ccd1//lc/lc_outcatrms_day_4177_cam1_ccd1_cand69.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam1_ccd1//lc/lc_outcatrms_day_4177_cam1_ccd1_cand70.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4177_cam1_ccd1_cand71.txt
+./cam1_ccd1//lc/lc_outcatrms_day_4177_cam1_ccd1_cand72.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+check:  103 0103 1 2 coords.txt lc
+1 2
+./cam1_ccd2//lc/lc_outcatrms_day_4153_cam1_ccd2_cand0.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4153_cam1_ccd2_cand1.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4154_cam1_ccd2_cand2.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4154_cam1_ccd2_cand3.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4154_cam1_ccd2_cand4.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand10.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand11.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand12.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand13.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand5.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand6.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand7.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand8.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4155_cam1_ccd2_cand9.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4156_cam1_ccd2_cand14.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4156_cam1_ccd2_cand15.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4156_cam1_ccd2_cand16.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4156_cam1_ccd2_cand17.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4157_cam1_ccd2_cand18.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4157_cam1_ccd2_cand19.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4157_cam1_ccd2_cand19.txt
+
+./cam1_ccd2//lc/lc_outcatrms_day_4158_cam1_ccd2_cand20.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4158_cam1_ccd2_cand21.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4158_cam1_ccd2_cand22.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand23.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand24.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand25.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand26.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand27.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand28.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand29.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4159_cam1_ccd2_cand30.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand31.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand32.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand33.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand34.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand35.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand36.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand37.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4160_cam1_ccd2_cand38.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand39.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand40.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand41.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand42.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand43.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand44.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand45.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand46.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand47.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4161_cam1_ccd2_cand48.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4162_cam1_ccd2_cand49.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4162_cam1_ccd2_cand50.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4162_cam1_ccd2_cand51.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4162_cam1_ccd2_cand52.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4163_cam1_ccd2_cand53.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4163_cam1_ccd2_cand54.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4163_cam1_ccd2_cand54.txt
+
+./cam1_ccd2//lc/lc_outcatrms_day_4164_cam1_ccd2_cand56.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4164_cam1_ccd2_cand56.txt
+
+./cam1_ccd2//lc/lc_outcatrms_day_4164_cam1_ccd2_cand57.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4164_cam1_ccd2_cand58.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4164_cam1_ccd2_cand59.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4172_cam1_ccd2_cand55.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4172_cam1_ccd2_cand60.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4172_cam1_ccd2_cand61.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4172_cam1_ccd2_cand62.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4172_cam1_ccd2_cand63.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4172_cam1_ccd2_cand64.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4173_cam1_ccd2_cand65.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4173_cam1_ccd2_cand66.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4173_cam1_ccd2_cand67.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4173_cam1_ccd2_cand68.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand69.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand70.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand71.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand72.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand73.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand74.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand75.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand76.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand77.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand78.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4174_cam1_ccd2_cand79.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4175_cam1_ccd2_cand80.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4175_cam1_ccd2_cand81.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4175_cam1_ccd2_cand82.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4175_cam1_ccd2_cand83.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4175_cam1_ccd2_cand84.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4176_cam1_ccd2_cand85.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4176_cam1_ccd2_cand86.txt
+./cam1_ccd2//lc/lc_outcatrms_day_4176_cam1_ccd2_cand87.txt
+check:  103 0103 1 3 coords.txt lc
+1 3
+./cam1_ccd3//lc/lc_outcatrms_day_4153_cam1_ccd3_cand0.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam1_ccd3_cand0.txt
+
+./cam1_ccd3//lc/lc_outcatrms_day_4153_cam1_ccd3_cand1.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4153_cam1_ccd3_cand64.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam1_ccd3_cand64.txt
+
+./cam1_ccd3//lc/lc_outcatrms_day_4153_cam1_ccd3_cand89.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam1_ccd3_cand89.txt
+
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand10.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand11.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand2.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand4.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand5.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand6.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand7.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand8.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4154_cam1_ccd3_cand9.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4155_cam1_ccd3_cand12.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4155_cam1_ccd3_cand13.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4155_cam1_ccd3_cand14.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4155_cam1_ccd3_cand15.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4155_cam1_ccd3_cand16.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4156_cam1_ccd3_cand17.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4156_cam1_ccd3_cand18.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4156_cam1_ccd3_cand19.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4156_cam1_ccd3_cand20.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4156_cam1_ccd3_cand21.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4156_cam1_ccd3_cand22.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4156_cam1_ccd3_cand23.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4157_cam1_ccd3_cand25.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4157_cam1_ccd3_cand26.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4157_cam1_ccd3_cand27.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4157_cam1_ccd3_cand28.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4157_cam1_ccd3_cand29.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4157_cam1_ccd3_cand3.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4157_cam1_ccd3_cand30.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4158_cam1_ccd3_cand31.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4158_cam1_ccd3_cand32.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4158_cam1_ccd3_cand33.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4158_cam1_ccd3_cand34.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4158_cam1_ccd3_cand35.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4159_cam1_ccd3_cand24.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4159_cam1_ccd3_cand36.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4159_cam1_ccd3_cand37.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4159_cam1_ccd3_cand38.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4159_cam1_ccd3_cand39.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4159_cam1_ccd3_cand40.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4159_cam1_ccd3_cand82.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4160_cam1_ccd3_cand41.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4160_cam1_ccd3_cand42.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4160_cam1_ccd3_cand43.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4160_cam1_ccd3_cand44.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4161_cam1_ccd3_cand45.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4161_cam1_ccd3_cand46.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4161_cam1_ccd3_cand47.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4162_cam1_ccd3_cand48.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4162_cam1_ccd3_cand49.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4162_cam1_ccd3_cand50.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4162_cam1_ccd3_cand51.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4163_cam1_ccd3_cand52.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand53.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand54.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand55.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand56.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand57.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand58.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand59.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand60.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand61.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam1_ccd3//lc/lc_outcatrms_day_4164_cam1_ccd3_cand62.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand63.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand65.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand66.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand67.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand68.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand69.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand70.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4172_cam1_ccd3_cand71.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4173_cam1_ccd3_cand72.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4173_cam1_ccd3_cand73.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4173_cam1_ccd3_cand74.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4173_cam1_ccd3_cand75.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4174_cam1_ccd3_cand76.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4174_cam1_ccd3_cand77.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4174_cam1_ccd3_cand78.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4174_cam1_ccd3_cand79.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4174_cam1_ccd3_cand80.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4174_cam1_ccd3_cand81.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4174_cam1_ccd3_cand94.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4175_cam1_ccd3_cand83.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4175_cam1_ccd3_cand84.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4175_cam1_ccd3_cand85.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4175_cam1_ccd3_cand86.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4176_cam1_ccd3_cand87.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4176_cam1_ccd3_cand88.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4177_cam1_ccd3_cand90.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4177_cam1_ccd3_cand90.txt
+
+./cam1_ccd3//lc/lc_outcatrms_day_4177_cam1_ccd3_cand91.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4177_cam1_ccd3_cand92.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4177_cam1_ccd3_cand93.txt
+./cam1_ccd3//lc/lc_outcatrms_day_4177_cam1_ccd3_cand95.txt
+check:  103 0103 1 4 coords.txt lc
+1 4
+./cam1_ccd4//lc/lc_outcatrms_day_4154_cam1_ccd4_cand0.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4154_cam1_ccd4_cand1.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4154_cam1_ccd4_cand2.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4154_cam1_ccd4_cand3.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4155_cam1_ccd4_cand4.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4155_cam1_ccd4_cand5.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4155_cam1_ccd4_cand6.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4155_cam1_ccd4_cand7.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4156_cam1_ccd4_cand10.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4156_cam1_ccd4_cand8.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4156_cam1_ccd4_cand9.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4157_cam1_ccd4_cand11.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4157_cam1_ccd4_cand12.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4157_cam1_ccd4_cand13.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4157_cam1_ccd4_cand14.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4158_cam1_ccd4_cand15.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4158_cam1_ccd4_cand16.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4158_cam1_ccd4_cand17.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4158_cam1_ccd4_cand18.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4158_cam1_ccd4_cand19.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4158_cam1_ccd4_cand20.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4159_cam1_ccd4_cand21.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4159_cam1_ccd4_cand22.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4160_cam1_ccd4_cand23.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4160_cam1_ccd4_cand24.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4160_cam1_ccd4_cand24.txt
+
+./cam1_ccd4//lc/lc_outcatrms_day_4161_cam1_ccd4_cand25.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4161_cam1_ccd4_cand26.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4161_cam1_ccd4_cand27.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4161_cam1_ccd4_cand28.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4161_cam1_ccd4_cand29.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4162_cam1_ccd4_cand30.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4162_cam1_ccd4_cand31.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4162_cam1_ccd4_cand32.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4162_cam1_ccd4_cand33.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4163_cam1_ccd4_cand34.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4163_cam1_ccd4_cand34.txt
+
+./cam1_ccd4//lc/lc_outcatrms_day_4163_cam1_ccd4_cand35.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4163_cam1_ccd4_cand36.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4163_cam1_ccd4_cand37.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4172_cam1_ccd4_cand38.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4172_cam1_ccd4_cand39.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4172_cam1_ccd4_cand40.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4173_cam1_ccd4_cand41.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4173_cam1_ccd4_cand42.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4173_cam1_ccd4_cand43.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4173_cam1_ccd4_cand44.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4173_cam1_ccd4_cand45.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4173_cam1_ccd4_cand46.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4174_cam1_ccd4_cand47.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4174_cam1_ccd4_cand48.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4174_cam1_ccd4_cand59.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4175_cam1_ccd4_cand49.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4175_cam1_ccd4_cand50.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4175_cam1_ccd4_cand51.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4175_cam1_ccd4_cand52.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4175_cam1_ccd4_cand53.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam1_ccd4//lc/lc_outcatrms_day_4176_cam1_ccd4_cand54.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4176_cam1_ccd4_cand55.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4176_cam1_ccd4_cand56.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4177_cam1_ccd4_cand57.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4177_cam1_ccd4_cand58.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4177_cam1_ccd4_cand60.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4177_cam1_ccd4_cand61.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4177_cam1_ccd4_cand62.txt
+./cam1_ccd4//lc/lc_outcatrms_day_4177_cam1_ccd4_cand63.txt
+check:  103 0103 2 1 coords.txt lc
+2 1
+./cam2_ccd1//lc/lc_outcatrms_day_4153_cam2_ccd1_cand0.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4153_cam2_ccd1_cand1.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4153_cam2_ccd1_cand2.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4153_cam2_ccd1_cand3.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4154_cam2_ccd1_cand4.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4154_cam2_ccd1_cand5.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4155_cam2_ccd1_cand6.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4155_cam2_ccd1_cand7.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4156_cam2_ccd1_cand8.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4156_cam2_ccd1_cand9.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4157_cam2_ccd1_cand10.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4157_cam2_ccd1_cand11.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4157_cam2_ccd1_cand12.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4157_cam2_ccd1_cand12.txt
+
+./cam2_ccd1//lc/lc_outcatrms_day_4158_cam2_ccd1_cand13.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4158_cam2_ccd1_cand14.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4158_cam2_ccd1_cand15.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4158_cam2_ccd1_cand16.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4158_cam2_ccd1_cand17.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4158_cam2_ccd1_cand18.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4159_cam2_ccd1_cand19.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4159_cam2_ccd1_cand20.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4160_cam2_ccd1_cand21.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4161_cam2_ccd1_cand22.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4161_cam2_ccd1_cand23.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4161_cam2_ccd1_cand24.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4161_cam2_ccd1_cand25.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4161_cam2_ccd1_cand26.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4161_cam2_ccd1_cand27.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4162_cam2_ccd1_cand28.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4162_cam2_ccd1_cand29.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4163_cam2_ccd1_cand30.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4163_cam2_ccd1_cand31.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4163_cam2_ccd1_cand32.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4163_cam2_ccd1_cand33.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4163_cam2_ccd1_cand34.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4164_cam2_ccd1_cand35.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4164_cam2_ccd1_cand36.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4164_cam2_ccd1_cand37.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4164_cam2_ccd1_cand38.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4172_cam2_ccd1_cand39.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4172_cam2_ccd1_cand40.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4172_cam2_ccd1_cand41.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4172_cam2_ccd1_cand42.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4173_cam2_ccd1_cand43.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4173_cam2_ccd1_cand44.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4173_cam2_ccd1_cand45.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4174_cam2_ccd1_cand46.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4174_cam2_ccd1_cand47.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4175_cam2_ccd1_cand48.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4175_cam2_ccd1_cand49.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4175_cam2_ccd1_cand50.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4176_cam2_ccd1_cand51.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4176_cam2_ccd1_cand52.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4176_cam2_ccd1_cand53.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4177_cam2_ccd1_cand54.txt
+./cam2_ccd1//lc/lc_outcatrms_day_4177_cam2_ccd1_cand55.txt
+check:  103 0103 2 2 coords.txt lc
+2 2
+./cam2_ccd2//lc/lc_outcatrms_day_4153_cam2_ccd2_cand0.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4153_cam2_ccd2_cand1.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4153_cam2_ccd2_cand2.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4153_cam2_ccd2_cand3.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4153_cam2_ccd2_cand4.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4153_cam2_ccd2_cand5.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4154_cam2_ccd2_cand6.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4155_cam2_ccd2_cand7.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4155_cam2_ccd2_cand8.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4156_cam2_ccd2_cand10.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4156_cam2_ccd2_cand11.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4156_cam2_ccd2_cand12.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4156_cam2_ccd2_cand13.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4156_cam2_ccd2_cand14.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4156_cam2_ccd2_cand9.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4157_cam2_ccd2_cand15.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4157_cam2_ccd2_cand16.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4158_cam2_ccd2_cand17.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4159_cam2_ccd2_cand18.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4159_cam2_ccd2_cand19.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4159_cam2_ccd2_cand20.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4159_cam2_ccd2_cand21.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4159_cam2_ccd2_cand22.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4160_cam2_ccd2_cand23.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4160_cam2_ccd2_cand24.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4160_cam2_ccd2_cand25.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4160_cam2_ccd2_cand26.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4161_cam2_ccd2_cand27.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4161_cam2_ccd2_cand28.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4161_cam2_ccd2_cand29.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4161_cam2_ccd2_cand30.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4161_cam2_ccd2_cand31.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4162_cam2_ccd2_cand32.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4162_cam2_ccd2_cand33.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4163_cam2_ccd2_cand34.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4163_cam2_ccd2_cand35.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4163_cam2_ccd2_cand36.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4163_cam2_ccd2_cand37.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4163_cam2_ccd2_cand38.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4164_cam2_ccd2_cand39.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4164_cam2_ccd2_cand40.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4164_cam2_ccd2_cand41.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4164_cam2_ccd2_cand42.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4164_cam2_ccd2_cand43.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4164_cam2_ccd2_cand44.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4172_cam2_ccd2_cand45.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4173_cam2_ccd2_cand46.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4173_cam2_ccd2_cand47.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4173_cam2_ccd2_cand48.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4173_cam2_ccd2_cand49.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4174_cam2_ccd2_cand50.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4174_cam2_ccd2_cand51.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4174_cam2_ccd2_cand52.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4175_cam2_ccd2_cand53.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4175_cam2_ccd2_cand54.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4175_cam2_ccd2_cand55.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4175_cam2_ccd2_cand56.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4175_cam2_ccd2_cand57.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4175_cam2_ccd2_cand58.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4176_cam2_ccd2_cand59.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4176_cam2_ccd2_cand60.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4176_cam2_ccd2_cand61.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4176_cam2_ccd2_cand62.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4176_cam2_ccd2_cand63.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4176_cam2_ccd2_cand63.txt
+
+./cam2_ccd2//lc/lc_outcatrms_day_4177_cam2_ccd2_cand64.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4177_cam2_ccd2_cand65.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4177_cam2_ccd2_cand66.txt
+./cam2_ccd2//lc/lc_outcatrms_day_4177_cam2_ccd2_cand67.txt
+check:  103 0103 2 3 coords.txt lc
+2 3
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand0.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam2_ccd3_cand0.txt
+
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand1.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam2_ccd3_cand1.txt
+
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand11.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam2_ccd3_cand11.txt
+
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand15.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand17.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand2.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand28.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand29.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand3.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand4.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand41.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand43.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand5.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand6.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam2_ccd3_cand6.txt
+
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand63.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam2_ccd3_cand63.txt
+
+./cam2_ccd3//lc/lc_outcatrms_day_4153_cam2_ccd3_cand64.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4153_cam2_ccd3_cand64.txt
+
+./cam2_ccd3//lc/lc_outcatrms_day_4154_cam2_ccd3_cand10.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4154_cam2_ccd3_cand7.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4154_cam2_ccd3_cand8.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4154_cam2_ccd3_cand9.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4155_cam2_ccd3_cand12.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4155_cam2_ccd3_cand13.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4155_cam2_ccd3_cand14.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4156_cam2_ccd3_cand16.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4156_cam2_ccd3_cand18.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4156_cam2_ccd3_cand19.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4156_cam2_ccd3_cand20.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4157_cam2_ccd3_cand21.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4157_cam2_ccd3_cand22.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4157_cam2_ccd3_cand23.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4157_cam2_ccd3_cand24.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4158_cam2_ccd3_cand25.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4158_cam2_ccd3_cand26.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4158_cam2_ccd3_cand27.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4159_cam2_ccd3_cand30.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4159_cam2_ccd3_cand31.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4159_cam2_ccd3_cand32.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4159_cam2_ccd3_cand33.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4161_cam2_ccd3_cand34.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4161_cam2_ccd3_cand35.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4161_cam2_ccd3_cand36.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4161_cam2_ccd3_cand37.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4161_cam2_ccd3_cand38.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4162_cam2_ccd3_cand39.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4163_cam2_ccd3_cand40.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4164_cam2_ccd3_cand42.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4172_cam2_ccd3_cand44.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4172_cam2_ccd3_cand45.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4172_cam2_ccd3_cand46.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4172_cam2_ccd3_cand47.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4172_cam2_ccd3_cand48.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4173_cam2_ccd3_cand49.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4173_cam2_ccd3_cand50.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4173_cam2_ccd3_cand51.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4173_cam2_ccd3_cand52.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4174_cam2_ccd3_cand53.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4175_cam2_ccd3_cand54.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4175_cam2_ccd3_cand55.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4175_cam2_ccd3_cand56.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4176_cam2_ccd3_cand57.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4176_cam2_ccd3_cand58.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4176_cam2_ccd3_cand59.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4176_cam2_ccd3_cand60.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4176_cam2_ccd3_cand61.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4176_cam2_ccd3_cand62.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4177_cam2_ccd3_cand65.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4177_cam2_ccd3_cand66.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4177_cam2_ccd3_cand67.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4177_cam2_ccd3_cand68.txt
+./cam2_ccd3//lc/lc_outcatrms_day_4177_cam2_ccd3_cand69.txt
+check:  103 0103 3 1 coords.txt lc
+3 1
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand0.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand1.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand2.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand3.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand4.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand5.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand6.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand7.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand8.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4153_cam3_ccd1_cand9.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4154_cam3_ccd1_cand10.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4155_cam3_ccd1_cand11.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4155_cam3_ccd1_cand12.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4155_cam3_ccd1_cand13.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4155_cam3_ccd1_cand14.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4156_cam3_ccd1_cand15.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4156_cam3_ccd1_cand16.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4156_cam3_ccd1_cand17.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4157_cam3_ccd1_cand18.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4158_cam3_ccd1_cand19.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4158_cam3_ccd1_cand20.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4158_cam3_ccd1_cand21.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4159_cam3_ccd1_cand22.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4159_cam3_ccd1_cand23.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4160_cam3_ccd1_cand24.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4160_cam3_ccd1_cand25.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4161_cam3_ccd1_cand26.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4161_cam3_ccd1_cand27.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4162_cam3_ccd1_cand28.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4162_cam3_ccd1_cand29.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4162_cam3_ccd1_cand30.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4162_cam3_ccd1_cand31.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4162_cam3_ccd1_cand32.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4163_cam3_ccd1_cand33.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4163_cam3_ccd1_cand34.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4164_cam3_ccd1_cand35.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4164_cam3_ccd1_cand36.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4164_cam3_ccd1_cand37.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4164_cam3_ccd1_cand38.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4164_cam3_ccd1_cand39.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4164_cam3_ccd1_cand40.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4164_cam3_ccd1_cand41.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4172_cam3_ccd1_cand42.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4172_cam3_ccd1_cand43.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4173_cam3_ccd1_cand44.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4173_cam3_ccd1_cand45.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4173_cam3_ccd1_cand46.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4173_cam3_ccd1_cand47.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4173_cam3_ccd1_cand48.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4174_cam3_ccd1_cand49.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4174_cam3_ccd1_cand50.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4174_cam3_ccd1_cand51.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4174_cam3_ccd1_cand52.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4175_cam3_ccd1_cand53.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4176_cam3_ccd1_cand54.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4177_cam3_ccd1_cand55.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4177_cam3_ccd1_cand56.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4177_cam3_ccd1_cand57.txt
+./cam3_ccd1//lc/lc_outcatrms_day_4177_cam3_ccd1_cand58.txt
+check:  103 0103 3 2 coords.txt lc
+3 2
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand0.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand1.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand10.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand2.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand3.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand4.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand5.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand6.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand7.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand8.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4153_cam3_ccd2_cand9.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4154_cam3_ccd2_cand11.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4154_cam3_ccd2_cand12.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4154_cam3_ccd2_cand13.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4154_cam3_ccd2_cand14.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4154_cam3_ccd2_cand15.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4155_cam3_ccd2_cand16.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4155_cam3_ccd2_cand17.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4155_cam3_ccd2_cand18.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4155_cam3_ccd2_cand19.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4156_cam3_ccd2_cand20.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4156_cam3_ccd2_cand21.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4156_cam3_ccd2_cand22.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4156_cam3_ccd2_cand23.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4156_cam3_ccd2_cand24.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4157_cam3_ccd2_cand25.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4157_cam3_ccd2_cand26.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4157_cam3_ccd2_cand27.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4157_cam3_ccd2_cand28.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4157_cam3_ccd2_cand29.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4157_cam3_ccd2_cand30.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand31.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand32.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand33.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand34.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand35.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand36.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand37.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4158_cam3_ccd2_cand38.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4159_cam3_ccd2_cand39.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4159_cam3_ccd2_cand40.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4159_cam3_ccd2_cand41.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4159_cam3_ccd2_cand41.txt
+
+./cam3_ccd2//lc/lc_outcatrms_day_4159_cam3_ccd2_cand42.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4160_cam3_ccd2_cand43.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4160_cam3_ccd2_cand44.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4160_cam3_ccd2_cand45.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4161_cam3_ccd2_cand46.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4161_cam3_ccd2_cand47.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4162_cam3_ccd2_cand48.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4163_cam3_ccd2_cand50.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4163_cam3_ccd2_cand51.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4163_cam3_ccd2_cand51.txt
+
+./cam3_ccd2//lc/lc_outcatrms_day_4164_cam3_ccd2_cand52.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4164_cam3_ccd2_cand53.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4172_cam3_ccd2_cand54.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4172_cam3_ccd2_cand55.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4172_cam3_ccd2_cand56.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4172_cam3_ccd2_cand57.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4173_cam3_ccd2_cand49.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4173_cam3_ccd2_cand58.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4173_cam3_ccd2_cand59.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4174_cam3_ccd2_cand60.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4174_cam3_ccd2_cand61.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4174_cam3_ccd2_cand62.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4175_cam3_ccd2_cand63.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4175_cam3_ccd2_cand64.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4175_cam3_ccd2_cand65.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4175_cam3_ccd2_cand66.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand67.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand68.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand69.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand70.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand71.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand72.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand73.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4176_cam3_ccd2_cand74.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4177_cam3_ccd2_cand75.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4177_cam3_ccd2_cand76.txt
+./cam3_ccd2//lc/lc_outcatrms_day_4177_cam3_ccd2_cand77.txt
+check:  103 0103 3 3 coords.txt lc
+3 3
+./cam3_ccd3//lc/lc_outcatrms_day_4153_cam3_ccd3_cand0.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4153_cam3_ccd3_cand1.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4153_cam3_ccd3_cand2.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4153_cam3_ccd3_cand3.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4153_cam3_ccd3_cand4.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4153_cam3_ccd3_cand5.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4153_cam3_ccd3_cand6.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4154_cam3_ccd3_cand7.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4154_cam3_ccd3_cand8.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4155_cam3_ccd3_cand10.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4155_cam3_ccd3_cand11.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4155_cam3_ccd3_cand12.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4155_cam3_ccd3_cand9.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4156_cam3_ccd3_cand13.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4156_cam3_ccd3_cand14.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4157_cam3_ccd3_cand15.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4157_cam3_ccd3_cand16.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4157_cam3_ccd3_cand17.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4157_cam3_ccd3_cand18.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4157_cam3_ccd3_cand19.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4157_cam3_ccd3_cand20.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4158_cam3_ccd3_cand21.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4158_cam3_ccd3_cand22.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4158_cam3_ccd3_cand23.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4158_cam3_ccd3_cand24.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4159_cam3_ccd3_cand25.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4159_cam3_ccd3_cand26.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4159_cam3_ccd3_cand27.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4160_cam3_ccd3_cand28.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4160_cam3_ccd3_cand29.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4160_cam3_ccd3_cand30.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4160_cam3_ccd3_cand31.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4161_cam3_ccd3_cand32.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4161_cam3_ccd3_cand33.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4161_cam3_ccd3_cand34.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4161_cam3_ccd3_cand35.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4161_cam3_ccd3_cand36.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4162_cam3_ccd3_cand37.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4162_cam3_ccd3_cand38.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4162_cam3_ccd3_cand39.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4162_cam3_ccd3_cand40.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4162_cam3_ccd3_cand50.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4163_cam3_ccd3_cand41.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4163_cam3_ccd3_cand42.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4163_cam3_ccd3_cand43.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4163_cam3_ccd3_cand44.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4163_cam3_ccd3_cand45.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4163_cam3_ccd3_cand46.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4164_cam3_ccd3_cand47.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4164_cam3_ccd3_cand48.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4164_cam3_ccd3_cand49.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4164_cam3_ccd3_cand51.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4172_cam3_ccd3_cand52.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4172_cam3_ccd3_cand53.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4172_cam3_ccd3_cand54.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4172_cam3_ccd3_cand55.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4172_cam3_ccd3_cand56.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4173_cam3_ccd3_cand57.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4173_cam3_ccd3_cand58.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4174_cam3_ccd3_cand59.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4174_cam3_ccd3_cand60.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4174_cam3_ccd3_cand61.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4174_cam3_ccd3_cand62.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4174_cam3_ccd3_cand63.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4174_cam3_ccd3_cand63.txt
+
+./cam3_ccd3//lc/lc_outcatrms_day_4175_cam3_ccd3_cand64.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4176_cam3_ccd3_cand65.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4176_cam3_ccd3_cand66.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4176_cam3_ccd3_cand67.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4176_cam3_ccd3_cand68.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4176_cam3_ccd3_cand69.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4176_cam3_ccd3_cand70.txt
+./cam3_ccd3//lc/lc_outcatrms_day_4176_cam3_ccd3_cand71.txt
+check:  103 0103 3 4 coords.txt lc
+3 4
+./cam3_ccd4//lc/lc_outcatrms_day_4153_cam3_ccd4_cand0.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4153_cam3_ccd4_cand1.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4153_cam3_ccd4_cand2.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4153_cam3_ccd4_cand3.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4153_cam3_ccd4_cand4.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4153_cam3_ccd4_cand5.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4155_cam3_ccd4_cand10.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4155_cam3_ccd4_cand11.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4155_cam3_ccd4_cand6.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4155_cam3_ccd4_cand7.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4155_cam3_ccd4_cand8.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4155_cam3_ccd4_cand9.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4156_cam3_ccd4_cand12.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4156_cam3_ccd4_cand13.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4156_cam3_ccd4_cand14.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4156_cam3_ccd4_cand15.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4157_cam3_ccd4_cand16.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4157_cam3_ccd4_cand17.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4158_cam3_ccd4_cand18.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4158_cam3_ccd4_cand19.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4159_cam3_ccd4_cand20.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4159_cam3_ccd4_cand21.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4160_cam3_ccd4_cand22.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4160_cam3_ccd4_cand23.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4161_cam3_ccd4_cand24.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4161_cam3_ccd4_cand25.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4161_cam3_ccd4_cand26.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4161_cam3_ccd4_cand27.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4162_cam3_ccd4_cand28.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4162_cam3_ccd4_cand29.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4162_cam3_ccd4_cand30.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4162_cam3_ccd4_cand31.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4162_cam3_ccd4_cand32.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4163_cam3_ccd4_cand33.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4163_cam3_ccd4_cand34.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4163_cam3_ccd4_cand35.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4164_cam3_ccd4_cand36.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4164_cam3_ccd4_cand37.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4164_cam3_ccd4_cand38.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4164_cam3_ccd4_cand39.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4164_cam3_ccd4_cand40.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4164_cam3_ccd4_cand41.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4172_cam3_ccd4_cand42.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4172_cam3_ccd4_cand43.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4172_cam3_ccd4_cand44.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4172_cam3_ccd4_cand45.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4172_cam3_ccd4_cand46.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4172_cam3_ccd4_cand46.txt
+
+./cam3_ccd4//lc/lc_outcatrms_day_4173_cam3_ccd4_cand48.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4173_cam3_ccd4_cand49.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4173_cam3_ccd4_cand50.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4173_cam3_ccd4_cand51.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4174_cam3_ccd4_cand52.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4174_cam3_ccd4_cand52.txt
+
+./cam3_ccd4//lc/lc_outcatrms_day_4174_cam3_ccd4_cand53.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4174_cam3_ccd4_cand54.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4175_cam3_ccd4_cand55.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4176_cam3_ccd4_cand56.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4177_cam3_ccd4_cand57.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4177_cam3_ccd4_cand58.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4177_cam3_ccd4_cand59.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4177_cam3_ccd4_cand60.txt
+./cam3_ccd4//lc/lc_outcatrms_day_4177_cam3_ccd4_cand61.txt
+check:  103 0103 4 1 coords.txt lc
+4 1
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand0.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand1.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand13.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand14.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand18.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand19.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand2.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand21.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand22.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand23.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand29.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand3.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand37.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand4.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand43.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand48.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand49.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand5.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand6.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand63.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand67.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand7.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand71.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand72.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand75.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand76.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand77.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand78.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand79.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand80.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand81.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4153_cam4_ccd1_cand85.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4154_cam4_ccd1_cand10.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4154_cam4_ccd1_cand11.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4154_cam4_ccd1_cand12.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4154_cam4_ccd1_cand8.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4154_cam4_ccd1_cand9.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4155_cam4_ccd1_cand15.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4155_cam4_ccd1_cand16.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4155_cam4_ccd1_cand17.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4155_cam4_ccd1_cand20.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4156_cam4_ccd1_cand24.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4156_cam4_ccd1_cand25.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4157_cam4_ccd1_cand26.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4157_cam4_ccd1_cand27.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4157_cam4_ccd1_cand28.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4158_cam4_ccd1_cand30.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4158_cam4_ccd1_cand31.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4158_cam4_ccd1_cand32.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4158_cam4_ccd1_cand33.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4159_cam4_ccd1_cand34.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4159_cam4_ccd1_cand35.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4159_cam4_ccd1_cand36.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4160_cam4_ccd1_cand38.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4160_cam4_ccd1_cand39.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4160_cam4_ccd1_cand40.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4160_cam4_ccd1_cand41.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4161_cam4_ccd1_cand42.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4161_cam4_ccd1_cand44.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4162_cam4_ccd1_cand45.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4162_cam4_ccd1_cand46.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4162_cam4_ccd1_cand47.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4163_cam4_ccd1_cand50.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4163_cam4_ccd1_cand51.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4163_cam4_ccd1_cand52.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4163_cam4_ccd1_cand53.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4163_cam4_ccd1_cand54.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4163_cam4_ccd1_cand55.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4163_cam4_ccd1_cand56.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4164_cam4_ccd1_cand57.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4164_cam4_ccd1_cand58.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4164_cam4_ccd1_cand59.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4164_cam4_ccd1_cand60.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4164_cam4_ccd1_cand61.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4164_cam4_ccd1_cand62.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4172_cam4_ccd1_cand64.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4172_cam4_ccd1_cand65.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4172_cam4_ccd1_cand66.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4172_cam4_ccd1_cand68.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4173_cam4_ccd1_cand69.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4173_cam4_ccd1_cand70.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4174_cam4_ccd1_cand73.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4174_cam4_ccd1_cand74.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4176_cam4_ccd1_cand82.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4176_cam4_ccd1_cand83.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4176_cam4_ccd1_cand84.txt
+./cam4_ccd1//lc/lc_outcatrms_day_4177_cam4_ccd1_cand86.txt
+check:  103 0103 4 2 coords.txt lc
+4 2
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand0.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand1.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand2.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand3.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand4.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand5.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand6.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand7.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4153_cam4_ccd2_cand8.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4154_cam4_ccd2_cand10.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4154_cam4_ccd2_cand9.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4155_cam4_ccd2_cand12.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4155_cam4_ccd2_cand13.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4156_cam4_ccd2_cand14.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand15.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand16.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand17.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand18.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand19.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand20.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand21.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4157_cam4_ccd2_cand22.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4158_cam4_ccd2_cand23.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4158_cam4_ccd2_cand24.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4159_cam4_ccd2_cand25.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4159_cam4_ccd2_cand26.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4159_cam4_ccd2_cand27.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4159_cam4_ccd2_cand28.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4159_cam4_ccd2_cand29.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4160_cam4_ccd2_cand30.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4160_cam4_ccd2_cand31.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4160_cam4_ccd2_cand32.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4161_cam4_ccd2_cand11.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4161_cam4_ccd2_cand33.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4161_cam4_ccd2_cand34.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4162_cam4_ccd2_cand35.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4163_cam4_ccd2_cand36.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4163_cam4_ccd2_cand37.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4163_cam4_ccd2_cand38.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4164_cam4_ccd2_cand39.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4164_cam4_ccd2_cand40.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4164_cam4_ccd2_cand41.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4164_cam4_ccd2_cand42.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4164_cam4_ccd2_cand43.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4172_cam4_ccd2_cand44.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4172_cam4_ccd2_cand45.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4172_cam4_ccd2_cand46.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4172_cam4_ccd2_cand47.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4172_cam4_ccd2_cand48.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4173_cam4_ccd2_cand49.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4173_cam4_ccd2_cand50.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4173_cam4_ccd2_cand51.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4173_cam4_ccd2_cand52.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4173_cam4_ccd2_cand53.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4173_cam4_ccd2_cand54.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4174_cam4_ccd2_cand55.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4174_cam4_ccd2_cand56.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4174_cam4_ccd2_cand57.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4175_cam4_ccd2_cand58.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4175_cam4_ccd2_cand59.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4176_cam4_ccd2_cand60.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4176_cam4_ccd2_cand61.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4176_cam4_ccd2_cand62.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4176_cam4_ccd2_cand63.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4177_cam4_ccd2_cand64.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4177_cam4_ccd2_cand65.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4177_cam4_ccd2_cand66.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4177_cam4_ccd2_cand67.txt
+./cam4_ccd2//lc/lc_outcatrms_day_4177_cam4_ccd2_cand68.txt
+check:  103 0103 4 3 coords.txt lc
+4 3
+./cam4_ccd3//lc/lc_outcatrms_day_4153_cam4_ccd3_cand1.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 649, in plot
+    fit_ra, fit_dec, fit_gal, ellip_ratio = fit_gaussian_panel(fig, gs, det_image, header, src, imsize)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 352, in fit_gaussian_panel
+    popt, _ = curve_fit(
+  File "/home/nimcclur/.conda/envs/nmcclur/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py", line 1029, in curve_fit
+    raise RuntimeError("Optimal parameters not found: " + res.message)
+RuntimeError: Optimal parameters not found: The maximum number of function evaluations is exceeded.
+
+./cam4_ccd3//lc/lc_outcatrms_day_4153_cam4_ccd3_cand3.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4153_cam4_ccd3_cand4.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4153_cam4_ccd3_cand5.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4153_cam4_ccd3_cand6.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4153_cam4_ccd3_cand7.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4153_cam4_ccd3_cand8.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4154_cam4_ccd3_cand10.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4154_cam4_ccd3_cand11.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4154_cam4_ccd3_cand12.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4156_cam4_ccd3_cand26.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4157_cam4_ccd3_cand29.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4158_cam4_ccd3_cand33.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4158_cam4_ccd3_cand34.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4158_cam4_ccd3_cand35.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4158_cam4_ccd3_cand36.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4158_cam4_ccd3_cand37.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4158_cam4_ccd3_cand38.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4159_cam4_ccd3_cand41.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4159_cam4_ccd3_cand42.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4159_cam4_ccd3_cand43.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4159_cam4_ccd3_cand44.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4159_cam4_ccd3_cand45.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4159_cam4_ccd3_cand46.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand100.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand101.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand102.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand103.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand104.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand105.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand106.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand107.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand108.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand109.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand110.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand111.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand112.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand113.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand114.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand115.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand116.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand118.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand119.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand120.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand121.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand122.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand123.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand124.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand125.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand126.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand127.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand128.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand129.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand130.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand131.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand132.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand133.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand134.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand135.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand136.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand137.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand138.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand139.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand140.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand141.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand142.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand143.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand144.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand145.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand146.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand147.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand148.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand149.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand150.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand151.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand152.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand153.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand154.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand155.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand156.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand157.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand158.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand159.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand160.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand161.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand162.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand163.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand164.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand165.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand166.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand167.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand168.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand169.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand170.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand171.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand172.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand173.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand174.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand175.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand176.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand177.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand178.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand179.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand18.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand180.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand181.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand182.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand183.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand184.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand185.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand186.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand187.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand188.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand189.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand19.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand190.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand191.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand192.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand193.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand194.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand195.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand196.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand197.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand198.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand199.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand2.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand202.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand203.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand208.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand209.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand21.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand214.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand22.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand222.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand223.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand224.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand23.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand234.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand236.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand237.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand24.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand242.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand243.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand244.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand249.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand25.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand250.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand252.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand47.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand48.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand49.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand50.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand51.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand52.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand53.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand54.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand55.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand56.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand57.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand58.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand59.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand60.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand61.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand62.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand63.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand64.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand65.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand66.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand67.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand68.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand69.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand70.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand71.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand72.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand73.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand74.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand75.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand76.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand77.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand78.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand79.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand80.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand81.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand82.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand83.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand84.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand85.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand86.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand87.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand88.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand89.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand9.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand90.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand91.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand92.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand93.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand94.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand95.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand96.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand97.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand98.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4160_cam4_ccd3_cand99.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4161_cam4_ccd3_cand200.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4161_cam4_ccd3_cand205.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4161_cam4_ccd3_cand206.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4161_cam4_ccd3_cand207.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4161_cam4_ccd3_cand27.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand13.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4163_cam4_ccd3_cand13.txt
+
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand211.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand212.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand213.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand215.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand216.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand217.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand218.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand219.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand220.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand240.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4163_cam4_ccd3_cand240.txt
+
+./cam4_ccd3//lc/lc_outcatrms_day_4163_cam4_ccd3_cand259.txt
+Traceback (most recent call last):
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 476, in plot
+    src = find_source_row(lcfile)
+  File "/lustre/work/nimcclur/TESS/photometry/sector103/../complicatedplot.py", line 190, in find_source_row
+    raise ValueError(f"No phot.data row for {srcname}")
+ValueError: No phot.data row for lc_outcatrms_day_4163_cam4_ccd3_cand259.txt
+
+./cam4_ccd3//lc/lc_outcatrms_day_4172_cam4_ccd3_cand226.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4172_cam4_ccd3_cand227.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4172_cam4_ccd3_cand228.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4172_cam4_ccd3_cand229.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4173_cam4_ccd3_cand233.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4173_cam4_ccd3_cand238.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4173_cam4_ccd3_cand239.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4174_cam4_ccd3_cand245.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4174_cam4_ccd3_cand246.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4174_cam4_ccd3_cand247.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4175_cam4_ccd3_cand248.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4175_cam4_ccd3_cand253.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4175_cam4_ccd3_cand254.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4176_cam4_ccd3_cand255.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4176_cam4_ccd3_cand256.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4176_cam4_ccd3_cand257.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4176_cam4_ccd3_cand258.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand0.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand117.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand14.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand15.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand16.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand17.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand20.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand201.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand204.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand210.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand221.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand225.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand230.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand231.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand232.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand235.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand241.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand251.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand260.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand261.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand262.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand263.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand264.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand265.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand266.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand267.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand268.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand269.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand270.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand271.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand272.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand273.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand274.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand275.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand28.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand30.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand31.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand32.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand39.txt
+./cam4_ccd3//lc/lc_outcatrms_day_4177_cam4_ccd3_cand40.txt
+check:  103 0103 4 4 coords.txt lc
+4 4
+./cam4_ccd4//lc/lc_outcatrms_day_4154_cam4_ccd4_cand0.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4155_cam4_ccd4_cand1.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4155_cam4_ccd4_cand2.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4156_cam4_ccd4_cand3.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4156_cam4_ccd4_cand4.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4157_cam4_ccd4_cand5.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4157_cam4_ccd4_cand6.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4157_cam4_ccd4_cand7.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4157_cam4_ccd4_cand8.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4158_cam4_ccd4_cand9.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4159_cam4_ccd4_cand10.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4159_cam4_ccd4_cand11.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4161_cam4_ccd4_cand12.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4161_cam4_ccd4_cand13.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4162_cam4_ccd4_cand14.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4162_cam4_ccd4_cand15.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4162_cam4_ccd4_cand16.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4163_cam4_ccd4_cand17.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4163_cam4_ccd4_cand18.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4164_cam4_ccd4_cand19.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4164_cam4_ccd4_cand20.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4164_cam4_ccd4_cand21.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4172_cam4_ccd4_cand22.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4172_cam4_ccd4_cand23.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4173_cam4_ccd4_cand24.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4173_cam4_ccd4_cand25.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4174_cam4_ccd4_cand26.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4174_cam4_ccd4_cand27.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4174_cam4_ccd4_cand28.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4174_cam4_ccd4_cand29.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4175_cam4_ccd4_cand30.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4176_cam4_ccd4_cand31.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4176_cam4_ccd4_cand32.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4176_cam4_ccd4_cand33.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4176_cam4_ccd4_cand34.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4177_cam4_ccd4_cand35.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4177_cam4_ccd4_cand36.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4177_cam4_ccd4_cand37.txt
+./cam4_ccd4//lc/lc_outcatrms_day_4177_cam4_ccd4_cand38.txt
+Plot page generation skipped (no burst table).
+Plots remain in cam*/plots and the single/ multiple/ flag/ folders.

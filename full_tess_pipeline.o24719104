@@ -1,0 +1,480 @@
+======================================================
+ Full TESS blind pipeline
+ Sector : 102
+ lcdir  : lc
+ CWD    : /lustre/work/nimcclur/TESS/photometry
+ Scripts: /lustre/work/nimcclur/TESS/photometry
+ Logs   : /lustre/work/nimcclur/TESS/photometry/logs
+======================================================
+
+[1/6] Creating local sector/cam/ccd/orbit directories...
+  Copying source-stage helper scripts into sector102/
+
+[2/6] Submitting daily RMS generation for all cam/ccd combinations...
+  daily_rms cam1_ccd1: 24719105
+  daily_rms cam1_ccd2: 24719106
+  daily_rms cam1_ccd3: 24719107
+  daily_rms cam1_ccd4: 24719108
+  daily_rms cam2_ccd1: 24719109
+  daily_rms cam2_ccd2: 24719110
+  daily_rms cam2_ccd3: 24719111
+  daily_rms cam2_ccd4: 24719112
+  daily_rms cam3_ccd1: 24719113
+  daily_rms cam3_ccd2: 24719114
+  daily_rms cam3_ccd3: 24719115
+  daily_rms cam3_ccd4: 24719116
+  daily_rms cam4_ccd1: 24719117
+  daily_rms cam4_ccd2: 24719118
+  daily_rms cam4_ccd3: 24719119
+  daily_rms cam4_ccd4: 24719120
+Waiting for daily RMS generation: 24719105 24719106 24719107 24719108 24719109 24719110 24719111 24719112 24719113 24719114 24719115 24719116 24719117 24719118 24719119 24719120
+Finished waiting for daily RMS generation
+
+[3/6] Running source extraction from daily RMS products...
+  source job ID: 24719136
+Waiting for source extraction: 24719136
+Finished waiting for source extraction
+
+[4/6] Submitting photometry pipeline...
+======================================================
+ full-sector pipeline submission
+ Sector  : s0102
+ lcdir   : lc
+ Found 15 cam-ccd combo(s)
+ Working directory: /lustre/work/nimcclur/TESS/photometry
+======================================================
+
+------------------------------------------------------
+ cam=1 ccd=1  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=1 ccd=1 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam1_ccd1
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719161
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/phot.data
+    do_phot  [o1a] job ID: 24719162
+    copy_phot[o1a] job ID: 24719163
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o2a/phot.data
+    do_phot  [o2a] job ID: 24719164
+    copy_phot[o2a] job ID: 24719165
+  clean_phot job ID: 24719171
+
+------------------------------------------------------
+ cam=1 ccd=2  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=1 ccd=2 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam1-ccd2
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam1_ccd2
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd2/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd2/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719172
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd2/o1a/phot.data
+    do_phot  [o1a] job ID: 24719173
+    copy_phot[o1a] job ID: 24719174
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd2/o2a/phot.data
+    do_phot  [o2a] job ID: 24719175
+    copy_phot[o2a] job ID: 24719176
+  clean_phot job ID: 24719177
+
+------------------------------------------------------
+ cam=1 ccd=3  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=1 ccd=3 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam1-ccd3
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam1_ccd3
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd3/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd3/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719178
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd3/o1a/phot.data
+    do_phot  [o1a] job ID: 24719179
+    copy_phot[o1a] job ID: 24719180
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd3/o2a/phot.data
+    do_phot  [o2a] job ID: 24719181
+    copy_phot[o2a] job ID: 24719182
+  clean_phot job ID: 24719183
+
+------------------------------------------------------
+ cam=1 ccd=4  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=1 ccd=4 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam1-ccd4
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam1_ccd4
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd4/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam1-ccd4/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719184
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd4/o1a/phot.data
+    do_phot  [o1a] job ID: 24719185
+    copy_phot[o1a] job ID: 24719186
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam1-ccd4/o2a/phot.data
+    do_phot  [o2a] job ID: 24719187
+    copy_phot[o2a] job ID: 24719188
+  clean_phot job ID: 24719189
+
+------------------------------------------------------
+ cam=2 ccd=1  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=2 ccd=1 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam2-ccd1
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam2_ccd1
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam2-ccd1/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam2-ccd1/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719190
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam2-ccd1/o1a/phot.data
+    do_phot  [o1a] job ID: 24719191
+    copy_phot[o1a] job ID: 24719192
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam2-ccd1/o2a/phot.data
+    do_phot  [o2a] job ID: 24719193
+    copy_phot[o2a] job ID: 24719224
+  clean_phot job ID: 24719225
+
+------------------------------------------------------
+ cam=2 ccd=3  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=2 ccd=3 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam2-ccd3
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam2_ccd3
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam2-ccd3/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam2-ccd3/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719226
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam2-ccd3/o1a/phot.data
+    do_phot  [o1a] job ID: 24719227
+    copy_phot[o1a] job ID: 24719228
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam2-ccd3/o2a/phot.data
+    do_phot  [o2a] job ID: 24719229
+    copy_phot[o2a] job ID: 24719230
+  clean_phot job ID: 24719231
+
+------------------------------------------------------
+ cam=2 ccd=4  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=2 ccd=4 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam2-ccd4
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam2_ccd4
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam2-ccd4/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam2-ccd4/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719232
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam2-ccd4/o1a/phot.data
+    do_phot  [o1a] job ID: 24719233
+    copy_phot[o1a] job ID: 24719234
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam2-ccd4/o2a/phot.data
+    do_phot  [o2a] job ID: 24719235
+    copy_phot[o2a] job ID: 24719236
+  clean_phot job ID: 24719237
+
+------------------------------------------------------
+ cam=3 ccd=1  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=3 ccd=1 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam3-ccd1
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam3_ccd1
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd1/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd1/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719238
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd1/o1a/phot.data
+    do_phot  [o1a] job ID: 24719239
+    copy_phot[o1a] job ID: 24719240
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd1/o2a/phot.data
+    do_phot  [o2a] job ID: 24719241
+    copy_phot[o2a] job ID: 24719242
+  clean_phot job ID: 24719243
+
+------------------------------------------------------
+ cam=3 ccd=2  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=3 ccd=2 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam3-ccd2
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam3_ccd2
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd2/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd2/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719244
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd2/o1a/phot.data
+    do_phot  [o1a] job ID: 24719245
+    copy_phot[o1a] job ID: 24719246
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd2/o2a/phot.data
+    do_phot  [o2a] job ID: 24719247
+    copy_phot[o2a] job ID: 24719248
+  clean_phot job ID: 24719249
+
+------------------------------------------------------
+ cam=3 ccd=3  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=3 ccd=3 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam3-ccd3
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam3_ccd3
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd3/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd3/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719250
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd3/o1a/phot.data
+    do_phot  [o1a] job ID: 24719251
+    copy_phot[o1a] job ID: 24719252
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd3/o2a/phot.data
+    do_phot  [o2a] job ID: 24719253
+    copy_phot[o2a] job ID: 24719254
+  clean_phot job ID: 24719255
+
+------------------------------------------------------
+ cam=3 ccd=4  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=3 ccd=4 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam3-ccd4
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam3_ccd4
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd4/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam3-ccd4/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719256
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd4/o1a/phot.data
+    do_phot  [o1a] job ID: 24719257
+    copy_phot[o1a] job ID: 24719258
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam3-ccd4/o2a/phot.data
+    do_phot  [o2a] job ID: 24719259
+    copy_phot[o2a] job ID: 24719260
+  clean_phot job ID: 24719261
+
+------------------------------------------------------
+ cam=4 ccd=1  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=4 ccd=1 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam4-ccd1
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam4_ccd1
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd1/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd1/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719262
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd1/o1a/phot.data
+    do_phot  [o1a] job ID: 24719263
+    copy_phot[o1a] job ID: 24719264
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd1/o2a/phot.data
+    do_phot  [o2a] job ID: 24719265
+    copy_phot[o2a] job ID: 24719266
+  clean_phot job ID: 24719267
+
+------------------------------------------------------
+ cam=4 ccd=2  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=4 ccd=2 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam4-ccd2
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam4_ccd2
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd2/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd2/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719268
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd2/o1a/phot.data
+    do_phot  [o1a] job ID: 24719269
+    copy_phot[o1a] job ID: 24719270
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd2/o2a/phot.data
+    do_phot  [o2a] job ID: 24719271
+    copy_phot[o2a] job ID: 24719272
+  clean_phot job ID: 24719273
+
+------------------------------------------------------
+ cam=4 ccd=3  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=4 ccd=3 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam4-ccd3
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam4_ccd3
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd3/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd3/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719274
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd3/o1a/phot.data
+    do_phot  [o1a] job ID: 24719275
+    copy_phot[o1a] job ID: 24719276
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd3/o2a/phot.data
+    do_phot  [o2a] job ID: 24719277
+    copy_phot[o2a] job ID: 24719278
+  clean_phot job ID: 24719279
+
+------------------------------------------------------
+ cam=4 ccd=4  orbits: o1a o2a
+------------------------------------------------------
+======================================================
+ Cleanup for sector=102 cam=4 ccd=4 lcdir=lc
+ DATA_DIR target : /lustre/research/mfausnau/data/tica/s0102/cam4-ccd4
+ Local output    : /lustre/work/nimcclur/TESS/photometry/sector102/cam4_ccd4
+======================================================
+
+--- Removing phot.data from orbit directories ---
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd4/o1a/phot.data
+  Removing: /lustre/research/mfausnau/data/tica/s0102/cam4-ccd4/o2a/phot.data
+  Removed 2 phot.data file(s).
+
+--- Removing aggregated lcdir from local sector directory ---
+  Done.
+
+Done. Submit cleanup_lc.sbatch separately for per-slice lc_* removal.
+  cleanup_lc job ID: 24719325
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd4/o1a/phot.data
+    do_phot  [o1a] job ID: 24719326
+    copy_phot[o1a] job ID: 24719327
+  Copying phot.data -> /lustre/research/mfausnau/data/tica/s0102/cam4-ccd4/o2a/phot.data
+    do_phot  [o2a] job ID: 24719328
+    copy_phot[o2a] job ID: 24719329
+  clean_phot job ID: 24719330
+
+Submitting aggregate_errors (after all clean_phot jobs)...
+  aggregate_errors job ID: 24719331
+
+Submitting purge_lc (after aggregate_errors)...
+  purge_lc job ID: 24719332
+
+======================================================
+ All cam-ccd combos submitted.
+ cleanup_lc jobs : 24719161 24719172 24719178 24719184 24719190 24719226 24719232 24719238 24719244 24719250 24719256 24719262 24719268 24719274 24719325
+ clean_phot jobs : 24719171 24719177 24719183 24719189 24719225 24719231 24719237 24719243 24719249 24719255 24719261 24719267 24719273 24719279 24719330
+ purge_lc job    : 24719332
+
+ Monitor with:
+   squeue -u $USER
+   ls /lustre/work/nimcclur/TESS/photometry/logs/{do_phot,copy_phot,clean_phot,cleanup_lc}.o*
+   cat errorlog-s0102-camall-ccdall-*.txt  (after pipeline completes)
+======================================================
+  purge_lc terminal job ID: 24719332
+Waiting for photometry pipeline through purge_lc: 24719332
+Finished waiting for photometry pipeline through purge_lc
+
+[5/6] Untarring image products for plotting...
+  images_untar job ID: 24720066
+Waiting for image untar: 24720066
+Finished waiting for image untar
+
+[6/6] Running analysis and plot generation...
+  analysis job ID: 24720093
+Waiting for analysis: 24720093

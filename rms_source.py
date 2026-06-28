@@ -72,7 +72,7 @@ for rms in rmsfiles:
                    continue
             ra, dec, scinfo  = tess_stars2px_reverse_function_entry(args.sector, args.cam, args.ccd, src['col'], src['row'], scInfo=scinfo)
             objcoords.append((ra,dec))
-        outcat.append((ra,dec,src['col'],src['row'],icol,irow,f"{src['col']+1}\t{src['row']+1}\t{src['r1']}\t{src['r2']}\n",Path(thisfile).stem+f"_cam{args.cam}_ccd{args.ccd}_"))
+            outcat.append((ra,dec,src['col'],src['row'],icol,irow,f"{src['col']+1}\t{src['row']+1}\t{src['r1']}\t{src['r2']}\n",Path(thisfile).stem+f"_cam{args.cam}_ccd{args.ccd}_"))
 
 objcoords = np.array(objcoords,dtype=[('ra','f8'),('dec','f8')])
 print(objcoords.shape)

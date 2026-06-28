@@ -1,0 +1,79 @@
+========================================================
+ Error report for sector=s0102 cam=all ccd=all
+ lcdir=lc
+ Generated: Fri Jun 26 04:31:20 CDT 2026
+ do_phot job IDs:    24719162 24719164 24719173 24719175 24719179 24719181 24719185 24719187 24719191 24719193 24719227 24719229 24719233 24719235 24719239 24719241 24719245 24719247 24719251 24719253 24719257 24719259 24719263 24719265 24719269 24719271 24719275 24719277 24719326 24719328
+ copy_phot job IDs:  24719163 24719165 24719174 24719176 24719180 24719182 24719186 24719188 24719192 24719224 24719228 24719230 24719234 24719236 24719240 24719242 24719246 24719248 24719252 24719254 24719258 24719260 24719264 24719266 24719270 24719272 24719276 24719278 24719327 24719329
+ clean_phot job IDs: 24719171 24719177 24719183 24719189 24719225 24719231 24719237 24719243 24719249 24719255 24719261 24719267 24719273 24719279 24719330
+========================================================
+
+--- do_phot failures ---
+
+--- do_phot job 24719162, task 0 ---
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0005/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0017/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0035/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0053/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0059/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0065/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0077/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0095/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0101/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0107/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0113/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0173/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0191/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0203/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0209/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0215/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0233/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0245/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0281/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0287/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0299/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0305/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0317/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0335/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0353/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0359/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0365/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0377/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0395/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0401/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0407/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0413/lc (phot2.csh likely segfaulted)
+/lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/bkg_phot/: No such file or directory.
+FAILED: no lc_* output in /lustre/research/mfausnau/data/tica/s0102/cam1-ccd1/o1a/slice0473/lc (phot2.csh likely segfaulted)
+
