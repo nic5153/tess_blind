@@ -26,7 +26,11 @@ if [[ ! "$orbit" =~ ^o[0-9][ab]$ ]]; then
     exit 1
 fi
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -n "${SLURM_SUBMIT_DIR:-}" && -f "${SLURM_SUBMIT_DIR}/do_photutils_extract.py" ]]; then
+    script_dir="$SLURM_SUBMIT_DIR"
+else
+    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
 
 source /home/${USER}/setup_vars.sh
 logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
