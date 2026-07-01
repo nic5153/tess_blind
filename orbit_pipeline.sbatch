@@ -179,6 +179,17 @@ if [[ ${#copy_jobs[@]} -eq 0 ]]; then
 fi
 wait_for_jobs "copy_phot" "${copy_jobs[@]}"
 
+lc_count=$(find "sector${sector}" -path "*/${lcdir}/lc_*.txt" -type f -printf '.' | wc -c)
+bkg_lc_count=$(find "sector${sector}" -path "*/bkg_phot/${lcdir}/lc_*.txt" -type f -printf '.' | wc -c)
+echo "Copied source light curves: $lc_count"
+echo "Copied background light curves: $bkg_lc_count"
+
+if [[ "$lc_count" -eq 0 || "$bkg_lc_count" -eq 0 ]]; then
+    echo "ERROR: photometry/copy stage produced no local light curves; aborting before analysis." >&2
+    echo "Check ${logdir}/do_phot.e* and ${logdir}/copy_phot.e* for phot2/copy failures." >&2
+    exit 1
+fi
+
 echo ""
 echo "[4/5] Sorting/deduplicating aggregate raw LC files and purging $orbit slice LC products..."
 for camccd in "${available_camccds[@]}"; do
@@ -200,9 +211,12 @@ for camccd in "${available_camccds[@]}"; do
     for slice_dir in "$orbit_dir"/slice*; do
         [[ -d "$slice_dir" ]] || continue
         rm -rf "$slice_dir/$lcdir" "$slice_dir/bkg_phot/$lcdir"
-        for photlink in "$slice_dir/phot.data" "$slice_dir/bkg_phot/phot.data"; do
-            if [[ -L "$photlink" && "$(readlink "$photlink")" == *"/$outbase/phot.data" ]]; then
-                rm -f "$photlink"
+        for photfile in "$slice_dir/phot.data" "$slice_dir/bkg_phot/phot.data"; do
+            marker="${photfile}.staged_by_orbit_pipeline"
+            if [[ -f "$marker" ]]; then
+                rm -f "$photfile" "$marker"
+            elif [[ -L "$photfile" && "$(readlink "$photfile")" == *"/$outbase/phot.data" ]]; then
+                rm -f "$photfile"
             fi
         done
     done

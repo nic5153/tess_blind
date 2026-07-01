@@ -33,27 +33,35 @@ fi
 
 stage_photfile() {
     local dest=$1
+    local marker="${dest}.staged_by_orbit_pipeline"
 
-    if [[ -L "$dest" ]]; then
-        ln -sfn "$local_photfile" "$dest"
-    elif [[ -e "$dest" ]]; then
-        if [[ -w "$dest" ]]; then
-            rm -f "$dest"
-            ln -s "$local_photfile" "$dest"
-        else
-            echo "ERROR: existing phot.data is not writable: $dest" >&2
+    rm -f "$marker"
+    if [[ -e "$dest" || -L "$dest" ]]; then
+        if ! rm -f "$dest"; then
+            echo "ERROR: could not replace existing phot.data: $dest" >&2
             exit 1
         fi
-    else
-        ln -s "$local_photfile" "$dest"
     fi
+
+    if ! cp "$local_photfile" "$dest"; then
+        echo "ERROR: could not copy local phot.data to $dest" >&2
+        exit 1
+    fi
+
+    touch "$marker"
 }
 
 cleanup_staged_photfile() {
     local dest=$1
+    local marker="${dest}.staged_by_orbit_pipeline"
 
-    if [[ -L "$dest" && "$(readlink "$dest")" == "$local_photfile" ]]; then
-        rm -f "$dest"
+    if [[ -f "$marker" ]]; then
+        rm -f "$dest" "$marker"
+    else
+        # Remove symlinks left by earlier versions of this wrapper.
+        if [[ -L "$dest" && "$(readlink "$dest")" == "$local_photfile" ]]; then
+            rm -f "$dest"
+        fi
     fi
 }
 
@@ -67,12 +75,16 @@ fi
 
 echo "Total slices: $nelements"
 
+processed_count=0
+success_count=0
+
 for (( ii=1; ii<=nelements; ii++ )); do
     if [[ $(( ii % n_tasks )) -ne $SLURM_ARRAY_TASK_ID ]]; then
         continue
     fi
 
     slice_dir="${folders[$((ii-1))]}"
+    processed_count=$((processed_count + 1))
     cd "$slice_dir"
     echo "Working in: $(pwd)"
 
@@ -138,6 +150,13 @@ for (( ii=1; ii<=nelements; ii++ )); do
     rm -f {interp,conv,bkg}*fits
     cleanup_staged_photfile "$slice_dir/bkg_phot/phot.data"
     cleanup_staged_photfile "$slice_dir/phot.data"
+    success_count=$((success_count + 1))
 
     cd "$dhome"
 done
+
+echo "Successful photometry slices for task ${SLURM_ARRAY_TASK_ID}: $success_count / $processed_count"
+if [[ "$processed_count" -gt 0 && "$success_count" -eq 0 ]]; then
+    echo "ERROR: no assigned slices produced both source and background lc_* output" >&2
+    exit 1
+fi

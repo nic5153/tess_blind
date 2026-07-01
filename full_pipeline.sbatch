@@ -120,6 +120,17 @@ fi
 echo "  purge_lc terminal job ID: $purge_job"
 wait_for_jobs "photometry pipeline through purge_lc" "$purge_job"
 
+lc_count=$(find "sector${sector}" -path "*/${lcdir}/lc_*.txt" -type f -printf '.' | wc -c)
+bkg_lc_count=$(find "sector${sector}" -path "*/bkg_phot/${lcdir}/lc_*.txt" -type f -printf '.' | wc -c)
+echo "Copied source light curves: $lc_count"
+echo "Copied background light curves: $bkg_lc_count"
+
+if [[ "$lc_count" -eq 0 || "$bkg_lc_count" -eq 0 ]]; then
+    echo "ERROR: photometry/copy stage produced no local light curves; aborting before image untar/analysis." >&2
+    echo "Check ${logdir}/do_phot.e*, ${logdir}/copy_phot.e*, and ${logdir}/clean_phot.e*." >&2
+    exit 1
+fi
+
 echo ""
 echo "[5/6] Untarring image products for plotting..."
 untar_job=$(sbatch --parsable "$script_dir/images_untar.sbatch" "$sector")
