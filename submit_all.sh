@@ -120,7 +120,10 @@ for phot_file in "${phot_files[@]}"; do
     for o in "${orbits[@]}"; do
         orbit_dir="$dtarget/$o"
 
-        echo "  Using slice-local staged phot.data for $orbit_dir"
+        # Copy phot.data before any array task starts
+        phot_dst="$orbit_dir/phot.data"
+        echo "  Copying phot.data -> $phot_dst"
+        cp "$phot_file" "$phot_dst"
 
         # Submit do_phot (reduced array, after cleanup_lc)
         do_job=$(sbatch \

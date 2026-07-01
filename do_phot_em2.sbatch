@@ -24,46 +24,6 @@ o=$4
 lcdir=$5
 
 echo "sector use: $sectoruse  cam: $cam  ccd: $ccd  orbit: $o  lcdir: $lcdir"
-local_photfile="$dhome/sector${sector}/cam${cam}_ccd${ccd}/phot.data"
-
-if [[ ! -s "$local_photfile" ]]; then
-    echo "ERROR: missing/empty local phot.data: $local_photfile"
-    exit 1
-fi
-
-stage_photfile() {
-    local dest=$1
-    local marker="${dest}.staged_by_orbit_pipeline"
-
-    rm -f "$marker"
-    if [[ -e "$dest" || -L "$dest" ]]; then
-        if ! rm -f "$dest"; then
-            echo "ERROR: could not replace existing phot.data: $dest" >&2
-            exit 1
-        fi
-    fi
-
-    if ! cp "$local_photfile" "$dest"; then
-        echo "ERROR: could not copy local phot.data to $dest" >&2
-        exit 1
-    fi
-
-    touch "$marker"
-}
-
-cleanup_staged_photfile() {
-    local dest=$1
-    local marker="${dest}.staged_by_orbit_pipeline"
-
-    if [[ -f "$marker" ]]; then
-        rm -f "$dest" "$marker"
-    else
-        # Remove symlinks left by earlier versions of this wrapper.
-        if [[ -L "$dest" && "$(readlink "$dest")" == "$local_photfile" ]]; then
-            rm -f "$dest"
-        fi
-    fi
-}
 
 mapfile -t folders < <(ls -d "$duse/$sectoruse/cam${cam}-ccd${ccd}/$o/slice"*)
 nelements=${#folders[@]}
@@ -75,20 +35,14 @@ fi
 
 echo "Total slices: $nelements"
 
-processed_count=0
-success_count=0
-
 for (( ii=1; ii<=nelements; ii++ )); do
     if [[ $(( ii % n_tasks )) -ne $SLURM_ARRAY_TASK_ID ]]; then
         continue
     fi
 
     slice_dir="${folders[$((ii-1))]}"
-    processed_count=$((processed_count + 1))
     cd "$slice_dir"
     echo "Working in: $(pwd)"
-
-    stage_photfile phot.data
 
     # Symlink PSF files and table from parent
     for p in ../psf_file*fits; do
@@ -109,7 +63,6 @@ for (( ii=1; ii<=nelements; ii++ )); do
         bash "$PIPELINE_DIR/setup/make_bkg_phot_dir_em2"
         cd ..
     fi
-    stage_photfile bkg_phot/phot.data
 
     # Run photometry
     "${ISIS_DIR}/phot2.csh" || true
@@ -117,8 +70,6 @@ for (( ii=1; ii<=nelements; ii++ )); do
     # Check for output — phot2.csh may exit 0 even after a segfault
     if ! compgen -G "$lcdir/lc_*" > /dev/null; then
         echo "FAILED: no lc_* output in $slice_dir/$lcdir (phot2.csh likely segfaulted)" >&2
-        cleanup_staged_photfile "$slice_dir/bkg_phot/phot.data"
-        cleanup_staged_photfile "$slice_dir/phot.data"
         cd "$dhome"
         continue
     fi
@@ -137,8 +88,6 @@ for (( ii=1; ii<=nelements; ii++ )); do
     # Check for output
     if ! compgen -G "$lcdir/lc_*" > /dev/null; then
         echo "FAILED: no lc_* output in $slice_dir/bkg_phot/$lcdir (phot2.csh likely segfaulted)" >&2
-        cleanup_staged_photfile "$slice_dir/bkg_phot/phot.data"
-        cleanup_staged_photfile "$slice_dir/phot.data"
         cd "$dhome"
         continue
     fi
@@ -148,15 +97,6 @@ for (( ii=1; ii<=nelements; ii++ )); do
 
     # Final cleanup of unpacked images
     rm -f {interp,conv,bkg}*fits
-    cleanup_staged_photfile "$slice_dir/bkg_phot/phot.data"
-    cleanup_staged_photfile "$slice_dir/phot.data"
-    success_count=$((success_count + 1))
 
     cd "$dhome"
 done
-
-echo "Successful photometry slices for task ${SLURM_ARRAY_TASK_ID}: $success_count / $processed_count"
-if [[ "$processed_count" -gt 0 && "$success_count" -eq 0 ]]; then
-    echo "ERROR: no assigned slices produced both source and background lc_* output" >&2
-    exit 1
-fi
