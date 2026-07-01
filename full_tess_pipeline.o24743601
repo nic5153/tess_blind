@@ -1,0 +1,30 @@
+======================================================
+ Full TESS blind pipeline
+ Sector : 99
+ lcdir  : lc
+ CWD    : /home/nimcclur/work/TESS/photometry
+ Scripts: /lustre/work/nimcclur/TESS/photometry
+ Logs   : /lustre/work/nimcclur/TESS/photometry/logs
+======================================================
+
+[1/6] Creating local sector/cam/ccd/orbit directories...
+  Copying source-stage helper scripts into sector99/
+
+[2/6] Submitting daily RMS generation for all cam/ccd combinations...
+  daily_rms cam1_ccd1: 24743610
+  daily_rms cam1_ccd2: 24743611
+  daily_rms cam1_ccd3: 24743612
+  daily_rms cam1_ccd4: 24743613
+  daily_rms cam2_ccd1: 24743614
+  daily_rms cam2_ccd2: 24743615
+  daily_rms cam2_ccd3: 24743616
+  daily_rms cam2_ccd4: 24743617
+  daily_rms cam3_ccd1: 24743618
+  daily_rms cam3_ccd2: 24743619
+  daily_rms cam3_ccd3: 24743620
+  daily_rms cam3_ccd4: 24743621
+  daily_rms cam4_ccd1: 24743622
+  daily_rms cam4_ccd2: 24743623
+  daily_rms cam4_ccd3: 24743624
+  daily_rms cam4_ccd4: 24743625
+Waiting for daily RMS generation: 24743610 24743611 24743612 24743613 24743614 24743615 24743616 24743617 24743618 24743619 24743620 24743621 24743622 24743623 24743624 24743625

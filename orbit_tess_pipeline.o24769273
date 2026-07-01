@@ -1,0 +1,29 @@
+======================================================
+ Incremental TESS blind orbit pipeline
+ Sector : s0105
+ Orbit  : o1b
+ lcdir  : lc
+ CWD    : /home/nimcclur/work/TESS/photometry
+ Data   : /lustre/research/mfausnau/data/tica/s0105
+ Scripts: /lustre/work/nimcclur/TESS/photometry
+ Logs   : /lustre/work/nimcclur/TESS/photometry/logs
+======================================================
+
+[1/5] Generating/updating daily RMS files for available cam/ccd directories...
+  daily_rms cam1_ccd1: 24769274
+  daily_rms cam1_ccd2: 24769275
+  daily_rms cam1_ccd3: 24769276
+  daily_rms cam1_ccd4: 24769277
+  daily_rms cam2_ccd1: 24769278
+  daily_rms cam2_ccd2: 24769279
+  daily_rms cam2_ccd3: 24769280
+  daily_rms cam2_ccd4: 24769281
+  daily_rms cam3_ccd1: 24769282
+  daily_rms cam3_ccd2: 24769283
+  daily_rms cam3_ccd3: 24769284
+  daily_rms cam3_ccd4: 24769285
+  daily_rms cam4_ccd1: 24769286
+  daily_rms cam4_ccd2: 24769287
+  daily_rms cam4_ccd3: 24769288
+  daily_rms cam4_ccd4: 24769289
+Waiting for daily RMS generation: 24769274 24769275 24769276 24769277 24769278 24769279 24769280 24769281 24769282 24769283 24769284 24769285 24769286 24769287 24769288 24769289

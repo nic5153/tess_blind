@@ -1,0 +1,11 @@
+======================================================
+ Full TESS blind pipeline
+ Sector : 99
+ lcdir  : lc
+ CWD    : /home/nimcclur/work/TESS/photometry
+ Scripts: /var/spool/slurmd/job24729521
+ Logs   : /lustre/work/nimcclur/TESS/photometry/logs
+======================================================
+
+[1/6] Creating local sector/cam/ccd/orbit directories...
+  Copying source-stage helper scripts into sector99/

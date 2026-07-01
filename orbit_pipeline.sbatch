@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --ntasks=1
-#SBATCH --time=3-00:00:00
+#SBATCH --time=06:00:00
 
 set -eo pipefail
 
@@ -26,7 +26,11 @@ if [[ ! "$orbit" =~ ^o[0-9][ab]$ ]]; then
     exit 1
 fi
 
-script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ -n "${SLURM_SUBMIT_DIR:-}" && -f "${SLURM_SUBMIT_DIR}/do_photutils_extract.py" ]]; then
+    script_dir="$SLURM_SUBMIT_DIR"
+else
+    script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
 
 source /home/${USER}/setup_vars.sh
 logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
@@ -103,7 +107,7 @@ rms_jobs=()
 for camccd in "${available_camccds[@]}"; do
     cam=${camccd%%:*}
     ccd=${camccd##*:}
-    rms_job=$(sbatch --parsable "$script_dir/make_rms_sbatch.sh" "$sector" "$cam" "$ccd")
+    rms_job=$(sbatch --parsable "$script_dir/make_rms_sbatch.sh" "$sector" "$cam" "$ccd" "$orbit")
     echo "  daily_rms cam${cam}_ccd${ccd}: $rms_job"
     rms_jobs+=("$rms_job")
 done

@@ -15,8 +15,9 @@ def get_frame_id(filename):
     except (IndexError, ValueError):
         return None
 
-def make_file_dict(lustre_ccd_dir):
-    dates_pattern = os.path.join(lustre_ccd_dir, 'o*/slice*/dates')
+def make_file_dict(lustre_ccd_dir, orbit=None):
+    orbit_glob = orbit if orbit is not None else 'o*'
+    dates_pattern = os.path.join(lustre_ccd_dir, orbit_glob, 'slice*/dates')
     dates_list = glob.glob(dates_pattern)
     
     file_info = {}
@@ -51,6 +52,7 @@ def main():
     parser.add_argument("--sector", type=int, required=True)
     parser.add_argument("--cam", type=int, required=True)
     parser.add_argument("--ccd", type=int, required=True)
+    parser.add_argument("--orbit", type=str, default=None)
     args = parser.parse_args()
 
     work_base = "/home/nimcclur/work/TESS/photometry"
@@ -59,8 +61,9 @@ def main():
     lustre_ccd_dir = f"{lustre_base}/s{args.sector:04}/cam{args.cam}-ccd{args.ccd}"
     work_ccd_dir = f"{work_base}/sector{args.sector}/cam{args.cam}_ccd{args.ccd}"
     
-    tica_lists = glob.glob(f"{lustre_ccd_dir}/o*/rms_list_tica")
-    lookup_dict = make_file_dict(lustre_ccd_dir)
+    orbit_glob = args.orbit if args.orbit is not None else "o*"
+    tica_lists = glob.glob(f"{lustre_ccd_dir}/{orbit_glob}/rms_list_tica")
+    lookup_dict = make_file_dict(lustre_ccd_dir, args.orbit)
     
     if not lookup_dict:
         return
@@ -94,6 +97,10 @@ def main():
             os.makedirs(orbit_dir, exist_ok=True)
         
         output_path = os.path.join(orbit_dir, f'rms_day_{day}.fits')
+        if os.path.exists(output_path):
+            print(f"Skipping existing: {output_path}")
+            continue
+
         avg, square, N = 0, 0, 0
         
         for f_id in ids_in_day:
