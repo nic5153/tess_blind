@@ -1,3 +1,32 @@
 sector*/
 
 logs/
+
+# HPCC run products and review artifacts. These live beside the code on HPCC,
+# but they should not become branch-owned files.
+*.o[0-9]*
+*.e[0-9]*
+machinefile.*
+cleanANDanalyze.o*
+cleanANDanalyze.e*
+orbit_tess_pipeline.o*
+orbit_tess_pipeline.e*
+rms_nocopy.o*
+rms_nocopy.e*
+source.o*
+source.e*
+do_phot.o*
+do_phot.e*
+copy_phot.o*
+copy_phot.e*
+clean_phot.o*
+clean_phot.e*
+errorlog-s*-camall-ccdall-*.txt
+my_recent_mfausnau_logs.txt
+recover_from_*.txt
+
+# Local plot/candidate exports.
+sector*_plots.tar.gz
+sector*_plots.txt
+multiple_candidates.csv
+multiple_candidates.html
