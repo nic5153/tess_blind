@@ -49,6 +49,14 @@ stage_photfile() {
     fi
 }
 
+cleanup_staged_photfile() {
+    local dest=$1
+
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$local_photfile" ]]; then
+        rm -f "$dest"
+    fi
+}
+
 mapfile -t folders < <(ls -d "$duse/$sectoruse/cam${cam}-ccd${ccd}/$o/slice"*)
 nelements=${#folders[@]}
 
@@ -97,6 +105,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
     # Check for output — phot2.csh may exit 0 even after a segfault
     if ! compgen -G "$lcdir/lc_*" > /dev/null; then
         echo "FAILED: no lc_* output in $slice_dir/$lcdir (phot2.csh likely segfaulted)" >&2
+        cleanup_staged_photfile "$slice_dir/bkg_phot/phot.data"
+        cleanup_staged_photfile "$slice_dir/phot.data"
         cd "$dhome"
         continue
     fi
@@ -115,6 +125,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
     # Check for output
     if ! compgen -G "$lcdir/lc_*" > /dev/null; then
         echo "FAILED: no lc_* output in $slice_dir/bkg_phot/$lcdir (phot2.csh likely segfaulted)" >&2
+        cleanup_staged_photfile "$slice_dir/bkg_phot/phot.data"
+        cleanup_staged_photfile "$slice_dir/phot.data"
         cd "$dhome"
         continue
     fi
@@ -124,6 +136,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
 
     # Final cleanup of unpacked images
     rm -f {interp,conv,bkg}*fits
+    cleanup_staged_photfile "$slice_dir/bkg_phot/phot.data"
+    cleanup_staged_photfile "$slice_dir/phot.data"
 
     cd "$dhome"
 done

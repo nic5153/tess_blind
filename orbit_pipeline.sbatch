@@ -200,6 +200,11 @@ for camccd in "${available_camccds[@]}"; do
     for slice_dir in "$orbit_dir"/slice*; do
         [[ -d "$slice_dir" ]] || continue
         rm -rf "$slice_dir/$lcdir" "$slice_dir/bkg_phot/$lcdir"
+        for photlink in "$slice_dir/phot.data" "$slice_dir/bkg_phot/phot.data"; do
+            if [[ -L "$photlink" && "$(readlink "$photlink")" == *"/$outbase/phot.data" ]]; then
+                rm -f "$photlink"
+            fi
+        done
     done
 done
 
