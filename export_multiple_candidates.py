@@ -156,7 +156,6 @@ def main():
     plot_files = collect_plot_files(root, args.plot_root)
 
     rows = []
-    scinfo_cache = {}
     phot_cache = {}
 
     for plot_file in plot_files:
@@ -184,12 +183,9 @@ def main():
             if tess_stars2px_reverse_function_entry is None:
                 ra = dec = ""
             else:
-                key = (sector, cam, ccd)
-                scinfo = scinfo_cache.get(key)
-                ra, dec, scinfo = tess_stars2px_reverse_function_entry(
-                    sector, cam, ccd, fcol, frow, scInfo=scinfo
-                )
-                scinfo_cache[key] = scinfo
+                # Match complicatedplot.py exactly so CSV/HTML coordinates
+                # agree with the RA/Dec printed on the plot image.
+                ra, dec, _ = tess_stars2px_reverse_function_entry(sector, cam, ccd, fcol, frow)
 
         rms_day = parse_rms_day(plot_file)
         orbit = find_orbit(sector_dir, cam, ccd, rms_day)
