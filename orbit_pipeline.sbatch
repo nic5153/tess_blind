@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --ntasks=1
-#SBATCH --time=3-00:00:00
+#SBATCH --time=0-04:00:00
 
 set -eo pipefail
 
@@ -151,7 +151,7 @@ for camccd in "${available_camccds[@]}"; do
     do_job=$(sbatch \
         --parsable \
         --array=0-5%6 \
-        --time=1-00:00:00 \
+        --time=0-00:30:00 \
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
         "$script_dir/do_phot_em2.sbatch" \
@@ -161,7 +161,7 @@ for camccd in "${available_camccds[@]}"; do
     copy_job=$(sbatch \
         --parsable \
         --array=0-5%6 \
-        --time=1-00:00:00 \
+        --time=0-01:30:00 \
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
         --dependency=afterany:"$do_job" \
