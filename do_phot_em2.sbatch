@@ -24,6 +24,30 @@ o=$4
 lcdir=$5
 
 echo "sector use: $sectoruse  cam: $cam  ccd: $ccd  orbit: $o  lcdir: $lcdir"
+local_photfile="$dhome/sector${sector}/cam${cam}_ccd${ccd}/phot.data"
+
+if [[ ! -s "$local_photfile" ]]; then
+    echo "ERROR: missing/empty local phot.data: $local_photfile"
+    exit 1
+fi
+
+stage_photfile() {
+    local dest=$1
+
+    if [[ -L "$dest" ]]; then
+        ln -sfn "$local_photfile" "$dest"
+    elif [[ -e "$dest" ]]; then
+        if [[ -w "$dest" ]]; then
+            rm -f "$dest"
+            ln -s "$local_photfile" "$dest"
+        else
+            echo "ERROR: existing phot.data is not writable: $dest" >&2
+            exit 1
+        fi
+    else
+        ln -s "$local_photfile" "$dest"
+    fi
+}
 
 mapfile -t folders < <(ls -d "$duse/$sectoruse/cam${cam}-ccd${ccd}/$o/slice"*)
 nelements=${#folders[@]}
@@ -44,6 +68,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
     cd "$slice_dir"
     echo "Working in: $(pwd)"
 
+    stage_photfile phot.data
+
     # Symlink PSF files and table from parent
     for p in ../psf_file*fits; do
         [[ -e "${p:3}" ]] || ln -s "$p"
@@ -63,6 +89,7 @@ for (( ii=1; ii<=nelements; ii++ )); do
         bash "$PIPELINE_DIR/setup/make_bkg_phot_dir_em2"
         cd ..
     fi
+    stage_photfile bkg_phot/phot.data
 
     # Run photometry
     "${ISIS_DIR}/phot2.csh" || true

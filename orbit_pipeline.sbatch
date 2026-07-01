@@ -141,7 +141,6 @@ for camccd in "${available_camccds[@]}"; do
     fi
 
     echo "  Preparing cam${cam}_ccd${ccd} $orbit"
-    cp "$local_camccd/phot.data" "$orbit_dir/phot.data"
 
     # Clear only this orbit's per-slice temporary LC products before rerunning it.
     for slice_dir in "$orbit_dir"/slice*; do
