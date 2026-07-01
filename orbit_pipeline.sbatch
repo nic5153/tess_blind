@@ -107,7 +107,7 @@ rms_jobs=()
 for camccd in "${available_camccds[@]}"; do
     cam=${camccd%%:*}
     ccd=${camccd##*:}
-    rms_job=$(sbatch --parsable "$script_dir/make_rms_sbatch.sh" "$sector" "$cam" "$ccd")
+    rms_job=$(sbatch --parsable "$script_dir/make_rms_sbatch.sh" "$sector" "$cam" "$ccd" "$orbit")
     echo "  daily_rms cam${cam}_ccd${ccd}: $rms_job"
     rms_jobs+=("$rms_job")
 done
