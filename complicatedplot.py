@@ -305,6 +305,17 @@ def display_window(ax, data, icol, irow, fcol, frow, imsize, vmin=None, vmax=Non
     ax.axis("off")
 
 
+def coords_from_image_position(header, col, row):
+    try:
+        src_sc = WCS(header).pixel_to_world(col, row)
+        ra = src_sc.ra.deg
+        dec = src_sc.dec.deg
+    except Exception:
+        ra, dec, _ = tess_stars2px_reverse_function_entry(args.sector, cam, ccd, col, row)
+        src_sc = SkyCoord(ra, dec, unit="deg")
+    return ra, dec, src_sc.transform_to("galactic")
+
+
 def fit_gaussian_panel(fig, gs, image, header, src, imsize):
     frow = src["frow"]
     fcol = src["fcol"]
@@ -349,24 +360,34 @@ def fit_gaussian_panel(fig, gs, image, header, src, imsize):
     xarr = np.arange(2 * constraint + 1)
     yarr = np.arange(2 * constraint + 1)
     subx, suby = np.meshgrid(xarr, yarr)
-    popt, _ = curve_fit(
-        gaussian_nobackground,
-        (subx, suby),
-        fitdata.ravel(),
-        p0=[f0, x0, y0, bsizepix, bsizepix, 0],
-        bounds=bounds,
-    )
+    try:
+        popt, _ = curve_fit(
+            gaussian_nobackground,
+            (subx, suby),
+            fitdata.ravel(),
+            p0=[f0, x0, y0, bsizepix, bsizepix, 0],
+            bounds=bounds,
+        )
+    except RuntimeError:
+        vmax = np.nanmax(imdata) if np.isfinite(imdata).any() else np.nanmax(subdata)
+        vmax = vmax if np.isfinite(vmax) and vmax > 0 else 1
+        display_window(axs[0], image, icol, irow, fcol, frow, imsize, vmin=0, vmax=vmax, title="data")
+        axs[1].set_title("model")
+        axs[1].text(0.05, 0.5, "fit failed", transform=axs[1].transAxes)
+        axs[1].axis("off")
+        axs[2].set_title("residuals")
+        axs[2].text(0.05, 0.5, "fit failed", transform=axs[2].transAxes)
+        axs[2].axis("off")
+        axs[3].text(0, 0.7, "Gaussian fit values")
+        axs[3].text(0, 0.5, "fit failed")
+        axs[3].text(0, 0.1, "no convergence")
+        axs[3].axis("off")
+        ra, dec, src_gal = coords_from_image_position(header, fcol, frow)
+        return ra, dec, src_gal, np.nan
 
     true_row = popt[1] + (irow - constraint)
     true_col = popt[2] + (icol - constraint)
-    try:
-        src_sc = WCS(header).pixel_to_world(true_col, true_row)
-        ra = src_sc.ra.deg
-        dec = src_sc.dec.deg
-    except Exception:
-        ra, dec, _ = tess_stars2px_reverse_function_entry(args.sector, cam, ccd, fcol, frow)
-        src_sc = SkyCoord(ra, dec, unit="deg")
-    src_gal = src_sc.transform_to("galactic")
+    ra, dec, src_gal = coords_from_image_position(header, true_col, true_row)
 
     model = gaussian_nobackground((subx, suby), *popt).reshape(fitdata.shape)
     vmax = np.nanmax(model) if np.isfinite(model).any() else np.nanmax(subdata)
