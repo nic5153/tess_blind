@@ -101,6 +101,12 @@ do
         cd ..
       fi
 
+      ## Clear stale per-cam/ccd plots before generating current plots. The
+      ## routed single/multiple/flag folders are rebuilt below from this folder,
+      ## so leaving old JPGs here can resurrect candidates that are no longer in
+      ## the current phot.data.
+      rm -rf "cam${cam}_ccd${ccd}/plots"
+
       plot_args=(--sector "$sector" --photfile "./cam${cam}_ccd${ccd}/phot.data")
       if [[ -n "$orbit" ]]
       then
