@@ -307,6 +307,13 @@ def orbit_rms_days():
     return days
 
 
+def photdata_lc_basenames():
+    return {
+        os.path.basename(str(name))
+        for name in sourcedata["fname"]
+    }
+
+
 def display_window(ax, data, icol, irow, fcol, frow, imsize, vmin=None, vmax=None, title=None):
     sub = data[(irow - imsize) : (irow + imsize + 1), (icol - imsize) : (icol + imsize + 1)]
     if vmin is None or vmax is None:
@@ -725,6 +732,11 @@ if __name__ == "__main__":
         for f in glob.glob(f"{args.photfile.replace('phot.data', '')}/lc/lc_outcatrms_*.txt")
         if "_cleaned" not in f and not f.endswith(".tmp")
     )
+    allowed_names = photdata_lc_basenames()
+    before_photdata_count = len(lcfiles)
+    lcfiles = [f for f in lcfiles if os.path.basename(f) in allowed_names]
+    if len(lcfiles) != before_photdata_count:
+        print(f"phot.data filter: plotting {len(lcfiles)} of {before_photdata_count} light curves")
     if allowed_days is not None:
         before_count = len(lcfiles)
         lcfiles = [f for f in lcfiles if parse_candidate_day(f) in allowed_days]

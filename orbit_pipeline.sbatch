@@ -114,12 +114,12 @@ done
 wait_for_jobs "daily RMS generation" "${rms_jobs[@]}"
 
 echo ""
-echo "[2/5] Refreshing cumulative source lists from all available RMS catalogs..."
+echo "[2/5] Refreshing source lists from $orbit RMS catalogs..."
 source_jobs=()
 for camccd in "${available_camccds[@]}"; do
     cam=${camccd%%:*}
     ccd=${camccd##*:}
-    source_job=$(sbatch --parsable --array=0-0 "$script_dir/source.sbatch" "$sector" "$cam" "$ccd")
+    source_job=$(sbatch --parsable --array=0-0 "$script_dir/source.sbatch" "$sector" "$cam" "$ccd" "$orbit")
     echo "  source cam${cam}_ccd${ccd}: $source_job"
     source_jobs+=("$source_job")
 done
