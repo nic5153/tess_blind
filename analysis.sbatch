@@ -5,7 +5,7 @@
 #SBATCH --error=%x.e%j 
 #SBATCH --partition=nocona 
 #SBATCH --nodes 1
-#SBATCH --cpus-per-task 1 
+#SBATCH --cpus-per-task=4
 #SBATCH --ntasks=1
 #SBATCH --time=0-24:00:00
 
@@ -16,6 +16,7 @@ coordfile=coords.txt
 indir=lc
 RUN_CLEANED=${RUN_CLEANED:-0}
 RUN_MATCHBKG=${RUN_MATCHBKG:-1}
+ANALYSIS_N=${ANALYSIS_N:-${SLURM_CPUS_PER_TASK:-1}}
 
 if [[ -n "$orbit" && ! "$orbit" =~ ^o[0-9][ab]$ ]]
 then
@@ -100,10 +101,16 @@ do
         cd ..
       fi
 
-      plot_args=(--sector "$sector" --photfile "./cam${cam}_ccd${ccd}/phot.data" --singleproc)
+      plot_args=(--sector "$sector" --photfile "./cam${cam}_ccd${ccd}/phot.data")
       if [[ -n "$orbit" ]]
       then
         plot_args+=(--orbit "$orbit")
+      fi
+      if [[ "$ANALYSIS_N" -gt 1 ]]
+      then
+        plot_args+=(--N "$ANALYSIS_N")
+      else
+        plot_args+=(--singleproc)
       fi
       python ../complicatedplot.py "${plot_args[@]}"
     fi

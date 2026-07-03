@@ -38,6 +38,9 @@ mkdir -p "$logdir"
 
 sectoruse=$(printf "s%04d" "$sector")
 dtarget_base="${DATA_DIR}/${sectoruse}"
+DO_PHOT_ARRAY=${DO_PHOT_ARRAY:-0-11%12}
+COPY_PHOT_ARRAY=${COPY_PHOT_ARRAY:-0-5%6}
+ANALYSIS_CPUS=${ANALYSIS_CPUS:-4}
 
 wait_for_jobs() {
     local label=$1
@@ -73,6 +76,9 @@ echo " CWD    : $(pwd)"
 echo " Data   : $dtarget_base"
 echo " Scripts: $script_dir"
 echo " Logs   : $logdir"
+echo " do_phot array : $DO_PHOT_ARRAY"
+echo " copy_phot array: $COPY_PHOT_ARRAY"
+echo " Analysis CPUs : $ANALYSIS_CPUS"
 echo "======================================================"
 
 if [[ ! -d "$dtarget_base" ]]; then
@@ -151,7 +157,7 @@ for camccd in "${available_camccds[@]}"; do
 
     do_job=$(sbatch \
         --parsable \
-        --array=0-5%6 \
+        --array="$DO_PHOT_ARRAY" \
         --time=0-00:30:00 \
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
@@ -161,7 +167,7 @@ for camccd in "${available_camccds[@]}"; do
 
     copy_job=$(sbatch \
         --parsable \
-        --array=0-5%6 \
+        --array="$COPY_PHOT_ARRAY" \
         --time=0-01:30:00 \
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
@@ -206,7 +212,7 @@ done
 
 echo ""
 echo "[5/5] Running $orbit analysis/plot generation..."
-analysis_job=$(sbatch --parsable "$script_dir/analysis.sbatch" "$sector" "$orbit")
+analysis_job=$(sbatch --parsable --cpus-per-task="$ANALYSIS_CPUS" "$script_dir/analysis.sbatch" "$sector" "$orbit")
 echo "  analysis job ID: $analysis_job"
 wait_for_jobs "analysis" "$analysis_job"
 
