@@ -113,6 +113,15 @@ def parse_args():
         default=3.0,
         help="Half-width of the DECaPS RA/Dec box search in arcmin. Default: 3.",
     )
+    parser.add_argument(
+        "--decaps-match-radius-arcsec",
+        type=float,
+        default=4.0,
+        help=(
+            "Maximum nearest-DECaPS distance to report as a counterpart match. "
+            "The broader DECaPS box count is still recorded. Default: 4."
+        ),
+    )
     parser.add_argument("--no-gaia", action="store_true", help="Skip Gaia DR3.")
     parser.add_argument("--no-panstarrs", action="store_true", help="Skip Pan-STARRS DR2.")
     parser.add_argument("--no-des", action="store_true", help="Skip DES DR2.")
@@ -454,7 +463,7 @@ def in_decaps_region(row):
     return abs(gal_b) < 10.1 and (gal_l > 124.1 or gal_l < 6.1)
 
 
-def query_decaps(outrow, row, sc, service, box_arcmin, matches, colors):
+def query_decaps(outrow, row, sc, service, box_arcmin, match_radius_arcsec, matches, colors):
     if not in_decaps_region(row):
         return
 
@@ -483,6 +492,9 @@ def query_decaps(outrow, row, sc, service, box_arcmin, matches, colors):
     if best_idx is None:
         return
     record = table[best_idx]
+
+    if dist is None or dist > match_radius_arcsec:
+        return
 
     outrow["decaps_dist_arcsec"] = fmt(dist)
     set_band_values(outrow, "decaps", record)
@@ -528,7 +540,16 @@ def enrich_row(row, args, decaps_service):
 
     if not args.no_decaps and decaps_service is not None:
         try:
-            query_decaps(row, row, sc, decaps_service, args.decaps_box_arcmin, matches, colors)
+            query_decaps(
+                row,
+                row,
+                sc,
+                decaps_service,
+                args.decaps_box_arcmin,
+                args.decaps_match_radius_arcsec,
+                matches,
+                colors,
+            )
         except Exception as exc:
             errors.append(f"DECaPS: {exc}")
 
