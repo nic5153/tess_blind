@@ -50,8 +50,11 @@ for ff in fitsfiles:
     with fits.open(ff) as hdul:
         fitsrms.append(np.transpose(hdul[0].data))
 
+candidate_id = 0
 for rms in rmsfiles:
     for i,src in tqdm(enumerate(rms),total=len(rms)):
+        this_candidate_id = candidate_id
+        candidate_id += 1
         icol = int(round(src['col']))
         irow = int(round(src['row']))
         ndets = 1
@@ -72,16 +75,14 @@ for rms in rmsfiles:
                    continue
             ra, dec, scinfo  = tess_stars2px_reverse_function_entry(args.sector, args.cam, args.ccd, src['col'], src['row'], scInfo=scinfo)
             objcoords.append((ra,dec))
-            outcat.append((ra,dec,src['col'],src['row'],icol,irow,f"{src['col']+1}\t{src['row']+1}\t{src['r1']}\t{src['r2']}\n",Path(thisfile).stem+f"_cam{args.cam}_ccd{args.ccd}_"))
+            outcat.append((ra,dec,src['col'],src['row'],icol,irow,f"{src['col']+1}\t{src['row']+1}\t{src['r1']}\t{src['r2']}\n",Path(thisfile).stem+f"_cam{args.cam}_ccd{args.ccd}_",this_candidate_id))
 
 objcoords = np.array(objcoords,dtype=[('ra','f8'),('dec','f8')])
 print(objcoords.shape)
-uno = 0
 filerows = []
 with open("objphot.tsv","w") as f:
-    for ra,dec,fcol,frow,icol,irow,ostring,oname in tqdm(outcat):
-        filerows.append(f"{fcol:8.4f}\t{frow:8.4f}\t{icol:d}\t{irow:d}\tlc/lc_{oname}cand{uno}.txt\t1\n")
-        uno+=1
+    for ra,dec,fcol,frow,icol,irow,ostring,oname,candidate_id in tqdm(outcat):
+        filerows.append(f"{fcol:8.4f}\t{frow:8.4f}\t{icol:d}\t{irow:d}\tlc/lc_{oname}cand{candidate_id}.txt\t1\n")
         f.write(ostring)
     
 with open("phot.data","w") as f:
