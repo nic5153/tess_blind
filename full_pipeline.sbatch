@@ -30,7 +30,7 @@ logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
 mkdir -p "$logdir"
 ANALYSIS_CPUS=${ANALYSIS_CPUS:-4}
 RUN_MULTIPLE_EXPORT=${RUN_MULTIPLE_EXPORT:-1}
-RUN_CATALOG_ENRICHMENT=${RUN_CATALOG_ENRICHMENT:-1}
+RUN_CATALOG_ENRICHMENT=${RUN_CATALOG_ENRICHMENT:-0}
 CATALOG_SLEEP=${CATALOG_SLEEP:-0.4}
 CATALOG_LIMIT=${CATALOG_LIMIT:-}
 MULTIPLE_CSV=${MULTIPLE_CSV:-multiple_candidates.csv}
@@ -51,7 +51,7 @@ wait_for_jobs() {
     while true; do
         local running=0
         for job in "${jobs[@]}"; do
-            if squeue -h -j "$job" | grep -q .; then
+            if squeue -h -j "$job" 2>/dev/null | grep -q .; then
                 running=1
                 break
             fi
