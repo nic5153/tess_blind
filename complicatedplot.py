@@ -1,4 +1,5 @@
 import argparse
+import csv
 import io
 import os
 import re
@@ -716,7 +717,53 @@ def plot(lcfile):
             f"(col,row):({fcol:6.1f},{frow:6.1f})\nDatafile:{lcfile} || "
             f"(l,b): ({src_gal.l.deg:7.4f},{src_gal.b.deg:7.4f}) || peak: {trigcand}"
         )
-        plt.savefig(os.path.join(outfolder, prefix + outfile))
+        plot_path = os.path.join(outfolder, prefix + outfile)
+        plt.savefig(plot_path)
+        with open(plot_path + ".metadata.csv", "w", newline="") as metafile:
+            writer = csv.DictWriter(
+                metafile,
+                fieldnames=[
+                    "plot_file",
+                    "lc_file",
+                    "sector",
+                    "cam",
+                    "ccd",
+                    "orbit",
+                    "rms_date",
+                    "ra",
+                    "dec",
+                    "l",
+                    "b",
+                    "fcol",
+                    "frow",
+                    "classification",
+                    "numpts",
+                    "rms",
+                    "peak_iso",
+                ],
+            )
+            writer.writeheader()
+            writer.writerow(
+                {
+                    "plot_file": os.path.basename(plot_path),
+                    "lc_file": lcfile,
+                    "sector": args.sector,
+                    "cam": cam,
+                    "ccd": ccd,
+                    "orbit": detorbit_hint or args.orbit or "",
+                    "rms_date": candidate_day or "",
+                    "ra": ra,
+                    "dec": dec,
+                    "l": src_gal.l.deg,
+                    "b": src_gal.b.deg,
+                    "fcol": fcol,
+                    "frow": frow,
+                    "classification": prefix,
+                    "numpts": numpts,
+                    "rms": rms,
+                    "peak_iso": trigcand,
+                }
+            )
         plt.close()
 
     except Exception:

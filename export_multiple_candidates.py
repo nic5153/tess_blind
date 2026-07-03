@@ -78,6 +78,7 @@ CATALOG_FIELDNAMES = [
 ]
 
 EDITABLE_FIELDNAMES = ["suspected source type", "notes"]
+RECOVERABLE_FIELDNAMES = ["ra", "dec", "l", "b", "lc_file", "fcol", "frow"]
 
 
 def parse_args():
@@ -223,6 +224,17 @@ def html_image_path(plot_file, html_file):
     return os.path.relpath(plot_file, html_dir).replace("\\", "/")
 
 
+def load_plot_metadata(plot_file):
+    metadata_file = f"{plot_file}.metadata.csv"
+    if not os.path.exists(metadata_file) or os.path.getsize(metadata_file) == 0:
+        return None
+    with open(metadata_file, newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            return row
+    return None
+
+
 def radec_to_galactic(ra, dec):
     if SkyCoord is None or astrou is None:
         return "", ""
@@ -276,17 +288,23 @@ def merge_existing_metadata(rows, paths):
         for field in preserve_fields:
             if field in previous and previous[field] != "":
                 row[field] = previous[field]
+        for field in RECOVERABLE_FIELDNAMES:
+            if row.get(field, "") == "" and previous.get(field, "") != "":
+                row[field] = previous[field]
 
 
 def main():
     args = parse_args()
     root = os.path.abspath(args.root)
     plot_files = collect_plot_files(root, args.plot_root)
+    existing_metadata = load_existing_metadata([args.outfile, args.enriched_csv])
 
     rows = []
     phot_cache = {}
 
     for plot_file in plot_files:
+        plot_file_for_html = html_image_path(plot_file, args.html)
+        plot_metadata = load_plot_metadata(plot_file)
         sector = parse_sector(plot_file)
         cam, ccd = parse_camccd(os.path.basename(plot_file))
         if sector is None or cam is None or ccd is None:
@@ -294,30 +312,56 @@ def main():
             continue
 
         sector_dir = os.path.join(root, f"sector{sector}")
-        photfile = os.path.join(sector_dir, f"cam{cam}_ccd{ccd}", "phot.data")
-        if photfile not in phot_cache:
-            phot_cache[photfile] = load_phot_data(photfile)
-
-        lc_candidates = source_lc_candidates_from_plot(plot_file, cam, ccd)
-        phot_row = find_phot_row(phot_cache[photfile], lc_candidates)
-        if phot_row is None:
-            print(f"WARNING: no phot.data match for {plot_file} as {lc_candidates[0]}")
-            fcol = frow = ra = dec = ""
-            lc_file = lc_candidates[0]
+        if plot_metadata is not None:
+            fcol = plot_metadata.get("fcol", "")
+            frow = plot_metadata.get("frow", "")
+            ra = plot_metadata.get("ra", "")
+            dec = plot_metadata.get("dec", "")
+            gal_l = plot_metadata.get("l", "")
+            gal_b = plot_metadata.get("b", "")
+            lc_file = plot_metadata.get("lc_file", "")
         else:
-            fcol = float(phot_row["fcol"])
-            frow = float(phot_row["frow"])
-            lc_file = str(phot_row["fname"])
-            if tess_stars2px_reverse_function_entry is None:
-                ra = dec = ""
-            else:
-                # Match complicatedplot.py exactly so CSV/HTML coordinates
-                # agree with the RA/Dec printed on the plot image.
-                ra, dec, _ = tess_stars2px_reverse_function_entry(sector, cam, ccd, fcol, frow)
+            photfile = os.path.join(sector_dir, f"cam{cam}_ccd{ccd}", "phot.data")
+            if photfile not in phot_cache:
+                phot_cache[photfile] = load_phot_data(photfile)
 
-        gal_l, gal_b = radec_to_galactic(ra, dec)
-        rms_day = parse_rms_day(plot_file)
-        orbit = find_orbit(sector_dir, cam, ccd, rms_day)
+            lc_candidates = source_lc_candidates_from_plot(plot_file, cam, ccd)
+            phot_row = find_phot_row(phot_cache[photfile], lc_candidates)
+            if phot_row is None:
+                previous = existing_metadata.get(("plot_file", plot_file_for_html))
+                if previous is None:
+                    print(f"WARNING: no phot.data match for {plot_file} as {lc_candidates[0]}")
+                    fcol = frow = ra = dec = ""
+                    gal_l = gal_b = ""
+                    lc_file = lc_candidates[0]
+                else:
+                    print(f"INFO: using previous CSV metadata for {plot_file}; no current phot.data match as {lc_candidates[0]}")
+                    fcol = previous.get("fcol", "")
+                    frow = previous.get("frow", "")
+                    ra = previous.get("ra", "")
+                    dec = previous.get("dec", "")
+                    gal_l = previous.get("l", "")
+                    gal_b = previous.get("b", "")
+                    lc_file = previous.get("lc_file", lc_candidates[0])
+            else:
+                fcol = float(phot_row["fcol"])
+                frow = float(phot_row["frow"])
+                lc_file = str(phot_row["fname"])
+                if tess_stars2px_reverse_function_entry is None:
+                    ra = dec = ""
+                else:
+                    # Match complicatedplot.py exactly so CSV/HTML coordinates
+                    # agree with the RA/Dec printed on the plot image when no
+                    # plot sidecar is available.
+                    ra, dec, _ = tess_stars2px_reverse_function_entry(sector, cam, ccd, fcol, frow)
+                gal_l, gal_b = radec_to_galactic(ra, dec)
+
+        rms_day = plot_metadata.get("rms_date", "") if plot_metadata is not None else parse_rms_day(plot_file)
+        if not rms_day:
+            rms_day = parse_rms_day(plot_file)
+        orbit = plot_metadata.get("orbit", "") if plot_metadata is not None else ""
+        if not orbit:
+            orbit = find_orbit(sector_dir, cam, ccd, rms_day)
 
         row = {
             "sector": sector,
@@ -330,7 +374,7 @@ def main():
             "b": gal_b,
             "suspected source type": "",
             "notes": "",
-            "plot_file": html_image_path(plot_file, args.html),
+            "plot_file": plot_file_for_html,
             "lc_file": lc_file,
             "fcol": fcol,
             "frow": frow,

@@ -120,6 +120,22 @@ done
 rm -rf single multiple flag
 mkdir -p single multiple flag
 
+move_plot_and_metadata()
+{
+  local plotfile=$1
+  local destdir=$2
+  local plotbase
+  local metadata
+
+  plotbase=$(basename "$plotfile")
+  metadata="${plotfile}.metadata.csv"
+  mv "$plotfile" "$destdir/"
+  if [[ -e "$metadata" ]]
+  then
+    mv "$metadata" "$destdir/${plotbase}.metadata.csv"
+  fi
+}
+
 ## Legacy cleaned plot routing:
 ## mv cam*/plots/flag*cleaned*jpg flag/
 ## mv cam*/plots/single*outcatrms*jpg single/
@@ -142,21 +158,33 @@ then
           plotbase=$(basename "$plotfile")
           if [[ "$plotbase" == flag*outcatrms* ]]
           then
-            mv "$plotfile" flag/
+            move_plot_and_metadata "$plotfile" flag
           elif [[ "$plotbase" == single*outcatrms* ]]
           then
-            mv "$plotfile" single/
+            move_plot_and_metadata "$plotfile" single
           else
-            mv "$plotfile" multiple/
+            move_plot_and_metadata "$plotfile" multiple
           fi
         done
       done
     done
   done
 else
-  mv cam*/plots/flag*outcatrms*jpg flag/ 2>/dev/null || true
-  mv cam*/plots/single*outcatrms*jpg single/ 2>/dev/null || true
-  mv cam*/plots/*outcatrms*jpg multiple/ 2>/dev/null || true
+  for plotfile in cam*/plots/flag*outcatrms*jpg
+  do
+    [[ -e "$plotfile" ]] || continue
+    move_plot_and_metadata "$plotfile" flag
+  done
+  for plotfile in cam*/plots/single*outcatrms*jpg
+  do
+    [[ -e "$plotfile" ]] || continue
+    move_plot_and_metadata "$plotfile" single
+  done
+  for plotfile in cam*/plots/*outcatrms*jpg
+  do
+    [[ -e "$plotfile" ]] || continue
+    move_plot_and_metadata "$plotfile" multiple
+  done
 fi
 
 echo "Plot page generation skipped (no burst table)."
