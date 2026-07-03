@@ -171,19 +171,46 @@ def source_lc_candidates_from_plot(plot_path, cam, ccd):
 def load_phot_data(photfile):
     if not os.path.exists(photfile) or os.path.getsize(photfile) == 0:
         return None
-    data = np.loadtxt(
-        photfile,
-        dtype=[
-            ("fcol", "f8"),
-            ("frow", "f8"),
-            ("icol", "i8"),
-            ("irow", "i8"),
-            ("fname", "<U256"),
-            ("flag", "i4"),
-        ],
-    )
-    if data.size == 1:
-        data = data[np.newaxis]
+    dtype = [
+        ("fcol", "f8"),
+        ("frow", "f8"),
+        ("icol", "i8"),
+        ("irow", "i8"),
+        ("fname", "<U256"),
+        ("flag", "i4"),
+    ]
+    rows = []
+    skipped = 0
+    with open(photfile, "r") as f:
+        for lineno, line in enumerate(f, start=1):
+            parts = line.split()
+            if not parts:
+                continue
+            if len(parts) < 6:
+                skipped += 1
+                if skipped <= 5:
+                    print(f"WARNING: skipping malformed {photfile}:{lineno}; expected 6 columns, found {len(parts)}")
+                continue
+            try:
+                rows.append(
+                    (
+                        float(parts[0]),
+                        float(parts[1]),
+                        int(float(parts[2])),
+                        int(float(parts[3])),
+                        parts[4],
+                        int(float(parts[5])),
+                    )
+                )
+            except ValueError:
+                skipped += 1
+                if skipped <= 5:
+                    print(f"WARNING: skipping malformed numeric values in {photfile}:{lineno}")
+    if skipped > 5:
+        print(f"WARNING: skipped {skipped} malformed rows in {photfile}")
+    if not rows:
+        return None
+    data = np.array(rows, dtype=dtype)
     return data
 
 
