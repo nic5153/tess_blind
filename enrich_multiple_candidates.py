@@ -4,6 +4,7 @@ import argparse
 import csv
 import os
 import time
+import warnings
 
 import numpy as np
 
@@ -373,13 +374,15 @@ def query_panstarrs(outrow, sc, radius_arcsec, matches, colors):
     from astroquery.mast import Catalogs
     import astropy.units as astrou
 
-    table = Catalogs.query_region(
-        sc,
-        radius=radius_arcsec * astrou.arcsec,
-        catalog="PANSTARRS",
-        table="stack",
-        data_release="dr2",
-    )
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", message="Query returned no results")
+        table = Catalogs.query_region(
+            sc,
+            radius=radius_arcsec * astrou.arcsec,
+            catalog="PANSTARRS",
+            table="stack",
+            data_release="dr2",
+        )
     if len(table) == 0:
         return
 
@@ -571,8 +574,20 @@ def main():
             write_csv(args.output, fieldnames, rows)
 
     write_csv(args.output, fieldnames, rows)
+    rows_with_matches = sum(1 for row in rows if row.get("catalog_matches", ""))
+    rows_with_gaia = sum(1 for row in rows if row.get("gaia_source_id", ""))
+    rows_with_panstarrs = sum(1 for row in rows if row.get("panstarrs_dist_arcsec", ""))
+    rows_with_des = sum(1 for row in rows if row.get("des_dist_arcsec", ""))
+    rows_with_decaps = sum(1 for row in rows if row.get("decaps_dist_arcsec", ""))
+    rows_missing_radec = sum(1 for row in rows if row.get("catalog_status", "") == "missing ra/dec")
     print(f"Wrote {len(rows)} rows to {args.output}")
     print(f"Processed {processed} rows; skipped {skipped} rows with existing catalog data")
+    print(
+        "Catalog match summary: "
+        f"any={rows_with_matches}, Gaia={rows_with_gaia}, "
+        f"Pan-STARRS={rows_with_panstarrs}, DES={rows_with_des}, "
+        f"DECaPS={rows_with_decaps}, missing_ra_dec={rows_missing_radec}"
+    )
 
 
 if __name__ == "__main__":
