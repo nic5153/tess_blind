@@ -205,8 +205,8 @@ for camccd in "${available_camccds[@]}"; do
 done
 
 echo ""
-echo "[5/5] Running cumulative analysis/plot generation..."
-analysis_job=$(sbatch --parsable "$script_dir/analysis.sbatch" "$sector")
+echo "[5/5] Running $orbit analysis/plot generation..."
+analysis_job=$(sbatch --parsable "$script_dir/analysis.sbatch" "$sector" "$orbit")
 echo "  analysis job ID: $analysis_job"
 wait_for_jobs "analysis" "$analysis_job"
 

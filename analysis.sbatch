@@ -10,11 +10,18 @@
 #SBATCH --time=0-24:00:00
 
 sector=$1
+orbit=${2:-}
 suse=$(printf "%04d"  $1)
 coordfile=coords.txt
 indir=lc
 RUN_CLEANED=${RUN_CLEANED:-0}
 RUN_MATCHBKG=${RUN_MATCHBKG:-1}
+
+if [[ -n "$orbit" && ! "$orbit" =~ ^o[0-9][ab]$ ]]
+then
+  echo "ERROR: orbit must look like o1a, o1b, o2a, o2b"
+  exit 1
+fi
 
 source /home/${USER}/setup_vars.sh
 
@@ -36,7 +43,39 @@ fi
 ## but complicatedplot.py also aligns by time so this step is not fatal.
 if [[ "$RUN_MATCHBKG" == "1" ]]
 then
-  python /home/sarchast/tesstools/matchbkgtolc.py cam*_ccd*/lc/lc_outcatrms_* || echo "WARNING: matchbkgtolc.py failed; continuing with in-plot time matching."
+  if [[ -n "$orbit" ]]
+  then
+    match_files=()
+    for cam in {1..4}
+    do
+      for ccd in {1..4}
+      do
+        for rmsfile in cam${cam}_ccd${ccd}/${orbit}/rms_day_*.fits
+        do
+          [[ -e "$rmsfile" ]] || continue
+          rmsbase=$(basename "$rmsfile")
+          day=${rmsbase#rms_day_}
+          day=${day%.fits}
+          for lcfile in cam${cam}_ccd${ccd}/lc/lc_outcatrms_day_${day}_*.txt
+          do
+            [[ -e "$lcfile" ]] && match_files+=("$lcfile")
+          done
+        done
+      done
+    done
+
+    if [[ ${#match_files[@]} -gt 0 ]]
+    then
+      for ((i=0; i<${#match_files[@]}; i+=500))
+      do
+        python /home/sarchast/tesstools/matchbkgtolc.py "${match_files[@]:i:500}" || echo "WARNING: matchbkgtolc.py failed for one ${orbit} chunk; continuing with in-plot time matching."
+      done
+    else
+      echo "WARNING: no ${orbit} light curves found for matchbkgtolc.py; continuing."
+    fi
+  else
+    python /home/sarchast/tesstools/matchbkgtolc.py cam*_ccd*/lc/lc_outcatrms_* || echo "WARNING: matchbkgtolc.py failed; continuing with in-plot time matching."
+  fi
 fi
 
 for cam in {1..4}
@@ -61,7 +100,12 @@ do
         cd ..
       fi
 
-      python ../complicatedplot.py --sector $sector --photfile ./cam${cam}_ccd${ccd}/phot.data --singleproc
+      plot_args=(--sector "$sector" --photfile "./cam${cam}_ccd${ccd}/phot.data" --singleproc)
+      if [[ -n "$orbit" ]]
+      then
+        plot_args+=(--orbit "$orbit")
+      fi
+      python ../complicatedplot.py "${plot_args[@]}"
     fi
   done
 done
@@ -73,9 +117,40 @@ mkdir -p single multiple flag
 ## mv cam*/plots/flag*cleaned*jpg flag/
 ## mv cam*/plots/single*outcatrms*jpg single/
 ## mv cam*/plots/outcatrms*jpg multiple/
-mv cam*/plots/flag*outcatrms*jpg flag/ 2>/dev/null || true
-mv cam*/plots/single*outcatrms*jpg single/ 2>/dev/null || true
-mv cam*/plots/*outcatrms*jpg multiple/ 2>/dev/null || true
+if [[ -n "$orbit" ]]
+then
+  for cam in {1..4}
+  do
+    for ccd in {1..4}
+    do
+      for rmsfile in cam${cam}_ccd${ccd}/${orbit}/rms_day_*.fits
+      do
+        [[ -e "$rmsfile" ]] || continue
+        rmsbase=$(basename "$rmsfile")
+        day=${rmsbase#rms_day_}
+        day=${day%.fits}
+        for plotfile in cam${cam}_ccd${ccd}/plots/*outcatrms_day_${day}_*.jpg
+        do
+          [[ -e "$plotfile" ]] || continue
+          plotbase=$(basename "$plotfile")
+          if [[ "$plotbase" == flag*outcatrms* ]]
+          then
+            mv "$plotfile" flag/
+          elif [[ "$plotbase" == single*outcatrms* ]]
+          then
+            mv "$plotfile" single/
+          else
+            mv "$plotfile" multiple/
+          fi
+        done
+      done
+    done
+  done
+else
+  mv cam*/plots/flag*outcatrms*jpg flag/ 2>/dev/null || true
+  mv cam*/plots/single*outcatrms*jpg single/ 2>/dev/null || true
+  mv cam*/plots/*outcatrms*jpg multiple/ 2>/dev/null || true
+fi
 
 echo "Plot page generation skipped (no burst table)."
 echo "Plots remain in cam*/plots and the single/ multiple/ flag/ folders."

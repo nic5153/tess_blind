@@ -32,6 +32,7 @@ parser.add_argument("--singleproc", action="store_true")
 parser.add_argument("--sector", type=int, required=True)
 parser.add_argument("--N", type=int, default=4)
 parser.add_argument("--rmsthresh", type=float, default=100.0)
+parser.add_argument("--orbit", default=None, help="Optional orbit filter, e.g. o1b")
 parser.add_argument("--data-dir", default=os.environ.get("DATA_DIR", "/lustre/research/mfausnau/data/tica"))
 args = parser.parse_args()
 
@@ -56,7 +57,8 @@ if sourcedata.size == 1:
 
 def load_dates():
     alldates = ""
-    pattern = f"{args.data_dir}/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/dates"
+    orbit_pattern = args.orbit if args.orbit else "o??"
+    pattern = f"{args.data_dir}/s{args.sector:04}/cam{cam}-ccd{ccd}/{orbit_pattern}/slice*/dates"
     for datesfile in glob_sorted(pattern):
         thisorbit = datesfile.split("/")[-3]
         with open(datesfile, "r") as f:
@@ -277,15 +279,32 @@ def local_camccd_dir():
 
 def daily_rms_files(candidate_day):
     root = local_camccd_dir()
+    orbit_pattern = args.orbit if args.orbit else "o??"
     if candidate_day is None:
-        pattern = os.path.join(root, "o??", "rms_day_*.fits")
+        pattern = os.path.join(root, orbit_pattern, "rms_day_*.fits")
     else:
-        pattern = os.path.join(root, "o??", f"rms_day_{candidate_day}.fits")
+        pattern = os.path.join(root, orbit_pattern, f"rms_day_{candidate_day}.fits")
     return glob_sorted(pattern)
 
 
 def all_daily_rms_files():
-    return glob_sorted(os.path.join(local_camccd_dir(), "o??", "rms_day_*.fits"))
+    orbit_pattern = args.orbit if args.orbit else "o??"
+    return glob_sorted(os.path.join(local_camccd_dir(), orbit_pattern, "rms_day_*.fits"))
+
+
+def orbit_rms_days():
+    if not args.orbit:
+        return None
+
+    days = set()
+    pattern = os.path.join(local_camccd_dir(), args.orbit, "rms_day_*.fits")
+    for rmsfile in glob_sorted(pattern):
+        match = re.search(r"rms_day_(\d+)\.fits$", os.path.basename(rmsfile))
+        if match:
+            days.add(int(match.group(1)))
+    if not days:
+        warnings.warn(f"No local RMS days found for orbit filter {args.orbit}: {pattern}")
+    return days
 
 
 def display_window(ax, data, icol, irow, fcol, frow, imsize, vmin=None, vmax=None, title=None):
@@ -700,11 +719,16 @@ def plot(lcfile):
 if __name__ == "__main__":
     import glob
 
+    allowed_days = orbit_rms_days()
     lcfiles = sorted(
         f
         for f in glob.glob(f"{args.photfile.replace('phot.data', '')}/lc/lc_outcatrms_*.txt")
         if "_cleaned" not in f and not f.endswith(".tmp")
     )
+    if allowed_days is not None:
+        before_count = len(lcfiles)
+        lcfiles = [f for f in lcfiles if parse_candidate_day(f) in allowed_days]
+        print(f"Orbit filter {args.orbit}: plotting {len(lcfiles)} of {before_count} light curves")
     if args.singleproc:
         for lc in tqdm(lcfiles):
             print(lc)
