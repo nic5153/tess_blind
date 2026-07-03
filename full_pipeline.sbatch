@@ -28,6 +28,14 @@ fi
 source /home/${USER}/setup_vars.sh
 logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
 mkdir -p "$logdir"
+ANALYSIS_CPUS=${ANALYSIS_CPUS:-4}
+RUN_MULTIPLE_EXPORT=${RUN_MULTIPLE_EXPORT:-1}
+RUN_CATALOG_ENRICHMENT=${RUN_CATALOG_ENRICHMENT:-1}
+CATALOG_SLEEP=${CATALOG_SLEEP:-0.4}
+CATALOG_LIMIT=${CATALOG_LIMIT:-}
+MULTIPLE_CSV=${MULTIPLE_CSV:-multiple_candidates.csv}
+MULTIPLE_HTML=${MULTIPLE_HTML:-multiple_candidates.html}
+MULTIPLE_ENRICHED_CSV=${MULTIPLE_ENRICHED_CSV:-multiple_candidates_enriched.csv}
 
 wait_for_jobs() {
     local label=$1
@@ -65,10 +73,13 @@ echo " lcdir  : $lcdir"
 echo " CWD    : $(pwd)"
 echo " Scripts: $script_dir"
 echo " Logs   : $logdir"
+echo " Analysis CPUs : $ANALYSIS_CPUS"
+echo " Multiple export: $RUN_MULTIPLE_EXPORT"
+echo " Catalog enrich : $RUN_CATALOG_ENRICHMENT"
 echo "======================================================"
 
 echo ""
-echo "[1/6] Creating local sector/cam/ccd/orbit directories..."
+echo "[1/7] Creating local sector/cam/ccd/orbit directories..."
 mkdir -p "sector${sector}"
 for cam in {1..4}; do
     for ccd in {1..4}; do
@@ -83,7 +94,7 @@ cp "$script_dir/do_photutils_extract.py" "sector${sector}/do_photutils_extract.p
 cp "$script_dir/rms_source.py" "sector${sector}/rms_source.py"
 
 echo ""
-echo "[2/6] Submitting daily RMS generation for all cam/ccd combinations..."
+echo "[2/7] Submitting daily RMS generation for all cam/ccd combinations..."
 rms_jobs=()
 for cam in {1..4}; do
     for ccd in {1..4}; do
@@ -95,13 +106,13 @@ done
 wait_for_jobs "daily RMS generation" "${rms_jobs[@]}"
 
 echo ""
-echo "[3/6] Running source extraction from daily RMS products..."
+echo "[3/7] Running source extraction from daily RMS products..."
 source_job=$(sbatch --parsable "$script_dir/source.sbatch" "$sector")
 echo "  source job ID: $source_job"
 wait_for_jobs "source extraction" "$source_job"
 
 echo ""
-echo "[4/6] Submitting photometry pipeline..."
+echo "[4/7] Submitting photometry pipeline..."
 submit_log="full_pipeline_submit_all_sector${sector}_$(date +%Y%m%d_%H%M%S).log"
 set +e
 bash "$script_dir/submit_all.sh" "$sector" "$lcdir" 2>&1 | tee "$submit_log"
@@ -132,21 +143,59 @@ if [[ "$lc_count" -eq 0 || "$bkg_lc_count" -eq 0 ]]; then
 fi
 
 echo ""
-echo "[5/6] Untarring image products for plotting..."
+echo "[5/7] Untarring image products for plotting..."
 untar_job=$(sbatch --parsable "$script_dir/images_untar.sbatch" "$sector")
 echo "  images_untar job ID: $untar_job"
 wait_for_jobs "image untar" "$untar_job"
 
 echo ""
-echo "[6/6] Running analysis and plot generation..."
-analysis_job=$(sbatch --parsable "$script_dir/analysis.sbatch" "$sector")
+echo "[6/7] Running analysis and plot generation..."
+analysis_job=$(sbatch --parsable --cpus-per-task="$ANALYSIS_CPUS" "$script_dir/analysis.sbatch" "$sector")
 echo "  analysis job ID: $analysis_job"
 wait_for_jobs "analysis" "$analysis_job"
+
+echo ""
+echo "[7/7] Exporting multiple-candidate CSV/HTML products..."
+if [[ "$RUN_MULTIPLE_EXPORT" == "1" ]]; then
+    if python "$script_dir/export_multiple_candidates.py" \
+        --root "." \
+        --outfile "$MULTIPLE_CSV" \
+        --html "$MULTIPLE_HTML" \
+        --enriched-csv "$MULTIPLE_ENRICHED_CSV"; then
+        echo "  Wrote base multiple-candidate products."
+    else
+        echo "WARNING: export_multiple_candidates.py failed; continuing." >&2
+    fi
+
+    if [[ "$RUN_CATALOG_ENRICHMENT" == "1" && -s "$MULTIPLE_CSV" ]]; then
+        enrich_args=("$MULTIPLE_CSV" --output "$MULTIPLE_ENRICHED_CSV" --sleep "$CATALOG_SLEEP")
+        if [[ -n "$CATALOG_LIMIT" ]]; then
+            enrich_args+=(--limit "$CATALOG_LIMIT")
+        fi
+
+        if python "$script_dir/enrich_multiple_candidates.py" "${enrich_args[@]}"; then
+            python "$script_dir/export_multiple_candidates.py" \
+                --root "." \
+                --outfile "$MULTIPLE_CSV" \
+                --html "$MULTIPLE_HTML" \
+                --enriched-csv "$MULTIPLE_ENRICHED_CSV" \
+                || echo "WARNING: enriched HTML refresh failed; continuing." >&2
+        else
+            echo "WARNING: enrich_multiple_candidates.py failed; base CSV/HTML remain available." >&2
+        fi
+    else
+        echo "  Catalog enrichment skipped."
+    fi
+else
+    echo "  Multiple-candidate export skipped."
+fi
 
 echo ""
 echo "======================================================"
 echo " Full pipeline finished submitting and waiting."
 echo " Sector: $sector"
 echo " Analysis job: $analysis_job"
+echo " Multiple CSV: $MULTIPLE_CSV"
+echo " Multiple HTML: $MULTIPLE_HTML"
 echo " Check plots under sector${sector}/cam*_ccd*/plots and sector${sector}/{single,multiple,flag}."
 echo "======================================================"

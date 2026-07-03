@@ -29,4 +29,5 @@ recover_from_*.txt
 sector*_plots.tar.gz
 sector*_plots.txt
 multiple_candidates.csv
+multiple_candidates_enriched.csv
 multiple_candidates.html

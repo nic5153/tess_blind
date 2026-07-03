@@ -41,6 +41,13 @@ dtarget_base="${DATA_DIR}/${sectoruse}"
 DO_PHOT_ARRAY=${DO_PHOT_ARRAY:-0-11%12}
 COPY_PHOT_ARRAY=${COPY_PHOT_ARRAY:-0-5%6}
 ANALYSIS_CPUS=${ANALYSIS_CPUS:-4}
+RUN_MULTIPLE_EXPORT=${RUN_MULTIPLE_EXPORT:-1}
+RUN_CATALOG_ENRICHMENT=${RUN_CATALOG_ENRICHMENT:-1}
+CATALOG_SLEEP=${CATALOG_SLEEP:-0.4}
+CATALOG_LIMIT=${CATALOG_LIMIT:-}
+MULTIPLE_CSV=${MULTIPLE_CSV:-multiple_candidates.csv}
+MULTIPLE_HTML=${MULTIPLE_HTML:-multiple_candidates.html}
+MULTIPLE_ENRICHED_CSV=${MULTIPLE_ENRICHED_CSV:-multiple_candidates_enriched.csv}
 
 wait_for_jobs() {
     local label=$1
@@ -79,6 +86,8 @@ echo " Logs   : $logdir"
 echo " do_phot array : $DO_PHOT_ARRAY"
 echo " copy_phot array: $COPY_PHOT_ARRAY"
 echo " Analysis CPUs : $ANALYSIS_CPUS"
+echo " Multiple export: $RUN_MULTIPLE_EXPORT"
+echo " Catalog enrich : $RUN_CATALOG_ENRICHMENT"
 echo "======================================================"
 
 if [[ ! -d "$dtarget_base" ]]; then
@@ -211,10 +220,46 @@ for camccd in "${available_camccds[@]}"; do
 done
 
 echo ""
-echo "[5/5] Running $orbit analysis/plot generation..."
+echo "[5/6] Running $orbit analysis/plot generation..."
 analysis_job=$(sbatch --parsable --cpus-per-task="$ANALYSIS_CPUS" "$script_dir/analysis.sbatch" "$sector" "$orbit")
 echo "  analysis job ID: $analysis_job"
 wait_for_jobs "analysis" "$analysis_job"
+
+echo ""
+echo "[6/6] Exporting multiple-candidate CSV/HTML products..."
+if [[ "$RUN_MULTIPLE_EXPORT" == "1" ]]; then
+    if python "$script_dir/export_multiple_candidates.py" \
+        --root "." \
+        --outfile "$MULTIPLE_CSV" \
+        --html "$MULTIPLE_HTML" \
+        --enriched-csv "$MULTIPLE_ENRICHED_CSV"; then
+        echo "  Wrote base multiple-candidate products."
+    else
+        echo "WARNING: export_multiple_candidates.py failed; continuing." >&2
+    fi
+
+    if [[ "$RUN_CATALOG_ENRICHMENT" == "1" && -s "$MULTIPLE_CSV" ]]; then
+        enrich_args=("$MULTIPLE_CSV" --output "$MULTIPLE_ENRICHED_CSV" --sleep "$CATALOG_SLEEP")
+        if [[ -n "$CATALOG_LIMIT" ]]; then
+            enrich_args+=(--limit "$CATALOG_LIMIT")
+        fi
+
+        if python "$script_dir/enrich_multiple_candidates.py" "${enrich_args[@]}"; then
+            python "$script_dir/export_multiple_candidates.py" \
+                --root "." \
+                --outfile "$MULTIPLE_CSV" \
+                --html "$MULTIPLE_HTML" \
+                --enriched-csv "$MULTIPLE_ENRICHED_CSV" \
+                || echo "WARNING: enriched HTML refresh failed; continuing." >&2
+        else
+            echo "WARNING: enrich_multiple_candidates.py failed; base CSV/HTML remain available." >&2
+        fi
+    else
+        echo "  Catalog enrichment skipped."
+    fi
+else
+    echo "  Multiple-candidate export skipped."
+fi
 
 echo ""
 echo "======================================================"
@@ -222,4 +267,6 @@ echo " Incremental orbit pipeline finished."
 echo " Sector: $sectoruse"
 echo " Orbit : $orbit"
 echo " Analysis job: $analysis_job"
+echo " Multiple CSV: $MULTIPLE_CSV"
+echo " Multiple HTML: $MULTIPLE_HTML"
 echo "======================================================"

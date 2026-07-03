@@ -10,9 +10,74 @@ from pathlib import Path
 import numpy as np
 
 try:
+    from astropy.coordinates import SkyCoord
+    import astropy.units as astrou
+except ImportError:
+    SkyCoord = None
+    astrou = None
+
+try:
     from tess_stars2px import tess_stars2px_reverse_function_entry
 except ImportError:
     tess_stars2px_reverse_function_entry = None
+
+
+BASE_FIELDNAMES = [
+    "sector",
+    "cam_ccd",
+    "orbit",
+    "rms_date",
+    "ra",
+    "dec",
+    "l",
+    "b",
+    "suspected source type",
+    "notes",
+    "plot_file",
+    "lc_file",
+    "fcol",
+    "frow",
+]
+
+CATALOG_FIELDNAMES = [
+    "catalog_status",
+    "catalog_matches",
+    "color_summary",
+    "gaia_source_id",
+    "gaia_dist_arcsec",
+    "gaia_parallax",
+    "gaia_g_mag",
+    "gaia_bp_mag",
+    "gaia_rp_mag",
+    "gaia_bp_rp",
+    "panstarrs_dist_arcsec",
+    "panstarrs_g_mag",
+    "panstarrs_r_mag",
+    "panstarrs_i_mag",
+    "panstarrs_z_mag",
+    "panstarrs_y_mag",
+    "panstarrs_g_r",
+    "panstarrs_r_i",
+    "des_dist_arcsec",
+    "des_g_mag",
+    "des_r_mag",
+    "des_i_mag",
+    "des_z_mag",
+    "des_y_mag",
+    "des_g_r",
+    "des_r_i",
+    "decaps_match_count",
+    "decaps_dist_arcsec",
+    "decaps_g_mag",
+    "decaps_r_mag",
+    "decaps_i_mag",
+    "decaps_z_mag",
+    "decaps_y_mag",
+    "decaps_g_r",
+    "decaps_r_i",
+]
+
+EDITABLE_FIELDNAMES = ["suspected source type", "notes"]
 
 
 def parse_args():
@@ -33,6 +98,14 @@ def parse_args():
         "--html",
         default="multiple_candidates.html",
         help="Output HTML review page. Default: multiple_candidates.html",
+    )
+    parser.add_argument(
+        "--enriched-csv",
+        default="multiple_candidates_enriched.csv",
+        help=(
+            "Optional catalog-enriched CSV to merge into the CSV/HTML output "
+            "when it exists. Default: multiple_candidates_enriched.csv"
+        ),
     )
     parser.add_argument(
         "--plot-root",
@@ -150,6 +223,61 @@ def html_image_path(plot_file, html_file):
     return os.path.relpath(plot_file, html_dir).replace("\\", "/")
 
 
+def radec_to_galactic(ra, dec):
+    if SkyCoord is None or astrou is None:
+        return "", ""
+    try:
+        if ra == "" or dec == "":
+            return "", ""
+        sc = SkyCoord(float(ra), float(dec), unit="deg")
+    except (TypeError, ValueError):
+        return "", ""
+    return float(sc.galactic.l.deg), float(sc.galactic.b.deg)
+
+
+def blank_catalog_fields():
+    return {field: "" for field in CATALOG_FIELDNAMES}
+
+
+def row_key(row):
+    plot_file = str(row.get("plot_file", "")).replace("\\", "/")
+    if plot_file:
+        return ("plot_file", plot_file)
+    return (
+        "coords",
+        str(row.get("sector", "")),
+        str(row.get("cam_ccd", "")),
+        str(row.get("orbit", "")),
+        str(row.get("rms_date", "")),
+        str(row.get("ra", "")),
+        str(row.get("dec", "")),
+    )
+
+
+def load_existing_metadata(paths):
+    metadata = {}
+    for path in paths:
+        if not path or not os.path.exists(path) or os.path.getsize(path) == 0:
+            continue
+        with open(path, newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                metadata[row_key(row)] = row
+    return metadata
+
+
+def merge_existing_metadata(rows, paths):
+    metadata = load_existing_metadata(paths)
+    preserve_fields = EDITABLE_FIELDNAMES + CATALOG_FIELDNAMES
+    for row in rows:
+        previous = metadata.get(row_key(row))
+        if previous is None:
+            continue
+        for field in preserve_fields:
+            if field in previous and previous[field] != "":
+                row[field] = previous[field]
+
+
 def main():
     args = parse_args()
     root = os.path.abspath(args.root)
@@ -187,40 +315,32 @@ def main():
                 # agree with the RA/Dec printed on the plot image.
                 ra, dec, _ = tess_stars2px_reverse_function_entry(sector, cam, ccd, fcol, frow)
 
+        gal_l, gal_b = radec_to_galactic(ra, dec)
         rms_day = parse_rms_day(plot_file)
         orbit = find_orbit(sector_dir, cam, ccd, rms_day)
 
-        rows.append(
-            {
-                "sector": sector,
-                "cam_ccd": f"cam{cam}_ccd{ccd}",
-                "orbit": orbit,
-                "rms_date": rms_day,
-                "ra": ra,
-                "dec": dec,
-                "suspected source type": "",
-                "notes": "",
-                "plot_file": html_image_path(plot_file, args.html),
-                "lc_file": lc_file,
-                "fcol": fcol,
-                "frow": frow,
-            }
-        )
+        row = {
+            "sector": sector,
+            "cam_ccd": f"cam{cam}_ccd{ccd}",
+            "orbit": orbit,
+            "rms_date": rms_day,
+            "ra": ra,
+            "dec": dec,
+            "l": gal_l,
+            "b": gal_b,
+            "suspected source type": "",
+            "notes": "",
+            "plot_file": html_image_path(plot_file, args.html),
+            "lc_file": lc_file,
+            "fcol": fcol,
+            "frow": frow,
+        }
+        row.update(blank_catalog_fields())
+        rows.append(row)
 
-    fieldnames = [
-        "sector",
-        "cam_ccd",
-        "orbit",
-        "rms_date",
-        "ra",
-        "dec",
-        "suspected source type",
-        "notes",
-        "plot_file",
-        "lc_file",
-        "fcol",
-        "frow",
-    ]
+    merge_existing_metadata(rows, [args.outfile, args.enriched_csv])
+
+    fieldnames = BASE_FIELDNAMES + CATALOG_FIELDNAMES
     with open(args.outfile, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
@@ -239,6 +359,30 @@ def html_escape(value):
         .replace(">", "&gt;")
         .replace('"', "&quot;")
     )
+
+
+def html_catalog_summary(row):
+    parts = []
+    if row.get("catalog_matches"):
+        parts.append(row["catalog_matches"])
+    if row.get("catalog_status") and row["catalog_status"] != "ok":
+        parts.append(row["catalog_status"])
+    return "; ".join(parts)
+
+
+def html_color_summary(row):
+    if row.get("color_summary"):
+        return row["color_summary"]
+    parts = []
+    if row.get("gaia_bp_rp"):
+        parts.append(f"Gaia BP-RP={row['gaia_bp_rp']}")
+    if row.get("panstarrs_g_r"):
+        parts.append(f"PS1 g-r={row['panstarrs_g_r']}")
+    if row.get("des_g_r"):
+        parts.append(f"DES g-r={row['des_g_r']}")
+    if row.get("decaps_g_r"):
+        parts.append(f"DECaPS g-r={row['decaps_g_r']}")
+    return "; ".join(parts)
 
 
 def write_html(outfile, rows):
@@ -287,7 +431,7 @@ figcaption { font-size: 14px; }
             html += "<figure>\n"
             html += f"""<figcaption>
 <table>
-<tr><th>sector</th><th>cam_ccd</th><th>orbit</th><th>rms_date</th><th>ra</th><th>dec</th><th>suspected source type</th><th>notes</th></tr>
+<tr><th>sector</th><th>cam_ccd</th><th>orbit</th><th>rms_date</th><th>ra</th><th>dec</th><th>l</th><th>b</th><th>suspected source type</th><th>notes</th></tr>
 <tr>
 <td>{html_escape(row["sector"])}</td>
 <td>{html_escape(row["cam_ccd"])}</td>
@@ -295,8 +439,20 @@ figcaption { font-size: 14px; }
 <td>{html_escape(row["rms_date"])}</td>
 <td>{html_escape(row["ra"])}</td>
 <td>{html_escape(row["dec"])}</td>
+<td>{html_escape(row.get("l", ""))}</td>
+<td>{html_escape(row.get("b", ""))}</td>
 <td>{html_escape(row["suspected source type"])}</td>
 <td>{html_escape(row["notes"])}</td>
+</tr>
+<tr><th colspan="2">catalog matches</th><th colspan="3">colors</th><th>Gaia source</th><th>Gaia dist</th><th>PS1 dist</th><th>DES dist</th><th>DECaPS dist</th></tr>
+<tr>
+<td colspan="2">{html_escape(html_catalog_summary(row))}</td>
+<td colspan="3">{html_escape(html_color_summary(row))}</td>
+<td>{html_escape(row.get("gaia_source_id", ""))}</td>
+<td>{html_escape(row.get("gaia_dist_arcsec", ""))}</td>
+<td>{html_escape(row.get("panstarrs_dist_arcsec", ""))}</td>
+<td>{html_escape(row.get("des_dist_arcsec", ""))}</td>
+<td>{html_escape(row.get("decaps_dist_arcsec", ""))}</td>
 </tr>
 </table>
 {html_escape(row["plot_file"])}
