@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+#SBATCH --job-name=cleanup_phot_intermediates
+#SBATCH --output=/lustre/work/nimcclur/TESS/photometry/logs/%x.o%j
+#SBATCH --error=/lustre/work/nimcclur/TESS/photometry/logs/%x.e%j
+#SBATCH --partition=nocona
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --time=0-02:00:00
 #
 # Remove loose photometry intermediate products left in slice directories.
 # This mirrors the cleanup performed inside do_phot_em2.sbatch:
@@ -30,6 +38,7 @@ Options:
   --delete       Actually remove files. Without this, the script only prints.
   --all-owners   Include files not owned by the current user.
   --data-dir DIR Data root. Defaults to DATA_DIR, then /lustre/research/mfausnau/data/tica.
+  --jobs N       Parallel workers for stat/delete. Defaults to SLURM_CPUS_PER_TASK, then 4.
   -h, --help     Show this help.
 
 Targets:
@@ -41,6 +50,7 @@ EOF
 delete=0
 owner_only=1
 data_dir="${DATA_DIR:-/lustre/research/mfausnau/data/tica}"
+jobs="${SLURM_CPUS_PER_TASK:-4}"
 positional=()
 
 while [[ $# -gt 0 ]]; do
@@ -59,6 +69,14 @@ while [[ $# -gt 0 ]]; do
                 exit 2
             fi
             data_dir=$2
+            shift 2
+            ;;
+        --jobs)
+            if [[ $# -lt 2 ]]; then
+                echo "ERROR: --jobs requires a positive integer" >&2
+                exit 2
+            fi
+            jobs=$2
             shift 2
             ;;
         -h|--help)
@@ -103,6 +121,10 @@ if [[ "$orbit_filter" != "*" && ! "$orbit_filter" =~ ^o[0-9][ab]$ ]]; then
     echo "ERROR: orbit must look like o1a, o1b, o2a, got: $orbit_filter" >&2
     exit 2
 fi
+if [[ ! "$jobs" =~ ^[1-9][0-9]*$ ]]; then
+    echo "ERROR: --jobs must be a positive integer, got: $jobs" >&2
+    exit 2
+fi
 
 sectoruse=$(printf "s%04d" "$sector")
 base="${data_dir%/}/${sectoruse}"
@@ -131,6 +153,7 @@ echo " CCD filter: $ccd_filter"
 echo " Orbit     : $orbit_filter"
 echo " Owner     : $([[ "$owner_only" == "1" ]] && echo "$USER only" || echo "all owners")"
 echo " Mode      : $([[ "$delete" == "1" ]] && echo DELETE || echo DRY-RUN)"
+echo " Workers   : $jobs"
 echo "======================================================"
 
 shopt -s nullglob
@@ -171,13 +194,8 @@ for root in "${roots[@]}"; do
     fi
 done
 
-count=0
-bytes=0
-while IFS= read -r -d '' file; do
-    count=$((count + 1))
-    size=$(stat -c '%s' "$file" 2>/dev/null || echo 0)
-    bytes=$((bytes + size))
-done < "$tmpfile"
+count=$(tr -cd '\0' < "$tmpfile" | wc -c | awk '{print $1}')
+bytes=$(xargs -0 -r -P "$jobs" -n 100 stat -c '%s' < "$tmpfile" 2>/dev/null | awk '{sum += $1} END {printf "%.0f", sum + 0}')
 
 human_bytes=$(numfmt --to=iec --suffix=B "$bytes" 2>/dev/null || echo "${bytes} bytes")
 
@@ -199,9 +217,7 @@ if [[ "$delete" != "1" ]]; then
 fi
 
 echo ""
-echo "Deleting matched files..."
-while IFS= read -r -d '' file; do
-    rm -f -- "$file"
-done < "$tmpfile"
+echo "Deleting matched files with $jobs workers..."
+xargs -0 -r -P "$jobs" -n 100 rm -f -- < "$tmpfile"
 
 echo "Deleted $count files ($human_bytes)."
