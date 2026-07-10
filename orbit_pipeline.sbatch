@@ -74,6 +74,21 @@ wait_for_jobs() {
     echo "Finished waiting for $label"
 }
 
+clean_lc_contents() {
+    local dir=$1
+    if [[ ! -d "$dir" ]]; then
+        return 0
+    fi
+    if ! find "$dir" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +; then
+        echo "ERROR: could not fully remove contents of $dir" >&2
+        return 1
+    fi
+    if [[ -n "$(find "$dir" -mindepth 1 -maxdepth 1 -print -quit)" ]]; then
+        echo "ERROR: contents remain in $dir after cleanup" >&2
+        return 1
+    fi
+}
+
 echo "======================================================"
 echo " Incremental TESS blind orbit pipeline"
 echo " Sector : $sectoruse"
@@ -161,7 +176,8 @@ for camccd in "${available_camccds[@]}"; do
     # Clear only this orbit's per-slice temporary LC products before rerunning it.
     for slice_dir in "$orbit_dir"/slice*; do
         [[ -d "$slice_dir" ]] || continue
-        rm -rf "$slice_dir/$lcdir" "$slice_dir/bkg_phot/$lcdir"
+        clean_lc_contents "$slice_dir/$lcdir"
+        clean_lc_contents "$slice_dir/bkg_phot/$lcdir"
     done
 
     do_job=$(sbatch \
@@ -215,7 +231,8 @@ for camccd in "${available_camccds[@]}"; do
     orbit_dir="$dtarget_base/cam${cam}-ccd${ccd}/$orbit"
     for slice_dir in "$orbit_dir"/slice*; do
         [[ -d "$slice_dir" ]] || continue
-        rm -rf "$slice_dir/$lcdir" "$slice_dir/bkg_phot/$lcdir"
+        clean_lc_contents "$slice_dir/$lcdir"
+        clean_lc_contents "$slice_dir/bkg_phot/$lcdir"
     done
 done
 

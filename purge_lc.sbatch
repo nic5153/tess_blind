@@ -41,6 +41,21 @@ fi
 
 echo "Total slice directories: $nelements"
 
+clean_lc_contents() {
+    local dir=$1
+    if [[ ! -d "$dir" ]]; then
+        return 0
+    fi
+    if ! find "$dir" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +; then
+        echo "ERROR: could not fully remove contents of $dir" >&2
+        return 1
+    fi
+    if [[ -n "$(find "$dir" -mindepth 1 -maxdepth 1 -print -quit)" ]]; then
+        echo "ERROR: contents remain in $dir after cleanup" >&2
+        return 1
+    fi
+}
+
 for (( ii=1; ii<=nelements; ii++ )); do
     if [[ $(( ii % n_tasks )) -ne $SLURM_ARRAY_TASK_ID ]]; then
         continue
@@ -48,8 +63,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
 
     slice_dir="${all_slices[$((ii-1))]}"
 
-    rm -rf "$slice_dir/$lcdir"
-    rm -rf "$slice_dir/bkg_phot/$lcdir"
+    clean_lc_contents "$slice_dir/$lcdir"
+    clean_lc_contents "$slice_dir/bkg_phot/$lcdir"
 done
 
 echo "Task $SLURM_ARRAY_TASK_ID done."
