@@ -25,6 +25,28 @@ lcdir=$5
 
 echo "sector use: $sectoruse  cam: $cam  ccd: $ccd  orbit: $o  lcdir: $lcdir"
 
+current_slice_dir=""
+
+cleanup_slice_products() {
+    local dir=$1
+    [[ -d "$dir" ]] || return 0
+    (
+        cd "$dir" || exit 0
+        rm -f -- {interp,conv,bkg}*fits kt_*fits kc_*fits
+    )
+}
+
+cleanup_current_slice() {
+    if [[ -n "${current_slice_dir:-}" ]]; then
+        cleanup_slice_products "$current_slice_dir"
+        cleanup_slice_products "$current_slice_dir/bkg_phot"
+    fi
+}
+
+trap cleanup_current_slice EXIT
+trap 'cleanup_current_slice; exit 143' TERM
+trap 'cleanup_current_slice; exit 130' INT
+
 mapfile -t folders < <(ls -d "$duse/$sectoruse/cam${cam}-ccd${ccd}/$o/slice"*)
 nelements=${#folders[@]}
 
@@ -41,6 +63,7 @@ for (( ii=1; ii<=nelements; ii++ )); do
     fi
 
     slice_dir="${folders[$((ii-1))]}"
+    current_slice_dir="$slice_dir"
     cd "$slice_dir"
     echo "Working in: $(pwd)"
 
@@ -70,6 +93,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
     # Check for output — phot2.csh may exit 0 even after a segfault
     if ! compgen -G "$lcdir/lc_*" > /dev/null; then
         echo "FAILED: no lc_* output in $slice_dir/$lcdir (phot2.csh likely segfaulted)" >&2
+        cleanup_slice_products "$slice_dir"
+        cleanup_slice_products "$slice_dir/bkg_phot"
         cd "$dhome"
         continue
     fi
@@ -88,6 +113,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
     # Check for output
     if ! compgen -G "$lcdir/lc_*" > /dev/null; then
         echo "FAILED: no lc_* output in $slice_dir/bkg_phot/$lcdir (phot2.csh likely segfaulted)" >&2
+        cleanup_slice_products "$slice_dir"
+        cleanup_slice_products "$slice_dir/bkg_phot"
         cd "$dhome"
         continue
     fi
@@ -96,7 +123,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
     cd ..
 
     # Final cleanup of unpacked images
-    rm -f {interp,conv,bkg}*fits
+    cleanup_slice_products "$slice_dir"
+    cleanup_slice_products "$slice_dir/bkg_phot"
 
     cd "$dhome"
 done
