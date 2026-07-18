@@ -66,10 +66,20 @@ for rms in rmsfiles:
                 continue
             if ((((src['col'] - orms['col'])**2 + (src['row'] - orms['row'])**2) < minsep**2).any()):
                 ndets+=1
-        if ((srcmeasinrms.max()/srcmeasinrms[srcmeasinrms!=srcmeasinrms.max()]) < 5).any():
+        finite_rms = np.isfinite(srcmeasinrms)
+        if not finite_rms.any():
+            continue
+        max_rms = np.nanmax(srcmeasinrms)
+        if not np.isfinite(max_rms):
+            continue
+        other_rms = srcmeasinrms[finite_rms & (srcmeasinrms != max_rms)]
+        if (other_rms.size > 0) and ((max_rms/other_rms) < 5).any():
             significant = False
         if (ndets==1) and significant:
-            thisfile = tsvfiles[srcmeasinrms==srcmeasinrms.max()][0]
+            best_rms = np.where(srcmeasinrms==max_rms)[0]
+            if best_rms.size == 0:
+                continue
+            thisfile = tsvfiles[best_rms[0]]
             if args.targetrms is not None:
                 if thisfile!=args.targetrms:
                    continue
