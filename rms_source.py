@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import argparse 
 import subprocess
+import os
 from astroquery.vizier import Vizier
 from tess_stars2px import tess_stars2px_reverse_function_entry
 from tqdm import tqdm
@@ -25,6 +26,89 @@ def angsep(ra1deg,dec1deg,ra2deg,dec2deg):
             sep = 0
     return 180*sep/np.pi
 
+def env_float(name, default):
+    try:
+        return float(os.environ.get(name, default))
+    except ValueError:
+        return default
+
+def env_int(name, default):
+    try:
+        return int(os.environ.get(name, default))
+    except ValueError:
+        return default
+
+SKIP_BAD_RMS = os.environ.get("RMS_SOURCE_SKIP_BAD_RMS", "1") != "0"
+MAX_OUTCAT_ROWS = env_int("RMS_SOURCE_MAX_OUTCAT_ROWS", 50000)
+MAX_RMS_MEDIAN = env_float("RMS_SOURCE_MAX_MEDIAN", 1.0e5)
+MAX_RMS_P99 = env_float("RMS_SOURCE_MAX_P99", 1.0e8)
+MAX_RMS_OVER_MEDIAN = env_float("RMS_SOURCE_MAX_OVER_MEDIAN", 1.0e5)
+MIN_FINITE_FRACTION = env_float("RMS_SOURCE_MIN_FINITE_FRACTION", 0.5)
+
+def outcat_to_fits(outcat_file):
+    outcat_path = Path(outcat_file)
+    if outcat_path.name.startswith("outcat"):
+        fits_name = outcat_path.name[len("outcat"):].replace(".tsv", ".fits")
+    else:
+        fits_name = outcat_path.name.replace(".tsv", ".fits")
+    return outcat_path.with_name(fits_name)
+
+def count_outcat_rows(outcat_file):
+    with open(outcat_file, "rb") as infile:
+        return max(sum(1 for _ in infile) - 1, 0)
+
+def bad_rms_reasons(outcat_file):
+    if not SKIP_BAD_RMS:
+        return []
+
+    outcat_file = Path(outcat_file)
+    fits_file = outcat_to_fits(outcat_file)
+    reasons = []
+
+    try:
+        nrows = count_outcat_rows(outcat_file)
+    except OSError as exc:
+        return [f"cannot read outcat ({exc})"]
+
+    if MAX_OUTCAT_ROWS > 0 and nrows > MAX_OUTCAT_ROWS:
+        reasons.append(f"outcat_rows={nrows}>{MAX_OUTCAT_ROWS}")
+
+    if not fits_file.exists():
+        reasons.append(f"missing FITS {fits_file}")
+        return reasons
+
+    try:
+        with fits.open(fits_file, memmap=True) as hdul:
+            data = np.asarray(hdul[0].data, dtype=float)
+            finite = np.isfinite(data)
+            finite_fraction = float(finite.mean())
+            vals = data[finite]
+            if vals.size == 0:
+                reasons.append("no finite RMS pixels")
+                return reasons
+
+            median = float(np.nanmedian(vals))
+            p99 = float(np.nanpercentile(vals, 99))
+            maxval = float(np.nanmax(vals))
+    except Exception as exc:
+        reasons.append(f"cannot read FITS ({exc})")
+        return reasons
+
+    if finite_fraction < MIN_FINITE_FRACTION:
+        reasons.append(f"finite_fraction={finite_fraction:.3f}<{MIN_FINITE_FRACTION}")
+    if (not np.isfinite(median)) or median <= 0:
+        reasons.append(f"median={median}")
+    elif median > MAX_RMS_MEDIAN:
+        reasons.append(f"median={median:.6g}>{MAX_RMS_MEDIAN:.6g}")
+    if np.isfinite(p99) and p99 > MAX_RMS_P99:
+        reasons.append(f"p99={p99:.6g}>{MAX_RMS_P99:.6g}")
+    if np.isfinite(maxval) and np.isfinite(median) and median > 0:
+        ratio = maxval / median
+        if ratio > MAX_RMS_OVER_MEDIAN:
+            reasons.append(f"max_over_median={ratio:.6g}>{MAX_RMS_OVER_MEDIAN:.6g}")
+
+    return reasons
+
 scinfo = None
 parser = argparse.ArgumentParser()
 parser.add_argument("--sector",type=int,required=True)
@@ -38,14 +122,24 @@ outcat= []
 minsep = 2 # pixels
 rmsfiles = []
 fitsfiles = []
+tsvfiles = []
 
 for rmsf in args.rms:
-    rmsfiles.append(np.loadtxt(rmsf, delimiter='\t', usecols=(1,2,4,5), skiprows=1, dtype=[('col','f8'),('row','f8'),('r1','f8'),('r2','f8')]))
-    fitsfiles.append(rmsf.replace("outcat","").replace(".tsv",".fits"))
+    skip_reasons = bad_rms_reasons(rmsf)
+    if skip_reasons:
+        print(f"SKIP bad RMS source catalog {rmsf}: {'; '.join(skip_reasons)}")
+        continue
+
+    rmsdata = np.loadtxt(rmsf, delimiter='\t', usecols=(1,2,4,5), skiprows=1, dtype=[('col','f8'),('row','f8'),('r1','f8'),('r2','f8')])
+    if rmsdata.ndim == 0:
+        rmsdata = np.array([rmsdata], dtype=rmsdata.dtype)
+    rmsfiles.append(rmsdata)
+    fitsfiles.append(str(outcat_to_fits(rmsf)))
+    tsvfiles.append(rmsf)
 
 objcoords = []
 fitsrms = []
-tsvfiles = np.array(args.rms)
+tsvfiles = np.array(tsvfiles)
 for ff in fitsfiles:
     with fits.open(ff) as hdul:
         fitsrms.append(np.transpose(hdul[0].data))
