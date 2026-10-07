@@ -1,4 +1,8 @@
 import argparse
+<<<<<<< HEAD
+=======
+import csv
+>>>>>>> origin/codex/raw-lc-daily-rms
 import io
 import os
 import re
@@ -32,6 +36,10 @@ parser.add_argument("--singleproc", action="store_true")
 parser.add_argument("--sector", type=int, required=True)
 parser.add_argument("--N", type=int, default=4)
 parser.add_argument("--rmsthresh", type=float, default=100.0)
+<<<<<<< HEAD
+=======
+parser.add_argument("--orbit", default=None, help="Optional orbit filter, e.g. o1b")
+>>>>>>> origin/codex/raw-lc-daily-rms
 parser.add_argument("--data-dir", default=os.environ.get("DATA_DIR", "/lustre/research/mfausnau/data/tica"))
 args = parser.parse_args()
 
@@ -56,7 +64,12 @@ if sourcedata.size == 1:
 
 def load_dates():
     alldates = ""
+<<<<<<< HEAD
     pattern = f"{args.data_dir}/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/dates"
+=======
+    orbit_pattern = args.orbit if args.orbit else "o??"
+    pattern = f"{args.data_dir}/s{args.sector:04}/cam{cam}-ccd{ccd}/{orbit_pattern}/slice*/dates"
+>>>>>>> origin/codex/raw-lc-daily-rms
     for datesfile in glob_sorted(pattern):
         thisorbit = datesfile.split("/")[-3]
         with open(datesfile, "r") as f:
@@ -277,15 +290,50 @@ def local_camccd_dir():
 
 def daily_rms_files(candidate_day):
     root = local_camccd_dir()
+<<<<<<< HEAD
     if candidate_day is None:
         pattern = os.path.join(root, "o??", "rms_day_*.fits")
     else:
         pattern = os.path.join(root, "o??", f"rms_day_{candidate_day}.fits")
+=======
+    orbit_pattern = args.orbit if args.orbit else "o??"
+    if candidate_day is None:
+        pattern = os.path.join(root, orbit_pattern, "rms_day_*.fits")
+    else:
+        pattern = os.path.join(root, orbit_pattern, f"rms_day_{candidate_day}.fits")
+>>>>>>> origin/codex/raw-lc-daily-rms
     return glob_sorted(pattern)
 
 
 def all_daily_rms_files():
+<<<<<<< HEAD
     return glob_sorted(os.path.join(local_camccd_dir(), "o??", "rms_day_*.fits"))
+=======
+    orbit_pattern = args.orbit if args.orbit else "o??"
+    return glob_sorted(os.path.join(local_camccd_dir(), orbit_pattern, "rms_day_*.fits"))
+
+
+def orbit_rms_days():
+    if not args.orbit:
+        return None
+
+    days = set()
+    pattern = os.path.join(local_camccd_dir(), args.orbit, "rms_day_*.fits")
+    for rmsfile in glob_sorted(pattern):
+        match = re.search(r"rms_day_(\d+)\.fits$", os.path.basename(rmsfile))
+        if match:
+            days.add(int(match.group(1)))
+    if not days:
+        warnings.warn(f"No local RMS days found for orbit filter {args.orbit}: {pattern}")
+    return days
+
+
+def photdata_lc_basenames():
+    return {
+        os.path.basename(str(name))
+        for name in sourcedata["fname"]
+    }
+>>>>>>> origin/codex/raw-lc-daily-rms
 
 
 def display_window(ax, data, icol, irow, fcol, frow, imsize, vmin=None, vmax=None, title=None):
@@ -305,6 +353,20 @@ def display_window(ax, data, icol, irow, fcol, frow, imsize, vmin=None, vmax=Non
     ax.axis("off")
 
 
+<<<<<<< HEAD
+=======
+def coords_from_image_position(header, col, row):
+    try:
+        src_sc = WCS(header).pixel_to_world(col, row)
+        ra = src_sc.ra.deg
+        dec = src_sc.dec.deg
+    except Exception:
+        ra, dec, _ = tess_stars2px_reverse_function_entry(args.sector, cam, ccd, col, row)
+        src_sc = SkyCoord(ra, dec, unit="deg")
+    return ra, dec, src_sc.transform_to("galactic")
+
+
+>>>>>>> origin/codex/raw-lc-daily-rms
 def fit_gaussian_panel(fig, gs, image, header, src, imsize):
     frow = src["frow"]
     fcol = src["fcol"]
@@ -349,6 +411,7 @@ def fit_gaussian_panel(fig, gs, image, header, src, imsize):
     xarr = np.arange(2 * constraint + 1)
     yarr = np.arange(2 * constraint + 1)
     subx, suby = np.meshgrid(xarr, yarr)
+<<<<<<< HEAD
     popt, _ = curve_fit(
         gaussian_nobackground,
         (subx, suby),
@@ -367,6 +430,36 @@ def fit_gaussian_panel(fig, gs, image, header, src, imsize):
         ra, dec, _ = tess_stars2px_reverse_function_entry(args.sector, cam, ccd, fcol, frow)
         src_sc = SkyCoord(ra, dec, unit="deg")
     src_gal = src_sc.transform_to("galactic")
+=======
+    try:
+        popt, _ = curve_fit(
+            gaussian_nobackground,
+            (subx, suby),
+            fitdata.ravel(),
+            p0=[f0, x0, y0, bsizepix, bsizepix, 0],
+            bounds=bounds,
+        )
+    except RuntimeError:
+        vmax = np.nanmax(imdata) if np.isfinite(imdata).any() else np.nanmax(subdata)
+        vmax = vmax if np.isfinite(vmax) and vmax > 0 else 1
+        display_window(axs[0], image, icol, irow, fcol, frow, imsize, vmin=0, vmax=vmax, title="data")
+        axs[1].set_title("model")
+        axs[1].text(0.05, 0.5, "fit failed", transform=axs[1].transAxes)
+        axs[1].axis("off")
+        axs[2].set_title("residuals")
+        axs[2].text(0.05, 0.5, "fit failed", transform=axs[2].transAxes)
+        axs[2].axis("off")
+        axs[3].text(0, 0.7, "Gaussian fit values")
+        axs[3].text(0, 0.5, "fit failed")
+        axs[3].text(0, 0.1, "no convergence")
+        axs[3].axis("off")
+        ra, dec, src_gal = coords_from_image_position(header, fcol, frow)
+        return ra, dec, src_gal, np.nan
+
+    true_row = popt[1] + (irow - constraint)
+    true_col = popt[2] + (icol - constraint)
+    ra, dec, src_gal = coords_from_image_position(header, true_col, true_row)
+>>>>>>> origin/codex/raw-lc-daily-rms
 
     model = gaussian_nobackground((subx, suby), *popt).reshape(fitdata.shape)
     vmax = np.nanmax(model) if np.isfinite(model).any() else np.nanmax(subdata)
@@ -669,7 +762,57 @@ def plot(lcfile):
             f"(col,row):({fcol:6.1f},{frow:6.1f})\nDatafile:{lcfile} || "
             f"(l,b): ({src_gal.l.deg:7.4f},{src_gal.b.deg:7.4f}) || peak: {trigcand}"
         )
+<<<<<<< HEAD
         plt.savefig(os.path.join(outfolder, prefix + outfile))
+=======
+        plot_path = os.path.join(outfolder, prefix + outfile)
+        plt.savefig(plot_path)
+        with open(plot_path + ".metadata.csv", "w", newline="") as metafile:
+            writer = csv.DictWriter(
+                metafile,
+                fieldnames=[
+                    "plot_file",
+                    "lc_file",
+                    "sector",
+                    "cam",
+                    "ccd",
+                    "orbit",
+                    "rms_date",
+                    "ra",
+                    "dec",
+                    "l",
+                    "b",
+                    "fcol",
+                    "frow",
+                    "classification",
+                    "numpts",
+                    "rms",
+                    "peak_iso",
+                ],
+            )
+            writer.writeheader()
+            writer.writerow(
+                {
+                    "plot_file": os.path.basename(plot_path),
+                    "lc_file": lcfile,
+                    "sector": args.sector,
+                    "cam": cam,
+                    "ccd": ccd,
+                    "orbit": detorbit_hint or args.orbit or "",
+                    "rms_date": candidate_day or "",
+                    "ra": ra,
+                    "dec": dec,
+                    "l": src_gal.l.deg,
+                    "b": src_gal.b.deg,
+                    "fcol": fcol,
+                    "frow": frow,
+                    "classification": prefix,
+                    "numpts": numpts,
+                    "rms": rms,
+                    "peak_iso": trigcand,
+                }
+            )
+>>>>>>> origin/codex/raw-lc-daily-rms
         plt.close()
 
     except Exception:
@@ -679,11 +822,27 @@ def plot(lcfile):
 if __name__ == "__main__":
     import glob
 
+<<<<<<< HEAD
+=======
+    allowed_days = orbit_rms_days()
+>>>>>>> origin/codex/raw-lc-daily-rms
     lcfiles = sorted(
         f
         for f in glob.glob(f"{args.photfile.replace('phot.data', '')}/lc/lc_outcatrms_*.txt")
         if "_cleaned" not in f and not f.endswith(".tmp")
     )
+<<<<<<< HEAD
+=======
+    allowed_names = photdata_lc_basenames()
+    before_photdata_count = len(lcfiles)
+    lcfiles = [f for f in lcfiles if os.path.basename(f) in allowed_names]
+    if len(lcfiles) != before_photdata_count:
+        print(f"phot.data filter: plotting {len(lcfiles)} of {before_photdata_count} light curves")
+    if allowed_days is not None:
+        before_count = len(lcfiles)
+        lcfiles = [f for f in lcfiles if parse_candidate_day(f) in allowed_days]
+        print(f"Orbit filter {args.orbit}: plotting {len(lcfiles)} of {before_count} light curves")
+>>>>>>> origin/codex/raw-lc-daily-rms
     if args.singleproc:
         for lc in tqdm(lcfiles):
             print(lc)

@@ -24,7 +24,7 @@
 # Notes:
 #   - Must be run from the phot_scripts directory (where sector*/cam*_ccd* live).
 #   - DATA_DIR, ISIS_DIR, and PIPELINE_DIR must be set in your environment.
-#   - Logs go to /lustre/research/mfausnau/logs/ (must exist).
+#   - Logs go to /lustre/work/nimcclur/TESS/photometry/logs/ (must exist).
 
 set -eo pipefail
 
@@ -50,7 +50,7 @@ orbits=("$@")
 sectoruse=$(printf "s%04d" "$sector")
 dhome=$(pwd)
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-logdir="${LOG_DIR:-/lustre/research/mfausnau/logs}"
+logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
 
 # ---- Sanity checks -----------------------------------------------------------
 if [[ -z "${DATA_DIR:-}" ]]; then

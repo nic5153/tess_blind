@@ -10,11 +10,83 @@ from pathlib import Path
 import numpy as np
 
 try:
+<<<<<<< HEAD
+=======
+    from astropy.coordinates import SkyCoord
+    import astropy.units as astrou
+except ImportError:
+    SkyCoord = None
+    astrou = None
+
+try:
+>>>>>>> origin/codex/raw-lc-daily-rms
     from tess_stars2px import tess_stars2px_reverse_function_entry
 except ImportError:
     tess_stars2px_reverse_function_entry = None
 
 
+<<<<<<< HEAD
+=======
+BASE_FIELDNAMES = [
+    "sector",
+    "cam_ccd",
+    "orbit",
+    "rms_date",
+    "ra",
+    "dec",
+    "l",
+    "b",
+    "suspected source type",
+    "notes",
+    "plot_file",
+    "lc_file",
+    "fcol",
+    "frow",
+]
+
+CATALOG_FIELDNAMES = [
+    "catalog_status",
+    "catalog_matches",
+    "color_summary",
+    "gaia_source_id",
+    "gaia_dist_arcsec",
+    "gaia_parallax",
+    "gaia_g_mag",
+    "gaia_bp_mag",
+    "gaia_rp_mag",
+    "gaia_bp_rp",
+    "panstarrs_dist_arcsec",
+    "panstarrs_g_mag",
+    "panstarrs_r_mag",
+    "panstarrs_i_mag",
+    "panstarrs_z_mag",
+    "panstarrs_y_mag",
+    "panstarrs_g_r",
+    "panstarrs_r_i",
+    "des_dist_arcsec",
+    "des_g_mag",
+    "des_r_mag",
+    "des_i_mag",
+    "des_z_mag",
+    "des_y_mag",
+    "des_g_r",
+    "des_r_i",
+    "decaps_match_count",
+    "decaps_dist_arcsec",
+    "decaps_g_mag",
+    "decaps_r_mag",
+    "decaps_i_mag",
+    "decaps_z_mag",
+    "decaps_y_mag",
+    "decaps_g_r",
+    "decaps_r_i",
+]
+
+EDITABLE_FIELDNAMES = ["suspected source type", "notes"]
+RECOVERABLE_FIELDNAMES = ["ra", "dec", "l", "b", "lc_file", "fcol", "frow"]
+
+
+>>>>>>> origin/codex/raw-lc-daily-rms
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Export sector*/multiple plot candidates to a CSV for source follow-up."
@@ -35,6 +107,17 @@ def parse_args():
         help="Output HTML review page. Default: multiple_candidates.html",
     )
     parser.add_argument(
+<<<<<<< HEAD
+=======
+        "--enriched-csv",
+        default="multiple_candidates_enriched.csv",
+        help=(
+            "Optional catalog-enriched CSV to merge into the CSV/HTML output "
+            "when it exists. Default: multiple_candidates_enriched.csv"
+        ),
+    )
+    parser.add_argument(
+>>>>>>> origin/codex/raw-lc-daily-rms
         "--plot-root",
         action="append",
         default=[],
@@ -97,6 +180,7 @@ def source_lc_candidates_from_plot(plot_path, cam, ccd):
 def load_phot_data(photfile):
     if not os.path.exists(photfile) or os.path.getsize(photfile) == 0:
         return None
+<<<<<<< HEAD
     data = np.loadtxt(
         photfile,
         dtype=[
@@ -110,6 +194,48 @@ def load_phot_data(photfile):
     )
     if data.size == 1:
         data = data[np.newaxis]
+=======
+    dtype = [
+        ("fcol", "f8"),
+        ("frow", "f8"),
+        ("icol", "i8"),
+        ("irow", "i8"),
+        ("fname", "<U256"),
+        ("flag", "i4"),
+    ]
+    rows = []
+    skipped = 0
+    with open(photfile, "r") as f:
+        for lineno, line in enumerate(f, start=1):
+            parts = line.split()
+            if not parts:
+                continue
+            if len(parts) < 6:
+                skipped += 1
+                if skipped <= 5:
+                    print(f"WARNING: skipping malformed {photfile}:{lineno}; expected 6 columns, found {len(parts)}")
+                continue
+            try:
+                rows.append(
+                    (
+                        float(parts[0]),
+                        float(parts[1]),
+                        int(float(parts[2])),
+                        int(float(parts[3])),
+                        parts[4],
+                        int(float(parts[5])),
+                    )
+                )
+            except ValueError:
+                skipped += 1
+                if skipped <= 5:
+                    print(f"WARNING: skipping malformed numeric values in {photfile}:{lineno}")
+    if skipped > 5:
+        print(f"WARNING: skipped {skipped} malformed rows in {photfile}")
+    if not rows:
+        return None
+    data = np.array(rows, dtype=dtype)
+>>>>>>> origin/codex/raw-lc-daily-rms
     return data
 
 
@@ -150,16 +276,99 @@ def html_image_path(plot_file, html_file):
     return os.path.relpath(plot_file, html_dir).replace("\\", "/")
 
 
+<<<<<<< HEAD
+=======
+def load_plot_metadata(plot_file):
+    metadata_file = f"{plot_file}.metadata.csv"
+    if not os.path.exists(metadata_file) or os.path.getsize(metadata_file) == 0:
+        return None
+    with open(metadata_file, newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            return row
+    return None
+
+
+def radec_to_galactic(ra, dec):
+    if SkyCoord is None or astrou is None:
+        return "", ""
+    try:
+        if ra == "" or dec == "":
+            return "", ""
+        sc = SkyCoord(float(ra), float(dec), unit="deg")
+    except (TypeError, ValueError):
+        return "", ""
+    return float(sc.galactic.l.deg), float(sc.galactic.b.deg)
+
+
+def blank_catalog_fields():
+    return {field: "" for field in CATALOG_FIELDNAMES}
+
+
+def row_key(row):
+    plot_file = str(row.get("plot_file", "")).replace("\\", "/")
+    if plot_file:
+        return ("plot_file", plot_file)
+    return (
+        "coords",
+        str(row.get("sector", "")),
+        str(row.get("cam_ccd", "")),
+        str(row.get("orbit", "")),
+        str(row.get("rms_date", "")),
+        str(row.get("ra", "")),
+        str(row.get("dec", "")),
+    )
+
+
+def load_existing_metadata(paths):
+    metadata = {}
+    for path in paths:
+        if not path or not os.path.exists(path) or os.path.getsize(path) == 0:
+            continue
+        with open(path, newline="") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                metadata[row_key(row)] = row
+    return metadata
+
+
+def merge_existing_metadata(rows, paths):
+    metadata = load_existing_metadata(paths)
+    preserve_fields = EDITABLE_FIELDNAMES + CATALOG_FIELDNAMES
+    for row in rows:
+        previous = metadata.get(row_key(row))
+        if previous is None:
+            continue
+        for field in preserve_fields:
+            if field in previous and previous[field] != "":
+                row[field] = previous[field]
+        for field in RECOVERABLE_FIELDNAMES:
+            if row.get(field, "") == "" and previous.get(field, "") != "":
+                row[field] = previous[field]
+
+
+>>>>>>> origin/codex/raw-lc-daily-rms
 def main():
     args = parse_args()
     root = os.path.abspath(args.root)
     plot_files = collect_plot_files(root, args.plot_root)
+<<<<<<< HEAD
 
     rows = []
     scinfo_cache = {}
     phot_cache = {}
 
     for plot_file in plot_files:
+=======
+    existing_metadata = load_existing_metadata([args.outfile, args.enriched_csv])
+
+    rows = []
+    phot_cache = {}
+
+    for plot_file in plot_files:
+        plot_file_for_html = html_image_path(plot_file, args.html)
+        plot_metadata = load_plot_metadata(plot_file)
+>>>>>>> origin/codex/raw-lc-daily-rms
         sector = parse_sector(plot_file)
         cam, ccd = parse_camccd(os.path.basename(plot_file))
         if sector is None or cam is None or ccd is None:
@@ -167,6 +376,7 @@ def main():
             continue
 
         sector_dir = os.path.join(root, f"sector{sector}")
+<<<<<<< HEAD
         photfile = os.path.join(sector_dir, f"cam{cam}_ccd{ccd}", "phot.data")
         if photfile not in phot_cache:
             phot_cache[photfile] = load_phot_data(photfile)
@@ -225,6 +435,81 @@ def main():
         "fcol",
         "frow",
     ]
+=======
+        if plot_metadata is not None:
+            fcol = plot_metadata.get("fcol", "")
+            frow = plot_metadata.get("frow", "")
+            ra = plot_metadata.get("ra", "")
+            dec = plot_metadata.get("dec", "")
+            gal_l = plot_metadata.get("l", "")
+            gal_b = plot_metadata.get("b", "")
+            lc_file = plot_metadata.get("lc_file", "")
+        else:
+            photfile = os.path.join(sector_dir, f"cam{cam}_ccd{ccd}", "phot.data")
+            if photfile not in phot_cache:
+                phot_cache[photfile] = load_phot_data(photfile)
+
+            lc_candidates = source_lc_candidates_from_plot(plot_file, cam, ccd)
+            phot_row = find_phot_row(phot_cache[photfile], lc_candidates)
+            if phot_row is None:
+                previous = existing_metadata.get(("plot_file", plot_file_for_html))
+                if previous is None:
+                    print(f"WARNING: no phot.data match for {plot_file} as {lc_candidates[0]}")
+                    fcol = frow = ra = dec = ""
+                    gal_l = gal_b = ""
+                    lc_file = lc_candidates[0]
+                else:
+                    print(f"INFO: using previous CSV metadata for {plot_file}; no current phot.data match as {lc_candidates[0]}")
+                    fcol = previous.get("fcol", "")
+                    frow = previous.get("frow", "")
+                    ra = previous.get("ra", "")
+                    dec = previous.get("dec", "")
+                    gal_l = previous.get("l", "")
+                    gal_b = previous.get("b", "")
+                    lc_file = previous.get("lc_file", lc_candidates[0])
+            else:
+                fcol = float(phot_row["fcol"])
+                frow = float(phot_row["frow"])
+                lc_file = str(phot_row["fname"])
+                if tess_stars2px_reverse_function_entry is None:
+                    ra = dec = ""
+                else:
+                    # Match complicatedplot.py exactly so CSV/HTML coordinates
+                    # agree with the RA/Dec printed on the plot image when no
+                    # plot sidecar is available.
+                    ra, dec, _ = tess_stars2px_reverse_function_entry(sector, cam, ccd, fcol, frow)
+                gal_l, gal_b = radec_to_galactic(ra, dec)
+
+        rms_day = plot_metadata.get("rms_date", "") if plot_metadata is not None else parse_rms_day(plot_file)
+        if not rms_day:
+            rms_day = parse_rms_day(plot_file)
+        orbit = plot_metadata.get("orbit", "") if plot_metadata is not None else ""
+        if not orbit:
+            orbit = find_orbit(sector_dir, cam, ccd, rms_day)
+
+        row = {
+            "sector": sector,
+            "cam_ccd": f"cam{cam}_ccd{ccd}",
+            "orbit": orbit,
+            "rms_date": rms_day,
+            "ra": ra,
+            "dec": dec,
+            "l": gal_l,
+            "b": gal_b,
+            "suspected source type": "",
+            "notes": "",
+            "plot_file": plot_file_for_html,
+            "lc_file": lc_file,
+            "fcol": fcol,
+            "frow": frow,
+        }
+        row.update(blank_catalog_fields())
+        rows.append(row)
+
+    merge_existing_metadata(rows, [args.outfile, args.enriched_csv])
+
+    fieldnames = BASE_FIELDNAMES + CATALOG_FIELDNAMES
+>>>>>>> origin/codex/raw-lc-daily-rms
     with open(args.outfile, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
@@ -245,6 +530,33 @@ def html_escape(value):
     )
 
 
+<<<<<<< HEAD
+=======
+def html_catalog_summary(row):
+    parts = []
+    if row.get("catalog_matches"):
+        parts.append(row["catalog_matches"])
+    if row.get("catalog_status") and row["catalog_status"] != "ok":
+        parts.append(row["catalog_status"])
+    return "; ".join(parts)
+
+
+def html_color_summary(row):
+    if row.get("color_summary"):
+        return row["color_summary"]
+    parts = []
+    if row.get("gaia_bp_rp"):
+        parts.append(f"Gaia BP-RP={row['gaia_bp_rp']}")
+    if row.get("panstarrs_g_r"):
+        parts.append(f"PS1 g-r={row['panstarrs_g_r']}")
+    if row.get("des_g_r"):
+        parts.append(f"DES g-r={row['des_g_r']}")
+    if row.get("decaps_g_r"):
+        parts.append(f"DECaPS g-r={row['decaps_g_r']}")
+    return "; ".join(parts)
+
+
+>>>>>>> origin/codex/raw-lc-daily-rms
 def write_html(outfile, rows):
     rows = sorted(rows, key=lambda r: (int(r["sector"]), r["cam_ccd"], r["orbit"], r["rms_date"], r["plot_file"]))
     sectors = []
@@ -291,7 +603,11 @@ figcaption { font-size: 14px; }
             html += "<figure>\n"
             html += f"""<figcaption>
 <table>
+<<<<<<< HEAD
 <tr><th>sector</th><th>cam_ccd</th><th>orbit</th><th>rms_date</th><th>ra</th><th>dec</th><th>suspected source type</th><th>notes</th></tr>
+=======
+<tr><th>sector</th><th>cam_ccd</th><th>orbit</th><th>rms_date</th><th>ra</th><th>dec</th><th>l</th><th>b</th><th>suspected source type</th><th>notes</th></tr>
+>>>>>>> origin/codex/raw-lc-daily-rms
 <tr>
 <td>{html_escape(row["sector"])}</td>
 <td>{html_escape(row["cam_ccd"])}</td>
@@ -299,9 +615,27 @@ figcaption { font-size: 14px; }
 <td>{html_escape(row["rms_date"])}</td>
 <td>{html_escape(row["ra"])}</td>
 <td>{html_escape(row["dec"])}</td>
+<<<<<<< HEAD
 <td>{html_escape(row["suspected source type"])}</td>
 <td>{html_escape(row["notes"])}</td>
 </tr>
+=======
+<td>{html_escape(row.get("l", ""))}</td>
+<td>{html_escape(row.get("b", ""))}</td>
+<td>{html_escape(row["suspected source type"])}</td>
+<td>{html_escape(row["notes"])}</td>
+</tr>
+<tr><th colspan="2">catalog matches</th><th colspan="3">colors</th><th>Gaia source</th><th>Gaia dist</th><th>PS1 dist</th><th>DES dist</th><th>DECaPS dist</th></tr>
+<tr>
+<td colspan="2">{html_escape(html_catalog_summary(row))}</td>
+<td colspan="3">{html_escape(html_color_summary(row))}</td>
+<td>{html_escape(row.get("gaia_source_id", ""))}</td>
+<td>{html_escape(row.get("gaia_dist_arcsec", ""))}</td>
+<td>{html_escape(row.get("panstarrs_dist_arcsec", ""))}</td>
+<td>{html_escape(row.get("des_dist_arcsec", ""))}</td>
+<td>{html_escape(row.get("decaps_dist_arcsec", ""))}</td>
+</tr>
+>>>>>>> origin/codex/raw-lc-daily-rms
 </table>
 {html_escape(row["plot_file"])}
 </figcaption>\n"""

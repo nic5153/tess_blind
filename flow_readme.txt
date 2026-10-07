@@ -1,5 +1,18 @@
 FLOW FOR RMS SOURCE AND PHOTOMETRY
 
+HPCC CODE UPDATE SAFETY:
+
+The HPCC photometry directory also contains run products, logs, plot tarballs,
+and recovered review files. Avoid switching branches there unless you know the
+working tree is clean and disposable.
+
+Safer update path for HPCC:
+
+bash sync_code_from_codex.sh
+
+This fetches GitHub and restores only code/script files from
+origin/codex/raw-lc-daily-rms, leaving sector outputs and plot exports in place.
+
 PRE PIPELINE:
 
 First: run make_dir.sbatch to create directories

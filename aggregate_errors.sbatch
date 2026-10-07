@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name="agg_errors"
-#SBATCH --output=/lustre/research/mfausnau/logs/%x.o%A
-#SBATCH --error=/lustre/research/mfausnau/logs/%x.e%A
+#SBATCH --output=/lustre/work/nimcclur/TESS/photometry/logs/%x.o%A
+#SBATCH --error=/lustre/work/nimcclur/TESS/photometry/logs/%x.e%A
 #SBATCH --partition=nocona
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -10,7 +10,7 @@
 
 set -eo pipefail
 
-logdir="${LOG_DIR:-/lustre/research/mfausnau/logs}"
+logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
 dhome=$(pwd)
 
 # Arguments: <sector> <cam> <ccd> <lcdir> <do_phot_jobid1> [...] -- <copy_phot_jobid1> [...] -- <clean_phot_jobid1> [...]

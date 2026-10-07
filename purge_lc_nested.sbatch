@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name="purge_lc_nested"
-#SBATCH --output=/lustre/research/mfausnau/logs/%x.o%A_%a
-#SBATCH --error=/lustre/research/mfausnau/logs/%x.e%A_%a
+#SBATCH --output=/lustre/work/nimcclur/TESS/photometry/logs/%x.o%A_%a
+#SBATCH --error=/lustre/work/nimcclur/TESS/photometry/logs/%x.e%A_%a
 #SBATCH --partition=nocona
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -41,6 +41,22 @@ fi
 
 echo "Total slice directories: $nelements"
 
+clean_lc_matches() {
+    local dir=$1
+    local pattern=$2
+    if [[ ! -d "$dir" ]]; then
+        return 0
+    fi
+    if ! find "$dir" -mindepth 1 -maxdepth 1 -name "$pattern" -exec rm -rf -- {} +; then
+        echo "ERROR: could not fully remove $pattern entries from $dir" >&2
+        return 1
+    fi
+    if [[ -n "$(find "$dir" -mindepth 1 -maxdepth 1 -name "$pattern" -print -quit)" ]]; then
+        echo "ERROR: $pattern entries remain in $dir after cleanup" >&2
+        return 1
+    fi
+}
+
 for (( ii=1; ii<=nelements; ii++ )); do
     if [[ $(( ii % n_tasks )) -ne $SLURM_ARRAY_TASK_ID ]]; then
         continue
@@ -48,8 +64,8 @@ for (( ii=1; ii<=nelements; ii++ )); do
 
     slice_dir="${all_slices[$((ii-1))]}"
 
-    rm -rf "$slice_dir/$lcdir"/lc_o*
-    rm -rf "$slice_dir/bkg_phot/$lcdir"/lc_o*
+    clean_lc_matches "$slice_dir/$lcdir" "lc_o*"
+    clean_lc_matches "$slice_dir/bkg_phot/$lcdir" "lc_o*"
 done
 
 echo "Task $SLURM_ARRAY_TASK_ID done."
