@@ -16,8 +16,6 @@ coordfile=coords.txt
 indir=lc
 RUN_CLEANED=${RUN_CLEANED:-0}
 RUN_MATCHBKG=${RUN_MATCHBKG:-1}
-<<<<<<< HEAD
-=======
 ANALYSIS_N=${ANALYSIS_N:-${SLURM_CPUS_PER_TASK:-1}}
 
 if [[ -n "$orbit" && ! "$orbit" =~ ^o[0-9][ab]$ ]]
@@ -25,7 +23,6 @@ then
   echo "ERROR: orbit must look like o1a, o1b, o2a, o2b"
   exit 1
 fi
->>>>>>> origin/codex/raw-lc-daily-rms
 
 source /home/${USER}/setup_vars.sh
 
@@ -47,9 +44,6 @@ fi
 ## but complicatedplot.py also aligns by time so this step is not fatal.
 if [[ "$RUN_MATCHBKG" == "1" ]]
 then
-<<<<<<< HEAD
-  python /home/sarchast/tesstools/matchbkgtolc.py cam*_ccd*/lc/lc_outcatrms_* || echo "WARNING: matchbkgtolc.py failed; continuing with in-plot time matching."
-=======
   if [[ -n "$orbit" ]]
   then
     match_files=()
@@ -83,7 +77,6 @@ then
   else
     python /home/sarchast/tesstools/matchbkgtolc.py cam*_ccd*/lc/lc_outcatrms_* || echo "WARNING: matchbkgtolc.py failed; continuing with in-plot time matching."
   fi
->>>>>>> origin/codex/raw-lc-daily-rms
 fi
 
 for cam in {1..4}
@@ -99,18 +92,6 @@ do
       if [[ "$RUN_CLEANED" == "1" ]]
       then
         cd cam${cam}_ccd${ccd}
-<<<<<<< HEAD
-
-        fluxcal.py --photfile ./phot.data --infiles /lustre/research/mfausnau/data/tica/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits 
-        mv ref_gaussian_psf_flux.txt "$indir"/ref_gaussian_psf_flux.txt
-
-        python ../../clean_handmade_lc.py  $indir/lc_outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal
-
-        cd ..
-      fi
-
-      python ../complicatedplot.py --sector $sector --photfile ./cam${cam}_ccd${ccd}/phot.data --singleproc
-=======
 
         fluxcal.py --photfile ./phot.data --infiles /lustre/research/mfausnau/data/tica/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits 
         mv ref_gaussian_psf_flux.txt "$indir"/ref_gaussian_psf_flux.txt
@@ -138,7 +119,6 @@ do
         plot_args+=(--singleproc)
       fi
       python ../complicatedplot.py "${plot_args[@]}"
->>>>>>> origin/codex/raw-lc-daily-rms
     fi
   done
 done
@@ -146,8 +126,6 @@ done
 rm -rf single multiple flag
 mkdir -p single multiple flag
 
-<<<<<<< HEAD
-=======
 move_plot_and_metadata()
 {
   local plotfile=$1
@@ -164,16 +142,10 @@ move_plot_and_metadata()
   fi
 }
 
->>>>>>> origin/codex/raw-lc-daily-rms
 ## Legacy cleaned plot routing:
 ## mv cam*/plots/flag*cleaned*jpg flag/
 ## mv cam*/plots/single*outcatrms*jpg single/
 ## mv cam*/plots/outcatrms*jpg multiple/
-<<<<<<< HEAD
-mv cam*/plots/flag*outcatrms*jpg flag/ 2>/dev/null || true
-mv cam*/plots/single*outcatrms*jpg single/ 2>/dev/null || true
-mv cam*/plots/*outcatrms*jpg multiple/ 2>/dev/null || true
-=======
 if [[ -n "$orbit" ]]
 then
   for cam in {1..4}
@@ -220,7 +192,6 @@ else
     move_plot_and_metadata "$plotfile" multiple
   done
 fi
->>>>>>> origin/codex/raw-lc-daily-rms
 
 echo "Plot page generation skipped (no burst table)."
 echo "Plots remain in cam*/plots and the single/ multiple/ flag/ folders."

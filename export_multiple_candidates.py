@@ -10,8 +10,6 @@ from pathlib import Path
 import numpy as np
 
 try:
-<<<<<<< HEAD
-=======
     from astropy.coordinates import SkyCoord
     import astropy.units as astrou
 except ImportError:
@@ -19,14 +17,11 @@ except ImportError:
     astrou = None
 
 try:
->>>>>>> origin/codex/raw-lc-daily-rms
     from tess_stars2px import tess_stars2px_reverse_function_entry
 except ImportError:
     tess_stars2px_reverse_function_entry = None
 
 
-<<<<<<< HEAD
-=======
 BASE_FIELDNAMES = [
     "sector",
     "cam_ccd",
@@ -86,7 +81,6 @@ EDITABLE_FIELDNAMES = ["suspected source type", "notes"]
 RECOVERABLE_FIELDNAMES = ["ra", "dec", "l", "b", "lc_file", "fcol", "frow"]
 
 
->>>>>>> origin/codex/raw-lc-daily-rms
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Export sector*/multiple plot candidates to a CSV for source follow-up."
@@ -107,8 +101,6 @@ def parse_args():
         help="Output HTML review page. Default: multiple_candidates.html",
     )
     parser.add_argument(
-<<<<<<< HEAD
-=======
         "--enriched-csv",
         default="multiple_candidates_enriched.csv",
         help=(
@@ -117,7 +109,6 @@ def parse_args():
         ),
     )
     parser.add_argument(
->>>>>>> origin/codex/raw-lc-daily-rms
         "--plot-root",
         action="append",
         default=[],
@@ -180,21 +171,6 @@ def source_lc_candidates_from_plot(plot_path, cam, ccd):
 def load_phot_data(photfile):
     if not os.path.exists(photfile) or os.path.getsize(photfile) == 0:
         return None
-<<<<<<< HEAD
-    data = np.loadtxt(
-        photfile,
-        dtype=[
-            ("fcol", "f8"),
-            ("frow", "f8"),
-            ("icol", "i8"),
-            ("irow", "i8"),
-            ("fname", "<U256"),
-            ("flag", "i4"),
-        ],
-    )
-    if data.size == 1:
-        data = data[np.newaxis]
-=======
     dtype = [
         ("fcol", "f8"),
         ("frow", "f8"),
@@ -235,7 +211,6 @@ def load_phot_data(photfile):
     if not rows:
         return None
     data = np.array(rows, dtype=dtype)
->>>>>>> origin/codex/raw-lc-daily-rms
     return data
 
 
@@ -276,8 +251,6 @@ def html_image_path(plot_file, html_file):
     return os.path.relpath(plot_file, html_dir).replace("\\", "/")
 
 
-<<<<<<< HEAD
-=======
 def load_plot_metadata(plot_file):
     metadata_file = f"{plot_file}.metadata.csv"
     if not os.path.exists(metadata_file) or os.path.getsize(metadata_file) == 0:
@@ -347,19 +320,10 @@ def merge_existing_metadata(rows, paths):
                 row[field] = previous[field]
 
 
->>>>>>> origin/codex/raw-lc-daily-rms
 def main():
     args = parse_args()
     root = os.path.abspath(args.root)
     plot_files = collect_plot_files(root, args.plot_root)
-<<<<<<< HEAD
-
-    rows = []
-    scinfo_cache = {}
-    phot_cache = {}
-
-    for plot_file in plot_files:
-=======
     existing_metadata = load_existing_metadata([args.outfile, args.enriched_csv])
 
     rows = []
@@ -368,7 +332,6 @@ def main():
     for plot_file in plot_files:
         plot_file_for_html = html_image_path(plot_file, args.html)
         plot_metadata = load_plot_metadata(plot_file)
->>>>>>> origin/codex/raw-lc-daily-rms
         sector = parse_sector(plot_file)
         cam, ccd = parse_camccd(os.path.basename(plot_file))
         if sector is None or cam is None or ccd is None:
@@ -376,66 +339,6 @@ def main():
             continue
 
         sector_dir = os.path.join(root, f"sector{sector}")
-<<<<<<< HEAD
-        photfile = os.path.join(sector_dir, f"cam{cam}_ccd{ccd}", "phot.data")
-        if photfile not in phot_cache:
-            phot_cache[photfile] = load_phot_data(photfile)
-
-        lc_candidates = source_lc_candidates_from_plot(plot_file, cam, ccd)
-        phot_row = find_phot_row(phot_cache[photfile], lc_candidates)
-        if phot_row is None:
-            print(f"WARNING: no phot.data match for {plot_file} as {lc_candidates[0]}")
-            fcol = frow = ra = dec = ""
-            lc_file = lc_candidates[0]
-        else:
-            fcol = float(phot_row["fcol"])
-            frow = float(phot_row["frow"])
-            lc_file = str(phot_row["fname"])
-            if tess_stars2px_reverse_function_entry is None:
-                ra = dec = ""
-            else:
-                key = (sector, cam, ccd)
-                scinfo = scinfo_cache.get(key)
-                ra, dec, scinfo = tess_stars2px_reverse_function_entry(
-                    sector, cam, ccd, fcol, frow, scInfo=scinfo
-                )
-                scinfo_cache[key] = scinfo
-
-        rms_day = parse_rms_day(plot_file)
-        orbit = find_orbit(sector_dir, cam, ccd, rms_day)
-
-        rows.append(
-            {
-                "sector": sector,
-                "cam_ccd": f"cam{cam}_ccd{ccd}",
-                "orbit": orbit,
-                "rms_date": rms_day,
-                "ra": ra,
-                "dec": dec,
-                "suspected source type": "",
-                "notes": "",
-                "plot_file": html_image_path(plot_file, args.html),
-                "lc_file": lc_file,
-                "fcol": fcol,
-                "frow": frow,
-            }
-        )
-
-    fieldnames = [
-        "sector",
-        "cam_ccd",
-        "orbit",
-        "rms_date",
-        "ra",
-        "dec",
-        "suspected source type",
-        "notes",
-        "plot_file",
-        "lc_file",
-        "fcol",
-        "frow",
-    ]
-=======
         if plot_metadata is not None:
             fcol = plot_metadata.get("fcol", "")
             frow = plot_metadata.get("frow", "")
@@ -509,7 +412,6 @@ def main():
     merge_existing_metadata(rows, [args.outfile, args.enriched_csv])
 
     fieldnames = BASE_FIELDNAMES + CATALOG_FIELDNAMES
->>>>>>> origin/codex/raw-lc-daily-rms
     with open(args.outfile, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
@@ -530,8 +432,6 @@ def html_escape(value):
     )
 
 
-<<<<<<< HEAD
-=======
 def html_catalog_summary(row):
     parts = []
     if row.get("catalog_matches"):
@@ -556,7 +456,6 @@ def html_color_summary(row):
     return "; ".join(parts)
 
 
->>>>>>> origin/codex/raw-lc-daily-rms
 def write_html(outfile, rows):
     rows = sorted(rows, key=lambda r: (int(r["sector"]), r["cam_ccd"], r["orbit"], r["rms_date"], r["plot_file"]))
     sectors = []
@@ -603,11 +502,7 @@ figcaption { font-size: 14px; }
             html += "<figure>\n"
             html += f"""<figcaption>
 <table>
-<<<<<<< HEAD
-<tr><th>sector</th><th>cam_ccd</th><th>orbit</th><th>rms_date</th><th>ra</th><th>dec</th><th>suspected source type</th><th>notes</th></tr>
-=======
 <tr><th>sector</th><th>cam_ccd</th><th>orbit</th><th>rms_date</th><th>ra</th><th>dec</th><th>l</th><th>b</th><th>suspected source type</th><th>notes</th></tr>
->>>>>>> origin/codex/raw-lc-daily-rms
 <tr>
 <td>{html_escape(row["sector"])}</td>
 <td>{html_escape(row["cam_ccd"])}</td>
@@ -615,11 +510,6 @@ figcaption { font-size: 14px; }
 <td>{html_escape(row["rms_date"])}</td>
 <td>{html_escape(row["ra"])}</td>
 <td>{html_escape(row["dec"])}</td>
-<<<<<<< HEAD
-<td>{html_escape(row["suspected source type"])}</td>
-<td>{html_escape(row["notes"])}</td>
-</tr>
-=======
 <td>{html_escape(row.get("l", ""))}</td>
 <td>{html_escape(row.get("b", ""))}</td>
 <td>{html_escape(row["suspected source type"])}</td>
@@ -635,7 +525,6 @@ figcaption { font-size: 14px; }
 <td>{html_escape(row.get("des_dist_arcsec", ""))}</td>
 <td>{html_escape(row.get("decaps_dist_arcsec", ""))}</td>
 </tr>
->>>>>>> origin/codex/raw-lc-daily-rms
 </table>
 {html_escape(row["plot_file"])}
 </figcaption>\n"""

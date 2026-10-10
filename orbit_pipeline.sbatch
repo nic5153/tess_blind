@@ -7,11 +7,7 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --ntasks=1
-<<<<<<< HEAD
-#SBATCH --time=06:00:00
-=======
 #SBATCH --time=08:00:00
->>>>>>> origin/codex/raw-lc-daily-rms
 
 set -eo pipefail
 
@@ -42,8 +38,6 @@ mkdir -p "$logdir"
 
 sectoruse=$(printf "s%04d" "$sector")
 dtarget_base="${DATA_DIR}/${sectoruse}"
-<<<<<<< HEAD
-=======
 DO_PHOT_ARRAY=${DO_PHOT_ARRAY:-0-11%12}
 COPY_PHOT_ARRAY=${COPY_PHOT_ARRAY:-0-5%6}
 ANALYSIS_CPUS=${ANALYSIS_CPUS:-4}
@@ -54,7 +48,6 @@ CATALOG_LIMIT=${CATALOG_LIMIT:-}
 MULTIPLE_CSV=${MULTIPLE_CSV:-multiple_candidates.csv}
 MULTIPLE_HTML=${MULTIPLE_HTML:-multiple_candidates.html}
 MULTIPLE_ENRICHED_CSV=${MULTIPLE_ENRICHED_CSV:-multiple_candidates_enriched.csv}
->>>>>>> origin/codex/raw-lc-daily-rms
 
 wait_for_jobs() {
     local label=$1
@@ -70,11 +63,7 @@ wait_for_jobs() {
     while true; do
         local running=0
         for job in "${jobs[@]}"; do
-<<<<<<< HEAD
-            if squeue -h -j "$job" | grep -q .; then
-=======
             if squeue -h -j "$job" 2>/dev/null | grep -q .; then
->>>>>>> origin/codex/raw-lc-daily-rms
                 running=1
                 break
             fi
@@ -85,8 +74,6 @@ wait_for_jobs() {
     echo "Finished waiting for $label"
 }
 
-<<<<<<< HEAD
-=======
 clean_lc_contents() {
     local dir=$1
     if [[ ! -d "$dir" ]]; then
@@ -102,7 +89,6 @@ clean_lc_contents() {
     fi
 }
 
->>>>>>> origin/codex/raw-lc-daily-rms
 echo "======================================================"
 echo " Incremental TESS blind orbit pipeline"
 echo " Sector : $sectoruse"
@@ -112,14 +98,11 @@ echo " CWD    : $(pwd)"
 echo " Data   : $dtarget_base"
 echo " Scripts: $script_dir"
 echo " Logs   : $logdir"
-<<<<<<< HEAD
-=======
 echo " do_phot array : $DO_PHOT_ARRAY"
 echo " copy_phot array: $COPY_PHOT_ARRAY"
 echo " Analysis CPUs : $ANALYSIS_CPUS"
 echo " Multiple export: $RUN_MULTIPLE_EXPORT"
 echo " Catalog enrich : $RUN_CATALOG_ENRICHMENT"
->>>>>>> origin/codex/raw-lc-daily-rms
 echo "======================================================"
 
 if [[ ! -d "$dtarget_base" ]]; then
@@ -161,20 +144,12 @@ done
 wait_for_jobs "daily RMS generation" "${rms_jobs[@]}"
 
 echo ""
-<<<<<<< HEAD
-echo "[2/5] Refreshing cumulative source lists from all available RMS catalogs..."
-=======
 echo "[2/5] Refreshing source lists from $orbit RMS catalogs..."
->>>>>>> origin/codex/raw-lc-daily-rms
 source_jobs=()
 for camccd in "${available_camccds[@]}"; do
     cam=${camccd%%:*}
     ccd=${camccd##*:}
-<<<<<<< HEAD
-    source_job=$(sbatch --parsable --array=0-0 "$script_dir/source.sbatch" "$sector" "$cam" "$ccd")
-=======
     source_job=$(sbatch --parsable --array=0-0 "$script_dir/source.sbatch" "$sector" "$cam" "$ccd" "$orbit")
->>>>>>> origin/codex/raw-lc-daily-rms
     echo "  source cam${cam}_ccd${ccd}: $source_job"
     source_jobs+=("$source_job")
 done
@@ -201,23 +176,14 @@ for camccd in "${available_camccds[@]}"; do
     # Clear only this orbit's per-slice temporary LC products before rerunning it.
     for slice_dir in "$orbit_dir"/slice*; do
         [[ -d "$slice_dir" ]] || continue
-<<<<<<< HEAD
-        rm -rf "$slice_dir/$lcdir" "$slice_dir/bkg_phot/$lcdir"
-=======
         clean_lc_contents "$slice_dir/$lcdir"
         clean_lc_contents "$slice_dir/bkg_phot/$lcdir"
->>>>>>> origin/codex/raw-lc-daily-rms
     done
 
     do_job=$(sbatch \
         --parsable \
-<<<<<<< HEAD
-        --array=0-5%6 \
-        --time=1-00:00:00 \
-=======
         --array="$DO_PHOT_ARRAY" \
         --time=0-00:30:00 \
->>>>>>> origin/codex/raw-lc-daily-rms
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
         "$script_dir/do_phot_em2.sbatch" \
@@ -226,13 +192,8 @@ for camccd in "${available_camccds[@]}"; do
 
     copy_job=$(sbatch \
         --parsable \
-<<<<<<< HEAD
-        --array=0-5%6 \
-        --time=1-00:00:00 \
-=======
         --array="$COPY_PHOT_ARRAY" \
         --time=0-01:30:00 \
->>>>>>> origin/codex/raw-lc-daily-rms
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
         --dependency=afterany:"$do_job" \
@@ -270,29 +231,18 @@ for camccd in "${available_camccds[@]}"; do
     orbit_dir="$dtarget_base/cam${cam}-ccd${ccd}/$orbit"
     for slice_dir in "$orbit_dir"/slice*; do
         [[ -d "$slice_dir" ]] || continue
-<<<<<<< HEAD
-        rm -rf "$slice_dir/$lcdir" "$slice_dir/bkg_phot/$lcdir"
-=======
         clean_lc_contents "$slice_dir/$lcdir"
         clean_lc_contents "$slice_dir/bkg_phot/$lcdir"
->>>>>>> origin/codex/raw-lc-daily-rms
     done
 done
 
 echo ""
-<<<<<<< HEAD
-echo "[5/5] Running cumulative analysis/plot generation..."
-analysis_job=$(sbatch --parsable "$script_dir/analysis.sbatch" "$sector")
-=======
 echo "[5/6] Running $orbit analysis/plot generation..."
 analysis_job=$(sbatch --parsable --cpus-per-task="$ANALYSIS_CPUS" "$script_dir/analysis.sbatch" "$sector" "$orbit")
->>>>>>> origin/codex/raw-lc-daily-rms
 echo "  analysis job ID: $analysis_job"
 wait_for_jobs "analysis" "$analysis_job"
 
 echo ""
-<<<<<<< HEAD
-=======
 echo "[6/6] Exporting multiple-candidate CSV/HTML products..."
 if [[ "$RUN_MULTIPLE_EXPORT" == "1" ]]; then
     if python "$script_dir/export_multiple_candidates.py" \
@@ -329,15 +279,11 @@ else
 fi
 
 echo ""
->>>>>>> origin/codex/raw-lc-daily-rms
 echo "======================================================"
 echo " Incremental orbit pipeline finished."
 echo " Sector: $sectoruse"
 echo " Orbit : $orbit"
 echo " Analysis job: $analysis_job"
-<<<<<<< HEAD
-=======
 echo " Multiple CSV: $MULTIPLE_CSV"
 echo " Multiple HTML: $MULTIPLE_HTML"
->>>>>>> origin/codex/raw-lc-daily-rms
 echo "======================================================"

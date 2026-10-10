@@ -3,41 +3,25 @@ set -euo pipefail
 
 remote_user="${HPCC_USER:-nimcclur}"
 remote_host="${HPCC_HOST:-login.hpcc.ttu.edu}"
-<<<<<<< HEAD
-remote_root="${HPCC_PHOTOMETRY_ROOT:-/work/TESS/photometry}"
-outdir="."
-csv_name="multiple_candidates.csv"
-=======
 remote_root="${HPCC_PHOTOMETRY_ROOT:-/lustre/work/nimcclur/TESS/photometry}"
 outdir="."
 csv_name="multiple_candidates.csv"
 enriched_name="multiple_candidates_enriched.csv"
->>>>>>> origin/codex/raw-lc-daily-rms
 html_name="multiple_candidates.html"
 
 usage() {
   cat <<EOF
 Usage: bash download_multiple_candidates.sh [options]
 
-<<<<<<< HEAD
-Downloads the multiple-candidate CSV and HTML generated on HPCC.
-=======
 Downloads the multiple-candidate CSV, enriched CSV if present, and HTML generated on HPCC.
->>>>>>> origin/codex/raw-lc-daily-rms
 
 Options:
   --user USER          HPCC username. Default: HPCC_USER or nimcclur
   --host HOST          HPCC login host. Default: HPCC_HOST or login.hpcc.ttu.edu
-<<<<<<< HEAD
-  --remote-root PATH   Remote photometry root. Default: HPCC_PHOTOMETRY_ROOT or /work/TESS/photometry
-  --outdir PATH        Local output directory. Default: current directory
-  --csv NAME           CSV filename. Default: multiple_candidates.csv
-=======
   --remote-root PATH   Remote photometry root. Default: HPCC_PHOTOMETRY_ROOT or /lustre/work/nimcclur/TESS/photometry
   --outdir PATH        Local output directory. Default: current directory
   --csv NAME           CSV filename. Default: multiple_candidates.csv
   --enriched NAME      Enriched CSV filename. Default: multiple_candidates_enriched.csv
->>>>>>> origin/codex/raw-lc-daily-rms
   --html NAME          HTML filename. Default: multiple_candidates.html
   -h, --help           Show this help message
 EOF
@@ -65,13 +49,10 @@ while [[ $# -gt 0 ]]; do
       csv_name="$2"
       shift 2
       ;;
-<<<<<<< HEAD
-=======
     --enriched)
       enriched_name="$2"
       shift 2
       ;;
->>>>>>> origin/codex/raw-lc-daily-rms
     --html)
       html_name="$2"
       shift 2
@@ -92,10 +73,7 @@ mkdir -p "$outdir"
 remote="${remote_user}@${remote_host}"
 remote_root="${remote_root%/}"
 remote_csv="${remote_root}/${csv_name}"
-<<<<<<< HEAD
-=======
 remote_enriched="${remote_root}/${enriched_name}"
->>>>>>> origin/codex/raw-lc-daily-rms
 remote_html="${remote_root}/${html_name}"
 
 echo "Downloading from ${remote}:${remote_root}"
@@ -118,23 +96,17 @@ EOF
 fi
 
 scp "${remote}:${remote_csv}" "${outdir}/${csv_name}"
-<<<<<<< HEAD
-=======
 if ssh "$remote" "test -f '$remote_enriched'"; then
   scp "${remote}:${remote_enriched}" "${outdir}/${enriched_name}"
 else
   echo "Optional enriched CSV not found yet: ${remote}:${remote_enriched}" >&2
 fi
->>>>>>> origin/codex/raw-lc-daily-rms
 scp "${remote}:${remote_html}" "${outdir}/${html_name}"
 
 echo
 echo "Downloaded:"
 echo "  ${outdir}/${csv_name}"
-<<<<<<< HEAD
-=======
 if [[ -f "${outdir}/${enriched_name}" ]]; then
   echo "  ${outdir}/${enriched_name}"
 fi
->>>>>>> origin/codex/raw-lc-daily-rms
 echo "  ${outdir}/${html_name}"
