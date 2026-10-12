@@ -8,6 +8,8 @@
 #   save_orbit_results.sh -> sector<N>/results/<orbit>/
 #
 # Usage (local):  bash reanalyze_orbit.sh <sector> <orbit> [orbit ...]
+# Usage (HPCC):   source setup_vars_hpcc.sh   (or ~/setup_vars.sh with SETUP_VARS set)
+#                 sbatch -p nocona -c 8 -t 1-00:00:00 --wrap "bash $TESS_CODE_DIR/reanalyze_orbit.sh 101 o1a o1b"
 # If the orbit's difference images were purged, plots lack the detection-image
 # cutout and Gaussian-fit panels; everything else is unchanged.
 
@@ -21,7 +23,8 @@ sector=$1
 shift
 
 code_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$code_dir/setup_vars_local.sh"
+source "${SETUP_VARS:-$code_dir/setup_vars_local.sh}"
+code_dir=${TESS_CODE_DIR:-$code_dir}
 cd "$WORK_DIR"
 sdir="sector${sector}"
 export ANALYSIS_N=${ANALYSIS_N:-$NPROC}

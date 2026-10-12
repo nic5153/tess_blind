@@ -26,14 +26,16 @@ if [[ "$orbit" != "all" && ! "$orbit" =~ ^o[0-9][ab]$ ]]; then
     exit 1
 fi
 
-if [[ -n "${SLURM_SUBMIT_DIR:-}" && -f "${SLURM_SUBMIT_DIR}/do_photutils_extract.py" ]]; then
+if [[ -n "${TESS_CODE_DIR:-}" && -f "${TESS_CODE_DIR}/do_photutils_extract.py" ]]; then
+    script_dir="$TESS_CODE_DIR"
+elif [[ -n "${SLURM_SUBMIT_DIR:-}" && -f "${SLURM_SUBMIT_DIR}/do_photutils_extract.py" ]]; then
     script_dir="$SLURM_SUBMIT_DIR"
 else
     script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 
 source "${SETUP_VARS:-/home/${USER}/setup_vars.sh}"
-logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
+logdir="${LOG_DIR:-/lustre/work/nmcclur/TESS/photometry/logs}"
 mkdir -p "$logdir"
 
 sectoruse=$(printf "s%04d" "$sector")
@@ -331,6 +333,15 @@ if [[ "${PURGE_IMAGES:-0}" == "1" ]]; then
         cam=${camccd%%:*}
         ccd=${camccd##*:}
         orbit_dir="$dtarget_base/cam${cam}-ccd${ccd}/$orbit"
+        manifest="$dtarget_base/cam${cam}-ccd${ccd}/manifest.tsv"
+        if [[ -f "$manifest" ]]; then
+            expected=$(awk -v o="$orbit" 'NR>1 && $4==o {print $5}' "$manifest" | sort -u | wc -l)
+            finished=$(find "$orbit_dir" -mindepth 2 -maxdepth 2 -name .done | wc -l)
+            if (( finished < expected )); then
+                echo "  cam${cam}_ccd${ccd}/$orbit: only $finished of $expected slices processed; not purging"
+                continue
+            fi
+        fi
         before=$(df -Pk "$orbit_dir" | awk 'NR==2 {print $4}')
         rm -f "$orbit_dir"/slice*/images.tar
         touch "$orbit_dir/.purged"

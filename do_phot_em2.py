@@ -115,7 +115,8 @@ os.chdir(dhome)
 with open(f"phot_s{sector:04}_cam{cam}-ccd{ccd}.sbatch","w") as f:
     f.write(phot2BATCHfile)
 
-cmdlist = [f"""python /lustre/research/mfausnau/software/tess_image_sub/phot_scripts/concat_lc.py --sector {sector} --cam {cam} --ccd {ccd} --lcdir lcGRB --override --delete"""]
+code_dir = os.environ.get("TESS_CODE_DIR", f"/home/{username}/work/TESS/photometry")
+cmdlist = [f"""python {code_dir}/concat_lc.py --sector {sector} --cam {cam} --ccd {ccd} --lcdir lcGRB --override --delete"""]
 copycleanBATCHfile = sbatchBONES(cmdlist,"copyclean")
 with open(f"copyclean_s{sector:04}_cam{cam}-ccd{ccd}.sbatch","w") as f:
     f.write(copycleanBATCHfile)                    

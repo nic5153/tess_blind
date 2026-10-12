@@ -9,7 +9,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16G
 
-logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
+logdir="${LOG_DIR:-/lustre/work/nmcclur/TESS/photometry/logs}"
 mkdir -p "$logdir"
 
 SECTOR=$1
@@ -17,7 +17,7 @@ CAM=$2
 CCD=$3
 ORBIT=${4:-}
 
-code_dir=${TESS_CODE_DIR:-/home/nimcclur/work/TESS/photometry}
+code_dir=${TESS_CODE_DIR:-/home/nmcclur/work/TESS/photometry}
 
 if [[ -n "$ORBIT" ]]; then
   python "$code_dir/make_rms.py" --sector $SECTOR --cam $CAM --ccd $CCD --orbit "$ORBIT"

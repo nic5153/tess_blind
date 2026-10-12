@@ -63,7 +63,8 @@ print(f"Reference: {len(candidates)} candidates from {args.orbit}, keeping {nfra
 # Pass 1: quality flag and background level of every candidate.
 levels = []
 for name in candidates:
-    path = tc.fetch_frame(args.sector, args.cam, args.ccd, name, cache)
+    # take=False: a prefetched frame stays in the pool for its slice job too
+    path = tc.fetch_frame(args.sector, args.cam, args.ccd, name, cache, take=False)
     data, hdr, _, _ = tc.load_frame(path, q)
     if int(hdr.get("QUAL_BIT", 0)) != 0:
         print(f"  skip {name}: QUAL_BIT={hdr.get('QUAL_BIT')}")

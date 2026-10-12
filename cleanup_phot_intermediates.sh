@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name=cleanup_phot_intermediates
-#SBATCH --output=/lustre/work/nimcclur/TESS/photometry/logs/%x.o%j
-#SBATCH --error=/lustre/work/nimcclur/TESS/photometry/logs/%x.e%j
+#SBATCH --output=/lustre/work/nmcclur/TESS/photometry/logs/%x.o%j
+#SBATCH --error=/lustre/work/nmcclur/TESS/photometry/logs/%x.e%j
 #SBATCH --partition=nocona
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -32,12 +32,12 @@ Examples:
   bash cleanup_phot_intermediates.sh 102 1 4 o2a --delete
 
   # Use an explicit data root instead of DATA_DIR
-  bash cleanup_phot_intermediates.sh 102 --data-dir /lustre/research/mfausnau/data/tica
+  bash cleanup_phot_intermediates.sh 102 --data-dir /lustre/scratch/nmcclur/TESS/tica
 
 Options:
   --delete       Actually remove files. Without this, the script only prints.
   --all-owners   Include files not owned by the current user.
-  --data-dir DIR Data root. Defaults to DATA_DIR, then /lustre/research/mfausnau/data/tica.
+  --data-dir DIR Data root. Defaults to DATA_DIR, then /lustre/scratch/nmcclur/TESS/tica.
   --jobs N       Parallel workers for stat/delete. Defaults to SLURM_CPUS_PER_TASK, then 4.
   -h, --help     Show this help.
 
@@ -49,7 +49,7 @@ EOF
 
 delete=0
 owner_only=1
-data_dir="${DATA_DIR:-/lustre/research/mfausnau/data/tica}"
+data_dir="${DATA_DIR:-/lustre/scratch/nmcclur/TESS/tica}"
 jobs="${SLURM_CPUS_PER_TASK:-4}"
 positional=()
 

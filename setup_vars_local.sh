@@ -2,8 +2,8 @@
 # Local (WSL) replacement for ~/setup_vars.sh on HPCC. Source it before running
 # anything:   source setup_vars_local.sh
 #
-#   DATA_DIR      role of /lustre/research/mfausnau/data/tica (upstream products)
-#   WORK_DIR      role of /home/nimcclur/work/TESS/photometry (sector*/ outputs);
+#   DATA_DIR      upstream products (the HPCC ISIS data directory's role)
+#   WORK_DIR      role of /home/nmcclur/work/TESS/photometry (sector*/ outputs);
 #                 run orbit_pipeline.sbatch from here
 #   TESS_CODE_DIR this repository (scripts are called from here, not copied)
 #
@@ -25,8 +25,8 @@ export LOG_DIR=${LOG_DIR:-$WORK_DIR/logs}
 export RAW_CACHE=${RAW_CACHE:-$TESS_LOCAL_ROOT/raw_cache}
 export TICA_URL=${TICA_URL:-https://archive.stsci.edu/hlsps/tica}
 
-# Downstream: Python photometry instead of ISIS, local SLURM stand-ins, and no
-# /home/sarchast/tesstools (analysis.sbatch skips matchbkgtolc.py without it).
+# Downstream: Python photometry instead of ISIS, local SLURM stand-ins, and an
+# optional tesstools/ folder (analysis.sbatch skips matchbkgtolc.py without it).
 export PHOT_BACKEND=${PHOT_BACKEND:-python}
 export LOCAL_SLURM=1
 # Delete each orbit's difference-image tarballs once orbit_pipeline has

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name="make_sector_dirs"
-#SBATCH --output=/lustre/work/nimcclur/TESS/photometry/logs/%x.o%j
-#SBATCH --error=/lustre/work/nimcclur/TESS/photometry/logs/%x.e%j
+#SBATCH --output=/lustre/work/nmcclur/TESS/photometry/logs/%x.o%j
+#SBATCH --error=/lustre/work/nmcclur/TESS/photometry/logs/%x.e%j
 #SBATCH --partition=nocona
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1

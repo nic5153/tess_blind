@@ -27,10 +27,11 @@ fi
 source "${SETUP_VARS:-/home/${USER}/setup_vars.sh}"
 
 ## Code and tool locations. On HPCC the code lives in the run directory (the
-## parent of sector*/); locally setup_vars_local.sh points TESS_CODE_DIR at the
-## repository and TESSTOOLS_DIR at a local copy of tesstools, if any.
+## parent of sector*/); setup_vars_*.sh point TESS_CODE_DIR at the repository.
+## The optional tesstools scripts (phot2coords.py, matchbkgtolc.py) are looked
+## for in TESSTOOLS_DIR, default <code dir>/tesstools.
 code_dir=${TESS_CODE_DIR:-$PWD}
-tesstools=${TESSTOOLS_DIR:-/home/sarchast/tesstools}
+tesstools=${TESSTOOLS_DIR:-$code_dir/tesstools}
 if [[ "$RUN_MATCHBKG" == "1" && ! -f "$tesstools/matchbkgtolc.py" ]]
 then
   echo "matchbkgtolc.py not found in $tesstools; skipping (complicatedplot.py aligns by time)."
@@ -104,7 +105,7 @@ do
       then
         cd cam${cam}_ccd${ccd}
 
-        fluxcal.py --photfile ./phot.data --infiles "${DATA_DIR:-/lustre/research/mfausnau/data/tica}"/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits
+        fluxcal.py --photfile ./phot.data --infiles "${DATA_DIR:-/lustre/scratch/nmcclur/TESS/tica}"/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits
         mv ref_gaussian_psf_flux.txt "$indir"/ref_gaussian_psf_flux.txt
 
         python "$code_dir/clean_handmade_lc.py"  $indir/lc_outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal

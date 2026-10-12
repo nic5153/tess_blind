@@ -46,7 +46,9 @@ if [[ "$orbit_arg" != "all" && ! "$orbit_arg" =~ ^o[0-9][ab]$ ]]; then
 fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$script_dir/../setup_vars_local.sh"
+# setup_vars_hpcc.sh exports SETUP_VARS (and TESS_CODE_DIR); default: local.
+source "${SETUP_VARS:-$script_dir/../setup_vars_local.sh}"
+[[ -n "${TESS_CODE_DIR:-}" && -d "$TESS_CODE_DIR/upstream" ]] && script_dir="$TESS_CODE_DIR/upstream"
 
 cams=$([[ "$cam_arg" == "all" ]] && echo 1 2 3 4 || echo "$cam_arg")
 ccds=$([[ "$ccd_arg" == "all" ]] && echo 1 2 3 4 || echo "$ccd_arg")

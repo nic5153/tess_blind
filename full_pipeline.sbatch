@@ -26,7 +26,7 @@ else
 fi
 
 source /home/${USER}/setup_vars.sh
-logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
+logdir="${LOG_DIR:-/lustre/work/nmcclur/TESS/photometry/logs}"
 mkdir -p "$logdir"
 ANALYSIS_CPUS=${ANALYSIS_CPUS:-4}
 RUN_MULTIPLE_EXPORT=${RUN_MULTIPLE_EXPORT:-1}

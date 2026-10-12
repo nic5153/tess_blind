@@ -122,10 +122,29 @@ def download(url, dest, retries=4, timeout=180):
             time.sleep(5 * attempt)
 
 
-def fetch_frame(sector, cam, ccd, name, cache_dir):
+def pool_dir(sector, cam, ccd):
+    """Where tica_prefetch.py stores frames ahead of time (for compute nodes
+    without internet access)."""
+    return os.path.join(raw_cache(), f"s{sector:04d}", f"cam{cam}-ccd{ccd}", "pool")
+
+
+def fetch_frame(sector, cam, ccd, name, cache_dir, take=True):
+    """Local path of a frame in cache_dir: taken from the prefetch pool if there
+    (moved when take=True, copied otherwise), else downloaded from MAST."""
     dest = os.path.join(cache_dir, name)
-    if not os.path.exists(dest):
-        download(frame_url(sector, cam, ccd, name), dest)
+    if os.path.exists(dest):
+        return dest
+    pooled = os.path.join(pool_dir(sector, cam, ccd), name)
+    if os.path.exists(pooled):
+        import shutil
+
+        os.makedirs(cache_dir, exist_ok=True)
+        if take:
+            shutil.move(pooled, dest)
+        else:
+            shutil.copyfile(pooled, dest)
+        return dest
+    download(frame_url(sector, cam, ccd, name), dest)
     return dest
 
 

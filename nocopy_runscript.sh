@@ -24,7 +24,7 @@ for cam in {1..4}
   do 
     if [[ -e sector${sector}/cam${cam}_ccd${ccd}/phot.data ]] 
     then
-      rm -f /lustre/research/mfausnau/data/tica/s00${sector}/cam${cam}-ccd${ccd}/o??/phot.data 
+      rm -f /lustre/scratch/nmcclur/TESS/tica/s00${sector}/cam${cam}-ccd${ccd}/o??/phot.data 
       cd $workdir 
       python3 nocopy_do_phot_em2.py ${sector} ${cam} ${ccd} 
       ID=$(sbatch --parsable  phot_s00${sector}_cam${cam}-ccd${ccd}.sbatch)

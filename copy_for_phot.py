@@ -15,7 +15,7 @@ parser.add_argument("--cam",required=True,type=int)
 parser.add_argument("--ccd",required=True,type=int)
 args = parser.parse_args()
 
-sourcepath = f"/lustre/research/mfausnau/data/tica/f{args.sector:04}/"
+sourcepath = f"/lustre/scratch/nmcclur/TESS/tica/f{args.sector:04}/"
 outSECpath = f"{os.environ['HOME']}/scratch/s{args.sector:04}"
 
 
@@ -28,19 +28,19 @@ if copyCAMCCD:
     if not os.path.exists(f"{outSECpath}/cam{cam}-ccd{ccd}"):
         os.mkdir(f"{outSECpath}/cam{cam}-ccd{ccd}")
     print("Copy Slice Folders")
-    for sliceFOLDER in tqdm(glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/")):
+    for sliceFOLDER in tqdm(glob.glob(f"/lustre/scratch/nmcclur/TESS/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/o??/slice*/")):
         folderLIST = sliceFOLDER.split("/")
         orbit = folderLIST[-3]
         curSLICE = folderLIST[-2]
         dates = np.loadtxt(f"{sliceFOLDER}/dates", dtype=[("file","<U128"),("tjd","f8")])
         if not os.path.exists(f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}"):
             os.mkdir(f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}")
-            for psf_path in glob.glob(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/{orbit}/psf*"):
+            for psf_path in glob.glob(f"/lustre/scratch/nmcclur/TESS/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/{orbit}/psf*"):
                 outpsf = psf_path.split("/")[-1]
                 outpsfpath = f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}/{outpsf}"
                 if not os.path.exists(outpsfpath):
                     shutil.copy(psf_path,outpsfpath)
-            rms_src = f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/{orbit}/rms.fits"
+            rms_src = f"/lustre/scratch/nmcclur/TESS/tica/s{args.sector:04}/cam{cam}-ccd{ccd}/{orbit}/rms.fits"
             rms_dst = f"{outSECpath}/cam{cam}-ccd{ccd}/{orbit}/rms.fits"
             if os.path.exists(rms_src) and not os.path.exists(rms_dst):
                 shutil.copy(rms_src, rms_dst)
@@ -58,8 +58,8 @@ for procfile in tqdm(glob.glob(f"{outSECpath}/cam{cam}-ccd{ccd}/o??/slice*/proce
     orbitfolder = procpath[-3]
     with open(procfile,"r") as f:
         oldtext = f.read()
-        newtext = oldtext.replace(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/slice",f"{outSECpath}/{camfolder}/{orbitfolder}/slice")
-        newtext = newtext.replace(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/phot.data",f"{outSECpath}/{camfolder}/{orbitfolder}/phot.data")
+        newtext = oldtext.replace(f"/lustre/scratch/nmcclur/TESS/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/slice",f"{outSECpath}/{camfolder}/{orbitfolder}/slice")
+        newtext = newtext.replace(f"/lustre/scratch/nmcclur/TESS/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/phot.data",f"{outSECpath}/{camfolder}/{orbitfolder}/phot.data")
     with open(procfile,"w") as f:
         f.write(newtext)
     
@@ -70,8 +70,8 @@ for procfile in tqdm(glob.glob(f"{outSECpath}/cam{cam}-ccd{ccd}/o??/slice*/bkg_p
     orbitfolder = procpath[-4]
     with open(procfile,"r") as f:
         oldtext = f.read()
-        newtext = oldtext.replace(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/slice",f"{outSECpath}/{camfolder}/{orbitfolder}/slice")
-        newtext = newtext.replace(f"/lustre/research/mfausnau/data/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/phot.data",f"{outSECpath}/{camfolder}/{orbitfolder}/phot.data")
+        newtext = oldtext.replace(f"/lustre/scratch/nmcclur/TESS/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/slice",f"{outSECpath}/{camfolder}/{orbitfolder}/slice")
+        newtext = newtext.replace(f"/lustre/scratch/nmcclur/TESS/tica/s{args.sector:04}/{camfolder}/{orbitfolder}/phot.data",f"{outSECpath}/{camfolder}/{orbitfolder}/phot.data")
     with open(procfile,"w") as f:
         f.write(newtext)
     
