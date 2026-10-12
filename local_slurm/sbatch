@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+# Local stand-in for SLURM's sbatch, so the HPCC wrappers (orbit_pipeline.sbatch,
+# submit_all.sh, ...) run unchanged on one machine. setup_vars_local.sh puts this
+# directory first on PATH.
+#
+# The job runs immediately and sbatch returns when it has finished, so
+# --dependency is satisfied by ordering and squeue (also stubbed) always reports
+# an empty queue. Array tasks run in parallel, at most min(%limit,
+# LOCAL_SLURM_MAX_PARALLEL) at a time (default: NPROC, else 4), each with the
+# SLURM_ARRAY_* variables the scripts read. Output goes to --output/--error if
+# given, else $LOG_DIR/%x.o%A_%a (arrays) or $LOG_DIR/%x.o%j; #SBATCH --output
+# lines in the script (HPCC /lustre paths) are ignored.
+#
+# Supported: --parsable --array -J/--job-name -c/--cpus-per-task -o/--output
+# -e/--error; scheduling options (--time, --dependency, --mem, ...) are accepted
+# and ignored. Exit status is 0 like a successful submission; task failures are
+# reported on stderr.
+
+set -uo pipefail
+
+parsable=0 array="" jobname="" cpus="" output="" error=""
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --parsable) parsable=1; shift ;;
+        --array=*) array="${1#*=}"; shift ;;
+        -a|--array) array="$2"; shift 2 ;;
+        --job-name=*) jobname="${1#*=}"; shift ;;
+        -J|--job-name) jobname="$2"; shift 2 ;;
+        --cpus-per-task=*) cpus="${1#*=}"; shift ;;
+        -c|--cpus-per-task) cpus="$2"; shift 2 ;;
+        --output=*) output="${1#*=}"; shift ;;
+        -o|--output) output="$2"; shift 2 ;;
+        --error=*) error="${1#*=}"; shift ;;
+        -e|--error) error="$2"; shift 2 ;;
+        --*=*) shift ;;
+        -t|-p|-d|-N|-n|--time|--partition|--dependency|--mem|--nodes|--ntasks|--ntasks-per-node|--account|--qos)
+            shift 2 ;;
+        --*) shift ;;
+        *) break ;;
+    esac
+done
+
+if [[ $# -lt 1 || ! -f "$1" ]]; then
+    echo "local sbatch: script not found: ${1:-<none>}" >&2
+    exit 1
+fi
+script=$1
+shift
+
+directive() {
+    sed -n "s/^#SBATCH[[:space:]]\{1,\}--$1=\{0,1\}[[:space:]]*//p" "$script" | head -1 | tr -d '"' | sed 's/[[:space:]]*$//'
+}
+[[ -z "$array" ]] && array=$(directive array)
+[[ -z "$jobname" ]] && jobname=$(directive job-name)
+[[ -z "$cpus" ]] && cpus=$(directive cpus-per-task)
+jobname=${jobname:-$(basename "$script")}
+cpus=${cpus:-1}
+
+logdir=${LOG_DIR:-$PWD}
+mkdir -p "$logdir"
+idfile="$logdir/.local_slurm_jobid"
+exec 9>"$idfile.lock"
+flock 9
+jobid=$(( $(cat "$idfile" 2>/dev/null || echo 1000) + 1 ))
+echo "$jobid" > "$idfile"
+flock -u 9
+
+tasks=()
+limit=""
+if [[ -n "$array" ]]; then
+    spec=${array%%\%*}
+    [[ "$array" == *%* ]] && limit=${array##*%}
+    IFS=',' read -ra parts <<< "$spec"
+    for part in "${parts[@]}"; do
+        if [[ "$part" == *-* ]]; then
+            for (( t=${part%-*}; t<=${part#*-}; t++ )); do tasks+=("$t"); done
+        else
+            tasks+=("$part")
+        fi
+    done
+fi
+
+maxpar=${LOCAL_SLURM_MAX_PARALLEL:-${NPROC:-4}}
+[[ -n "$limit" && "$limit" -lt "$maxpar" ]] && maxpar=$limit
+
+expand() {  # expand %x %j %A %a in an output pattern
+    local p=$1 task=$2
+    p=${p//%x/$jobname}
+    p=${p//%A/$jobid}
+    p=${p//%j/$jobid}
+    p=${p//%a/$task}
+    echo "$p"
+}
+
+statusdir=$(mktemp -d)
+# Background tasks in a non-interactive shell ignore Ctrl+C (SIGINT), so on
+# interrupt send SIGTERM to the whole process group (this job, its tasks, and
+# the wrapper that called sbatch), the way scancel would.
+trap 'trap - INT TERM; echo "[local sbatch] job $jobid interrupted; stopping its tasks" >&2; rm -rf "$statusdir"; kill -TERM 0' INT TERM
+run_task() {
+    local task=$1
+    shift
+    local out err
+    if [[ -n "$task" ]]; then
+        out=$(expand "${output:-$logdir/%x.o%A_%a}" "$task")
+        err=$(expand "${error:-$logdir/%x.e%A_%a}" "$task")
+    else
+        out=$(expand "${output:-$logdir/%x.o%j}" "")
+        err=$(expand "${error:-$logdir/%x.e%j}" "")
+    fi
+    mkdir -p "$(dirname "$out")" "$(dirname "$err")"
+    (
+        export SLURM_JOB_ID=$jobid SLURM_JOBID=$jobid SLURM_JOB_NAME=$jobname
+        export SLURM_SUBMIT_DIR=$PWD SLURM_CPUS_PER_TASK=$cpus SLURM_JOB_PARTITION=local
+        if [[ -n "$task" ]]; then
+            export SLURM_ARRAY_JOB_ID=$jobid SLURM_ARRAY_TASK_ID=$task
+            export SLURM_ARRAY_TASK_MIN=${tasks[0]} SLURM_ARRAY_TASK_MAX=${tasks[-1]}
+            export SLURM_ARRAY_TASK_COUNT=${#tasks[@]}
+        else
+            unset SLURM_ARRAY_JOB_ID SLURM_ARRAY_TASK_ID SLURM_ARRAY_TASK_MIN SLURM_ARRAY_TASK_MAX SLURM_ARRAY_TASK_COUNT
+        fi
+        bash "$script" "$@" > "$out" 2> "$err"
+    )
+    echo $? > "$statusdir/${task:-0}"
+}
+
+echo "[local sbatch] job $jobid ($jobname${array:+, array $array}) started: $(basename "$script") $*" >&2
+if [[ ${#tasks[@]} -eq 0 ]]; then
+    run_task "" "$@"
+else
+    for task in "${tasks[@]}"; do
+        run_task "$task" "$@" &
+        while (( $(jobs -rp | wc -l) >= maxpar )); do wait -n; done
+    done
+    wait
+fi
+
+failed=0
+for f in "$statusdir"/*; do
+    [[ "$(cat "$f")" == "0" ]] || failed=$((failed + 1))
+done
+rm -rf "$statusdir"
+ntasks=$(( ${#tasks[@]} > 0 ? ${#tasks[@]} : 1 ))
+echo "[local sbatch] job $jobid ($jobname) finished: $((ntasks - failed))/$ntasks task(s) OK; logs in $logdir" >&2
+
+if [[ $parsable -eq 1 ]]; then
+    echo "$jobid"
+else
+    echo "Submitted batch job $jobid"
+fi

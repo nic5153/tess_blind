@@ -55,8 +55,9 @@ def main():
     parser.add_argument("--orbit", type=str, default=None)
     args = parser.parse_args()
 
-    work_base = "/home/nimcclur/work/TESS/photometry"
-    lustre_base = "/lustre/research/mfausnau/data/tica"
+    # HPCC defaults; set WORK_DIR / DATA_DIR (upstream/setup_vars_local.sh) to run locally.
+    work_base = os.environ.get("WORK_DIR", "/home/nimcclur/work/TESS/photometry")
+    lustre_base = os.environ.get("DATA_DIR", "/lustre/research/mfausnau/data/tica")
     
     lustre_ccd_dir = f"{lustre_base}/s{args.sector:04}/cam{args.cam}-ccd{args.ccd}"
     work_ccd_dir = f"{work_base}/sector{args.sector}/cam{args.cam}_ccd{args.ccd}"

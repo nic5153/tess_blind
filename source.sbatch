@@ -31,11 +31,11 @@ if [[ -d "$sector_dir" ]]; then
 elif [[ "$(basename "$PWD")" == "$sector_dir" ]]; then
     :
 else
-    echo "ERROR: run from /home/nimcclur/work/TESS/photometry or sector${sector}"
+    echo "ERROR: run from ${WORK_DIR:-/home/nimcclur/work/TESS/photometry} or sector${sector}"
     exit 1
 fi
 
-mkdir -p /lustre/work/nimcclur/TESS/photometry/logs
+mkdir -p "${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
 
 if [[ ! -f do_photutils_extract.py ]]; then
     echo "ERROR: missing do_photutils_extract.py in $(pwd)"

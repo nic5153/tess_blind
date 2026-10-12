@@ -31,3 +31,7 @@ sector*_plots.txt
 multiple_candidates.csv
 multiple_candidates_enriched.csv
 multiple_candidates.html
+
+# Python bytecode
+__pycache__/
+*.pyc

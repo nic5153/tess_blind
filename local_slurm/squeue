@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Local stand-in for SLURM's squeue. The local sbatch runs every job to
+# completion before returning, so the queue is always empty: print the header
+# (unless -h/--noheader) and nothing else. wait_for_jobs in orbit_pipeline.sbatch
+# therefore returns immediately.
+for arg in "$@"; do
+    [[ "$arg" == "-h" || "$arg" == "--noheader" ]] && exit 0
+done
+echo "             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)"

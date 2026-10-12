@@ -11,18 +11,18 @@
 
 set -eo pipefail
 
-if [[ $# -lt 2 || $# -gt 3 ]]; then
-    echo "Usage: sbatch $0 <sector> <orbit> [lcdir]"
+if [[ $# -lt 1 || $# -gt 3 ]]; then
+    echo "Usage: sbatch $0 <sector> [orbit|all] [lcdir]   (orbit defaults to all)"
     echo "Example: sbatch $0 105 o1a lc"
     exit 1
 fi
 
 sector=$1
-orbit=$2
+orbit=${2:-all}
 lcdir=${3:-lc}
 
-if [[ ! "$orbit" =~ ^o[0-9][ab]$ ]]; then
-    echo "ERROR: orbit must look like o1a, o1b, o2a, o2b"
+if [[ "$orbit" != "all" && ! "$orbit" =~ ^o[0-9][ab]$ ]]; then
+    echo "ERROR: orbit must look like o1a, o1b, o2a, o2b (or all)"
     exit 1
 fi
 
@@ -32,7 +32,7 @@ else
     script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 fi
 
-source /home/${USER}/setup_vars.sh
+source "${SETUP_VARS:-/home/${USER}/setup_vars.sh}"
 logdir="${LOG_DIR:-/lustre/work/nimcclur/TESS/photometry/logs}"
 mkdir -p "$logdir"
 
@@ -48,6 +48,34 @@ CATALOG_LIMIT=${CATALOG_LIMIT:-}
 MULTIPLE_CSV=${MULTIPLE_CSV:-multiple_candidates.csv}
 MULTIPLE_HTML=${MULTIPLE_HTML:-multiple_candidates.html}
 MULTIPLE_ENRICHED_CSV=${MULTIPLE_ENRICHED_CSV:-multiple_candidates_enriched.csv}
+
+# No orbit given (or "all"): run every half-orbit present under DATA_DIR, in
+# order. Locally (LOCAL_SLURM=1) they run one after another in this shell; on
+# HPCC each orbit is submitted as its own job, chained with afterany, so each
+# keeps the per-orbit time limit.
+if [[ "$orbit" == "all" ]]; then
+    mapfile -t all_orbits < <(find "$dtarget_base" -mindepth 2 -maxdepth 2 -type d -name 'o[0-9][ab]' \
+        -printf '%f\n' 2>/dev/null | sort -u)
+    if [[ ${#all_orbits[@]} -eq 0 ]]; then
+        echo "ERROR: no orbit directories found under $dtarget_base/cam*-ccd*/"
+        exit 1
+    fi
+    echo "Running all orbits for $sectoruse: ${all_orbits[*]}"
+    if [[ "${LOCAL_SLURM:-0}" == "1" ]]; then
+        for o in "${all_orbits[@]}"; do
+            bash "${BASH_SOURCE[0]}" "$sector" "$o" "$lcdir" || echo "WARNING: orbit $o did not finish cleanly"
+        done
+    else
+        prev=""
+        for o in "${all_orbits[@]}"; do
+            job=$(sbatch --parsable ${prev:+--dependency=afterany:$prev} \
+                "$script_dir/orbit_pipeline.sbatch" "$sector" "$o" "$lcdir")
+            echo "  submitted $o: job $job"
+            prev=$job
+        done
+    fi
+    exit 0
+fi
 
 wait_for_jobs() {
     local label=$1
@@ -115,9 +143,13 @@ cp "$script_dir/do_photutils_extract.py" "sector${sector}/do_photutils_extract.p
 cp "$script_dir/rms_source.py" "sector${sector}/rms_source.py"
 
 available_camccds=()
+purged_camccds=0
 for cam in {1..4}; do
     for ccd in {1..4}; do
-        if [[ -d "$dtarget_base/cam${cam}-ccd${ccd}/$orbit" ]]; then
+        if [[ -e "$dtarget_base/cam${cam}-ccd${ccd}/$orbit/.purged" ]]; then
+            echo "Skipping cam${cam}_ccd${ccd}/$orbit: already processed (difference images purged)"
+            purged_camccds=$((purged_camccds + 1))
+        elif [[ -d "$dtarget_base/cam${cam}-ccd${ccd}/$orbit" ]]; then
             mkdir -p "sector${sector}/cam${cam}_ccd${ccd}/$orbit"
             available_camccds+=("${cam}:${ccd}")
         else
@@ -127,6 +159,10 @@ for cam in {1..4}; do
 done
 
 if [[ ${#available_camccds[@]} -eq 0 ]]; then
+    if [[ $purged_camccds -gt 0 ]]; then
+        echo "Nothing to do: every cam/ccd for $sectoruse $orbit was already processed."
+        exit 0
+    fi
     echo "ERROR: no cam/ccd directories found for $sectoruse $orbit"
     exit 1
 fi
@@ -276,6 +312,31 @@ if [[ "$RUN_MULTIPLE_EXPORT" == "1" ]]; then
     fi
 else
     echo "  Multiple-candidate export skipped."
+fi
+
+# Keep this orbit's plots, candidate lists and exports: the next orbit's
+# analysis rebuilds sector*/{single,multiple,flag} and phot.data from scratch.
+bash "$script_dir/save_orbit_results.sh" "$sector" "$orbit"
+
+# Download-process-delete (local runs): once this orbit is analysed, the
+# difference-image tarballs (~18 MB per frame) are no longer needed. With
+# PURGE_IMAGES=1 (setup_vars_local.sh default; off on HPCC) delete them and mark
+# the orbit .purged so later runs skip it. dates, .quality/.stats.tsv,
+# rms_list_tica, the reference, and everything under sector*/ are kept. To
+# rebuild an orbit: delete its .purged file and rerun upstream with FORCE=1.
+if [[ "${PURGE_IMAGES:-0}" == "1" ]]; then
+    echo ""
+    echo "[purge] Deleting $orbit difference-image tarballs (PURGE_IMAGES=1)..."
+    for camccd in "${available_camccds[@]}"; do
+        cam=${camccd%%:*}
+        ccd=${camccd##*:}
+        orbit_dir="$dtarget_base/cam${cam}-ccd${ccd}/$orbit"
+        before=$(df -Pk "$orbit_dir" | awk 'NR==2 {print $4}')
+        rm -f "$orbit_dir"/slice*/images.tar
+        touch "$orbit_dir/.purged"
+        after=$(df -Pk "$orbit_dir" | awk 'NR==2 {print $4}')
+        echo "  cam${cam}_ccd${ccd}/$orbit: freed ~$(( (after - before) / 1024 / 1024 )) GB"
+    done
 fi
 
 echo ""

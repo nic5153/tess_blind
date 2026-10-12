@@ -24,12 +24,23 @@ then
   exit 1
 fi
 
-source /home/${USER}/setup_vars.sh
+source "${SETUP_VARS:-/home/${USER}/setup_vars.sh}"
+
+## Code and tool locations. On HPCC the code lives in the run directory (the
+## parent of sector*/); locally setup_vars_local.sh points TESS_CODE_DIR at the
+## repository and TESSTOOLS_DIR at a local copy of tesstools, if any.
+code_dir=${TESS_CODE_DIR:-$PWD}
+tesstools=${TESSTOOLS_DIR:-/home/sarchast/tesstools}
+if [[ "$RUN_MATCHBKG" == "1" && ! -f "$tesstools/matchbkgtolc.py" ]]
+then
+  echo "matchbkgtolc.py not found in $tesstools; skipping (complicatedplot.py aligns by time)."
+  RUN_MATCHBKG=0
+fi
 
 cd sector${sector}
 
 ## Clean phot file
-python ../cleanphotfile.py cam*_ccd*/phot.data
+python "$code_dir/cleanphotfile.py" cam*_ccd*/phot.data
 
 ## Legacy cleaned-light-curve workflow.
 ## Keep this available because it defines the original flux calibration and
@@ -37,7 +48,7 @@ python ../cleanphotfile.py cam*_ccd*/phot.data
 if [[ "$RUN_CLEANED" == "1" ]]
 then
   ## Make coords.txt
-  python /home/sarchast/tesstools/phot2coords.py cam*_ccd*/phot.data
+  python "$tesstools/phot2coords.py" cam*_ccd*/phot.data
 fi
 
 ## Only get times with bkg and source. This is still useful for the raw plots,
@@ -69,13 +80,13 @@ then
     then
       for ((i=0; i<${#match_files[@]}; i+=500))
       do
-        python /home/sarchast/tesstools/matchbkgtolc.py "${match_files[@]:i:500}" || echo "WARNING: matchbkgtolc.py failed for one ${orbit} chunk; continuing with in-plot time matching."
+        python "$tesstools/matchbkgtolc.py" "${match_files[@]:i:500}" || echo "WARNING: matchbkgtolc.py failed for one ${orbit} chunk; continuing with in-plot time matching."
       done
     else
       echo "WARNING: no ${orbit} light curves found for matchbkgtolc.py; continuing."
     fi
   else
-    python /home/sarchast/tesstools/matchbkgtolc.py cam*_ccd*/lc/lc_outcatrms_* || echo "WARNING: matchbkgtolc.py failed; continuing with in-plot time matching."
+    python "$tesstools/matchbkgtolc.py" cam*_ccd*/lc/lc_outcatrms_* || echo "WARNING: matchbkgtolc.py failed; continuing with in-plot time matching."
   fi
 fi
 
@@ -93,10 +104,10 @@ do
       then
         cd cam${cam}_ccd${ccd}
 
-        fluxcal.py --photfile ./phot.data --infiles /lustre/research/mfausnau/data/tica/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits 
+        fluxcal.py --photfile ./phot.data --infiles "${DATA_DIR:-/lustre/research/mfausnau/data/tica}"/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits
         mv ref_gaussian_psf_flux.txt "$indir"/ref_gaussian_psf_flux.txt
 
-        python ../../clean_handmade_lc.py  $indir/lc_outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal
+        python "$code_dir/clean_handmade_lc.py"  $indir/lc_outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal
 
         cd ..
       fi
@@ -118,7 +129,7 @@ do
       else
         plot_args+=(--singleproc)
       fi
-      python ../complicatedplot.py "${plot_args[@]}"
+      python "$code_dir/complicatedplot.py" "${plot_args[@]}"
     fi
   done
 done

@@ -67,6 +67,17 @@ for (( ii=1; ii<=nelements; ii++ )); do
     cd "$slice_dir"
     echo "Working in: $(pwd)"
 
+    # Local runs (PHOT_BACKEND=python, set by setup_vars_local.sh): forced PSF
+    # photometry with photutils in place of ISIS phot2.csh. Writes the same
+    # $lcdir/lc_* and bkg_phot/$lcdir/lc_* files that copy_phot_em2.sbatch collects.
+    if [[ "${PHOT_BACKEND:-isis}" == "python" ]]; then
+        if ! python "${TESS_CODE_DIR:-$dhome}/phot_slice.py" --slice-dir "$slice_dir" --lcdir "$lcdir"; then
+            echo "FAILED: phot_slice.py in $slice_dir" >&2
+        fi
+        cd "$dhome"
+        continue
+    fi
+
     # Symlink PSF files and table from parent
     for p in ../psf_file*fits; do
         [[ -e "${p:3}" ]] || ln -s "$p"

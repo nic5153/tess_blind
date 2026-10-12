@@ -17,10 +17,12 @@ CAM=$2
 CCD=$3
 ORBIT=${4:-}
 
+code_dir=${TESS_CODE_DIR:-/home/nimcclur/work/TESS/photometry}
+
 if [[ -n "$ORBIT" ]]; then
-  python /home/nimcclur/work/TESS/photometry/make_rms.py --sector $SECTOR --cam $CAM --ccd $CCD --orbit "$ORBIT"
+  python "$code_dir/make_rms.py" --sector $SECTOR --cam $CAM --ccd $CCD --orbit "$ORBIT"
 else
-  python /home/nimcclur/work/TESS/photometry/make_rms.py --sector $SECTOR --cam $CAM --ccd $CCD
+  python "$code_dir/make_rms.py" --sector $SECTOR --cam $CAM --ccd $CCD
 fi
 
 shopt -s nullglob
