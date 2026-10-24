@@ -44,7 +44,10 @@ cd /home/$USER/work/TESS/photometry      (where the code lives)
 source setup_vars_hpcc.sh                (paths above + conda env "tess")
 
 Whole sector, chained jobs per half-orbit (upstream array -> orbit_pipeline):
-bash run_sector_hpcc.sh <sector> [ccd-array]     e.g. 102, or 102 10 for cam3 ccd3
+bash run_sector_hpcc.sh --sector 102                     (whole sector)
+bash run_sector_hpcc.sh --sector 102 --cam 3 --ccd 3      (one CCD)
+   options: --cam/--ccd take 1-4 or lists like 1,3; --orbit o1a,o2b;
+   --parallel N (CCDs at once, default 4); --dry-run (show, don't submit)
 
 Or step by step:
 sbatch --array=0-15%4 upstream/tica_upstream.sbatch <sector> <orbit>
