@@ -48,10 +48,12 @@ export PURGE_IMAGES=${PURGE_IMAGES:-1}
 export NPROC=${SLURM_CPUS_PER_TASK:-${NPROC:-8}}
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
 
-# Python environment (see flow_readme.txt for creating it once).
-if [[ "${CONDA_DEFAULT_ENV:-}" != "${TESS_CONDA_ENV:-tess}" ]] && command -v conda > /dev/null 2>&1; then
+# Python environment: your existing conda env "nmcclur" (needs photutils >= 2.0,
+# astropy, scipy, astroquery, tess-point). Set TESS_CONDA_ENV to use another one.
+export TESS_CONDA_ENV=${TESS_CONDA_ENV:-nmcclur}
+if [[ "${CONDA_DEFAULT_ENV:-}" != "$TESS_CONDA_ENV" ]] && command -v conda > /dev/null 2>&1; then
     eval "$(conda shell.bash hook)"
-    conda activate "${TESS_CONDA_ENV:-tess}" || echo "WARNING: conda env ${TESS_CONDA_ENV:-tess} not found" >&2
+    conda activate "$TESS_CONDA_ENV" || echo "WARNING: conda env $TESS_CONDA_ENV not found (conda info --envs)" >&2
 fi
 
 mkdir -p "$DATA_DIR" "$RAW_CACHE" "$WORK_DIR" "$LOG_DIR"
