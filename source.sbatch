@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name="source"
-#SBATCH --output=/lustre/work/nmcclur/TESS/photometry/logs/%x.o%A_%a
-#SBATCH --error=/lustre/work/nmcclur/TESS/photometry/logs/%x.e%A_%a
+#SBATCH --output=/lustre/work/nmcclur/tess_blind_data/photometry/logs/%x.o%A_%a
+#SBATCH --error=/lustre/work/nmcclur/tess_blind_data/photometry/logs/%x.e%A_%a
 #SBATCH --partition=nocona
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
@@ -31,11 +31,11 @@ if [[ -d "$sector_dir" ]]; then
 elif [[ "$(basename "$PWD")" == "$sector_dir" ]]; then
     :
 else
-    echo "ERROR: run from ${WORK_DIR:-/home/nmcclur/work/TESS/photometry} or sector${sector}"
+    echo "ERROR: run from ${WORK_DIR:-/lustre/work/nmcclur/tess_blind_data/photometry} or sector${sector}"
     exit 1
 fi
 
-mkdir -p "${LOG_DIR:-/lustre/work/nmcclur/TESS/photometry/logs}"
+mkdir -p "${LOG_DIR:-/lustre/work/nmcclur/tess_blind_data/photometry/logs}"
 
 if [[ ! -f do_photutils_extract.py ]]; then
     echo "ERROR: missing do_photutils_extract.py in $(pwd)"

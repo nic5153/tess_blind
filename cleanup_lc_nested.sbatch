@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --job-name="cleanup_lc_nested"
-#SBATCH --output=/lustre/work/nmcclur/TESS/photometry/logs/%x.o%A_%a
-#SBATCH --error=/lustre/work/nmcclur/TESS/photometry/logs/%x.e%A_%a
+#SBATCH --output=/lustre/work/nmcclur/tess_blind_data/photometry/logs/%x.o%A_%a
+#SBATCH --error=/lustre/work/nmcclur/tess_blind_data/photometry/logs/%x.e%A_%a
 #SBATCH --partition=nocona
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1

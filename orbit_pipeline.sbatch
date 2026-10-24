@@ -35,7 +35,7 @@ else
 fi
 
 source "${SETUP_VARS:-/home/${USER}/setup_vars.sh}"
-logdir="${LOG_DIR:-/lustre/work/nmcclur/TESS/photometry/logs}"
+logdir="${LOG_DIR:-/lustre/work/nmcclur/tess_blind_data/photometry/logs}"
 mkdir -p "$logdir"
 
 sectoruse=$(printf "s%04d" "$sector")

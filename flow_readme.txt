@@ -11,13 +11,24 @@ Safer update path for HPCC:
 bash sync_code_from_codex.sh
 
 This fetches GitHub and restores only code/script files from
-origin/updated-hpcc (pass another ref to override), leaving sector outputs and
-plot exports in place.
+origin/hpcc-local-layout (pass another ref to override), leaving sector outputs
+and plot exports in place.
 
-HPCC WITH YOUR OWN TICA PROCESSING (branch updated-hpcc):
+HPCC WITH YOUR OWN TICA PROCESSING (branch hpcc-local-layout):
 
 Download and subtract the FFIs yourself (same code as the local version) under
-SLURM, instead of relying on someone else's ISIS products.
+SLURM, instead of relying on someone else's ISIS products. Everything lives in
+one folder, laid out like the local D:\tess_blind_data:
+
+/lustre/work/nmcclur/tess_blind_data/tica        upstream products
+/lustre/work/nmcclur/tess_blind_data/raw_cache   downloads (deleted per slice)
+/lustre/work/nmcclur/tess_blind_data/photometry  sector*/ results; logs/ inside
+
+/lustre/work has a quota: each half-orbit's difference images are deleted once
+it is analysed (PURGE_IMAGES=1), and upstream checks the quota before starting
+a half-orbit (~50 GB per CCD at 200-s cadence). Check it with:
+lfs quota -h -u $USER /lustre/work
+Run only as many CCDs at once as the quota allows (the %N in the job array).
 
 One-time Python environment on HPCC (in a login shell):
 conda create -n tess -c conda-forge python=3.12 astropy photutils astroquery scipy numpy pandas matplotlib tqdm
@@ -30,7 +41,7 @@ python $TESS_CODE_DIR/upstream/tica_prefetch.py --sector 102 --cam 3 --ccd 3 --o
 
 Every session:
 cd /home/$USER/work/TESS/photometry      (where the code lives)
-source setup_vars_hpcc.sh                (DATA_DIR/RAW_CACHE on /lustre/scratch)
+source setup_vars_hpcc.sh                (paths above + conda env "tess")
 
 Whole sector, chained jobs per half-orbit (upstream array -> orbit_pipeline):
 bash run_sector_hpcc.sh <sector> [ccd-array]     e.g. 102, or 102 10 for cam3 ccd3

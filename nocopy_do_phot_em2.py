@@ -40,7 +40,7 @@ def sbatchARRAYbones(arraysize, cmdlist, jobname):
 
 source ~/setup_vars.sh
 
-folders=($(eval "ls -d /lustre/scratch/nmcclur/TESS/tica/s{sector:04}/cam{cam}-ccd{ccd}/o??/slice*/"))
+folders=($(eval "ls -d /lustre/work/nmcclur/tess_blind_data/tica/s{sector:04}/cam{cam}-ccd{ccd}/o??/slice*/"))
 for i in {{1..{arraysize}}}
 do
   if [[ $((i%50)) -eq $SLURM_ARRAY_TASK_ID ]]

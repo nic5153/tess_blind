@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-branch=${1:-origin/updated-hpcc}
+branch=${1:-origin/hpcc-local-layout}
 
 echo "Fetching latest GitHub refs..."
 git fetch origin

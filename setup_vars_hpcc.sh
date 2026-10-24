@@ -6,34 +6,43 @@
 #
 #   source setup_vars_hpcc.sh
 #
-#   DATA_DIR   your upstream products (ref.fits, slice tarballs, rms_list_tica)
-#   RAW_CACHE  downloaded FFIs, deleted as each slice is processed
-#   WORK_DIR   where orbit_pipeline runs (sector*/ outputs), as before
-#   LOG_DIR    SLURM logs, as before
+# Everything lives in one folder you own, laid out like the local version
+# (D:\tess_blind_data on the PC):
 #
-# DATA_DIR and RAW_CACHE default to /lustre/scratch (large; files left unused
-# for a long time are purged by HPCC policy). Check quotas with:
-#   lfs quota -h -u $USER /lustre/scratch ; lfs quota -h -u $USER /lustre/work
-# To use the old ISIS products instead, source ~/setup_vars.sh as before.
+#   TESS_ROOT  = /lustre/work/$USER/tess_blind_data
+#   DATA_DIR   = $TESS_ROOT/tica        upstream products (ref.fits, slice
+#                                       tarballs, rms_list_tica)
+#   RAW_CACHE  = $TESS_ROOT/raw_cache   downloaded FFIs, deleted as each slice
+#                                       is processed
+#   WORK_DIR   = $TESS_ROOT/photometry  where orbit_pipeline runs (sector*/)
+#   LOG_DIR    = $WORK_DIR/logs         SLURM logs
+#
+# /lustre/work is not purged but has a quota, so each half-orbit's difference
+# images are deleted once orbit_pipeline has analysed it (PURGE_IMAGES=1), and
+# the upstream disk guard checks the quota. See your quota with:
+#   lfs quota -h -u $USER /lustre/work
+# The code itself stays wherever you keep it (TESS_CODE_DIR, this folder).
 
 TESS_CODE_DIR=${TESS_CODE_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}
 export TESS_CODE_DIR
 export SETUP_VARS=${SETUP_VARS:-$TESS_CODE_DIR/setup_vars_hpcc.sh}
+export TESS_ROOT=${TESS_ROOT:-/lustre/work/$USER/tess_blind_data}
 
-# Separate trees per compression setting (tica/ vs tica_q4/, ...).
+# Separate trees per compression setting (tica/ + photometry/ vs tica_q4/ + photometry_q4/).
 suffix=${COMPRESS_Q:+_q${COMPRESS_Q}}
-export DATA_DIR=${DATA_DIR:-/lustre/scratch/$USER/TESS/tica$suffix}
-export RAW_CACHE=${RAW_CACHE:-/lustre/scratch/$USER/TESS/raw_cache}
-export WORK_DIR=${WORK_DIR:-/home/$USER/work/TESS/photometry$suffix}
+export DATA_DIR=${DATA_DIR:-$TESS_ROOT/tica$suffix}
+export WORK_DIR=${WORK_DIR:-$TESS_ROOT/photometry$suffix}
 unset suffix
-export LOG_DIR=${LOG_DIR:-/lustre/work/$USER/TESS/photometry/logs}
+export RAW_CACHE=${RAW_CACHE:-$TESS_ROOT/raw_cache}
+export LOG_DIR=${LOG_DIR:-$WORK_DIR/logs}
 export TICA_URL=${TICA_URL:-https://archive.stsci.edu/hlsps/tica}
 
 # Python photometry instead of ISIS phot2; real SLURM (no local stand-ins).
 export PHOT_BACKEND=${PHOT_BACKEND:-python}
 export LOCAL_SLURM=0
-# Keep difference images after an orbit is analysed unless asked (HPCC has room).
-export PURGE_IMAGES=${PURGE_IMAGES:-0}
+# Delete each orbit's difference images once it is analysed (work quota).
+# Set PURGE_IMAGES=0 to keep them.
+export PURGE_IMAGES=${PURGE_IMAGES:-1}
 
 # Workers per job: the job's CPU count inside SLURM, else a modest default.
 export NPROC=${SLURM_CPUS_PER_TASK:-${NPROC:-8}}

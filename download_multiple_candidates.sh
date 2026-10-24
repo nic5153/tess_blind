@@ -3,7 +3,7 @@ set -euo pipefail
 
 remote_user="${HPCC_USER:-nmcclur}"
 remote_host="${HPCC_HOST:-login.hpcc.ttu.edu}"
-remote_root="${HPCC_PHOTOMETRY_ROOT:-/lustre/work/nmcclur/TESS/photometry}"
+remote_root="${HPCC_PHOTOMETRY_ROOT:-/lustre/work/nmcclur/tess_blind_data/photometry}"
 outdir="."
 csv_name="multiple_candidates.csv"
 enriched_name="multiple_candidates_enriched.csv"
@@ -18,7 +18,7 @@ Downloads the multiple-candidate CSV, enriched CSV if present, and HTML generate
 Options:
   --user USER          HPCC username. Default: HPCC_USER or nmcclur
   --host HOST          HPCC login host. Default: HPCC_HOST or login.hpcc.ttu.edu
-  --remote-root PATH   Remote photometry root. Default: HPCC_PHOTOMETRY_ROOT or /lustre/work/nmcclur/TESS/photometry
+  --remote-root PATH   Remote photometry root. Default: HPCC_PHOTOMETRY_ROOT or /lustre/work/nmcclur/tess_blind_data/photometry
   --outdir PATH        Local output directory. Default: current directory
   --csv NAME           CSV filename. Default: multiple_candidates.csv
   --enriched NAME      Enriched CSV filename. Default: multiple_candidates_enriched.csv

@@ -105,7 +105,7 @@ do
       then
         cd cam${cam}_ccd${ccd}
 
-        fluxcal.py --photfile ./phot.data --infiles "${DATA_DIR:-/lustre/scratch/nmcclur/TESS/tica}"/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits
+        fluxcal.py --photfile ./phot.data --infiles "${DATA_DIR:-/lustre/work/nmcclur/tess_blind_data/tica}"/s"$suse"/"cam$cam""-ccd$ccd"/ref.fits
         mv ref_gaussian_psf_flux.txt "$indir"/ref_gaussian_psf_flux.txt
 
         python "$code_dir/clean_handmade_lc.py"  $indir/lc_outcatrms_* --fluxcal "$indir"/ref_gaussian_psf_flux.txt --metafile coords.txt #--decimal

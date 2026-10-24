@@ -23,8 +23,9 @@
 # TESS-transients convention).
 #
 # Disk guard: before each half-orbit, the frames still to process (~18 MB of
-# conv_ image each) plus MIN_FREE_GB (default 20) must fit on the DATA_DIR
-# drive, otherwise the run stops. A whole sector is ~70 GB per CCD at 10-min
+# conv_ image each) plus MIN_FREE_GB (default 20) must fit in the free space on
+# the DATA_DIR drive (and, on HPCC, within your Lustre quota), otherwise the run
+# stops. A whole sector is ~70 GB per CCD at 10-min
 # cadence and ~150 GB per CCD at 200-s cadence, so for all 16 CCDs run
 # orbit_pipeline and clear finished orbits between upstream runs.
 
@@ -49,6 +50,31 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # setup_vars_hpcc.sh exports SETUP_VARS (and TESS_CODE_DIR); default: local.
 source "${SETUP_VARS:-$script_dir/../setup_vars_local.sh}"
 [[ -n "${TESS_CODE_DIR:-}" && -d "$TESS_CODE_DIR/upstream" ]] && script_dir="$TESS_CODE_DIR/upstream"
+
+# Free space (GB) for a path: what df reports, further limited by the user's
+# Lustre quota when lfs is available (df on Lustre shows the whole filesystem).
+free_gb_for() {
+    local path=$1 free_kb mount quota_kb
+    free_kb=$(df -Pk "$path" | awk 'NR==2 {print $4}')
+    if command -v lfs > /dev/null 2>&1; then
+        mount=$(df -P "$path" | awk 'NR==2 {print $6}')
+        # lfs quota -q: <fs> <used> <soft> <hard> ... in KB ('*' marks over quota)
+        quota_kb=$(lfs quota -q -u "$USER" "$mount" 2>/dev/null | awk '
+            {for (i = 1; i <= NF; i++) t[++n] = $i}
+            END {for (i = 1; i <= n; i++) {
+                     u = t[i]; gsub(/\*/, "", u)
+                     if (u ~ /^[0-9]+$/) {
+                         s = t[i + 1]; h = t[i + 2]; gsub(/\*/, "", s); gsub(/\*/, "", h)
+                         lim = (s + 0 > 0) ? s : h
+                         if (lim + 0 > 0) print lim - u
+                         exit
+                     }}}')
+        if [[ -n "$quota_kb" ]] && (( quota_kb < free_kb )); then
+            free_kb=$quota_kb
+        fi
+    fi
+    echo $(( free_kb / 1024 / 1024 ))
+}
 
 cams=$([[ "$cam_arg" == "all" ]] && echo 1 2 3 4 || echo "$cam_arg")
 ccds=$([[ "$ccd_arg" == "all" ]] && echo 1 2 3 4 || echo "$ccd_arg")
@@ -116,7 +142,7 @@ for cam in $cams; do
                 fi
             done < <(awk -v o="$orbit" 'NR>1 && $4==o {n[$5]++} END {for (s in n) print s, n[s]}' "$manifest")
             need_gb=$(( todo_frames * 18 / 1024 + ${MIN_FREE_GB:-20} ))
-            free_gb=$(( $(df -Pk "$DATA_DIR" | awk 'NR==2 {print $4}') / 1024 / 1024 ))
+            free_gb=$(free_gb_for "$DATA_DIR")
             if (( todo_frames > 0 && free_gb < need_gb )); then
                 echo "ERROR: $orbit needs ~${need_gb} GB ($todo_frames frames + ${MIN_FREE_GB:-20} GB margin)" \
                      "but only ${free_gb} GB is free on $DATA_DIR. Run orbit_pipeline on finished" \

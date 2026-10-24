@@ -9,7 +9,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16G
 
-logdir="${LOG_DIR:-/lustre/work/nmcclur/TESS/photometry/logs}"
+logdir="${LOG_DIR:-/lustre/work/nmcclur/tess_blind_data/photometry/logs}"
 mkdir -p "$logdir"
 
 SECTOR=$1
