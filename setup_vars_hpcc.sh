@@ -23,22 +23,25 @@
 #   lfs quota -h -u $USER /lustre/work
 # The code itself stays wherever you keep it (TESS_CODE_DIR, this folder).
 
-TESS_CODE_DIR=${TESS_CODE_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}
-export TESS_CODE_DIR
-export SETUP_VARS=${SETUP_VARS:-$TESS_CODE_DIR/setup_vars_hpcc.sh}
+export TESS_CODE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export SETUP_VARS="$TESS_CODE_DIR/setup_vars_hpcc.sh"
 export TESS_ROOT=${TESS_ROOT:-/lustre/work/$USER/tess_blind_data}
 
+# All paths are derived from TESS_ROOT and always overwritten here: a shell that
+# already loaded the old ~/setup_vars.sh has DATA_DIR pointing at the shared
+# ISIS data, which these scripts must never write into. To relocate everything,
+# set TESS_ROOT before sourcing this file.
 # Separate trees per compression setting (tica/ + photometry/ vs tica_q4/ + photometry_q4/).
 suffix=${COMPRESS_Q:+_q${COMPRESS_Q}}
-export DATA_DIR=${DATA_DIR:-$TESS_ROOT/tica$suffix}
-export WORK_DIR=${WORK_DIR:-$TESS_ROOT/photometry$suffix}
+export DATA_DIR="$TESS_ROOT/tica$suffix"
+export WORK_DIR="$TESS_ROOT/photometry$suffix"
 unset suffix
-export RAW_CACHE=${RAW_CACHE:-$TESS_ROOT/raw_cache}
-export LOG_DIR=${LOG_DIR:-$WORK_DIR/logs}
+export RAW_CACHE="$TESS_ROOT/raw_cache"
+export LOG_DIR="$WORK_DIR/logs"
 export TICA_URL=${TICA_URL:-https://archive.stsci.edu/hlsps/tica}
 
 # Python photometry instead of ISIS phot2; real SLURM (no local stand-ins).
-export PHOT_BACKEND=${PHOT_BACKEND:-python}
+export PHOT_BACKEND=python
 export LOCAL_SLURM=0
 # Delete each orbit's difference images once it is analysed (work quota).
 # Set PURGE_IMAGES=0 to keep them.

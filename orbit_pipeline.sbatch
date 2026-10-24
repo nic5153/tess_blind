@@ -336,6 +336,10 @@ if [[ "${PURGE_IMAGES:-0}" == "1" ]]; then
         cam=${camccd%%:*}
         ccd=${camccd##*:}
         orbit_dir="$dtarget_base/cam${cam}-ccd${ccd}/$orbit"
+        if [[ "${LOCAL_SLURM:-0}" != "1" && "$(stat -c %U "$orbit_dir" 2>/dev/null)" != "$USER" ]]; then
+            echo "  cam${cam}_ccd${ccd}/$orbit: not owned by $USER (shared data?); not purging"
+            continue
+        fi
         manifest="$dtarget_base/cam${cam}-ccd${ccd}/manifest.tsv"
         if [[ -f "$manifest" ]]; then
             expected=$(awk -v o="$orbit" 'NR>1 && $4==o {print $5}' "$manifest" | sort -u | wc -l)

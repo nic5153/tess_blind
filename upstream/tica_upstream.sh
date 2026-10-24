@@ -76,6 +76,18 @@ free_gb_for() {
     echo $(( free_kb / 1024 / 1024 ))
 }
 
+# Never write into a data tree that belongs to someone else (e.g. a shared ISIS
+# products directory left in DATA_DIR by another setup file). Local exFAT
+# drives report root as the owner, so this check applies on HPCC only.
+if [[ "${LOCAL_SLURM:-0}" != "1" ]]; then
+    owner=$(stat -c %U "$DATA_DIR" 2>/dev/null || true)
+    if [[ -n "$owner" && "$owner" != "$USER" ]]; then
+        echo "ERROR: DATA_DIR=$DATA_DIR belongs to '$owner', not $USER. Refusing to write there."
+        echo "       Source setup_vars_hpcc.sh (it sets DATA_DIR under TESS_ROOT) and resubmit."
+        exit 1
+    fi
+fi
+
 cams=$([[ "$cam_arg" == "all" ]] && echo 1 2 3 4 || echo "$cam_arg")
 ccds=$([[ "$ccd_arg" == "all" ]] && echo 1 2 3 4 || echo "$ccd_arg")
 sectoruse=$(printf "s%04d" "$sector")

@@ -76,10 +76,19 @@ for orbit in ${orbits//,/ }; do
     fi
 done
 
-if [[ -z "${TESS_CODE_DIR:-}" ]]; then
+if [[ -z "${TESS_CODE_DIR:-}" || -z "${TESS_ROOT:-}" ]]; then
     echo "ERROR: run 'source setup_vars_hpcc.sh' first"
     exit 1
 fi
+# Refuse to submit if the data or results paths point outside your own
+# TESS_ROOT (e.g. a shell where the old ~/setup_vars.sh was sourced afterwards).
+for path in "$DATA_DIR" "$WORK_DIR" "$RAW_CACHE"; do
+    if [[ "$path" != "$TESS_ROOT"/* ]]; then
+        echo "ERROR: $path is outside TESS_ROOT=$TESS_ROOT."
+        echo "       Run 'source setup_vars_hpcc.sh' again (after any other setup file) and retry."
+        exit 1
+    fi
+done
 
 submit() {  # print in dry-run mode, otherwise run sbatch and return the job id
     if [[ $dry_run -eq 1 ]]; then
