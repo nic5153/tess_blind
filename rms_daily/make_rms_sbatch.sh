@@ -9,14 +9,14 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=16G
 
-logdir="${LOG_DIR:-/lustre/work/nmcclur/tess_blind_data/photometry/logs}"
+logdir="${LOG_DIR:-/lustre/work/nimcclur/tess_blind_data/photometry/logs}"
 mkdir -p "$logdir"
 
 SECTOR=$1
 CAM=$2
 CCD=$3
 
-python /home/nmcclur/work/TESS/photometry/rms_daily/make_rms.py --sector $SECTOR --cam $CAM --ccd $CCD
+python /home/nimcclur/work/TESS/photometry/rms_daily/make_rms.py --sector $SECTOR --cam $CAM --ccd $CCD
 
 shopt -s nullglob
 logs=(rms_nocopy.o* rms_nocopy.e*)

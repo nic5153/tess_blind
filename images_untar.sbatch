@@ -6,8 +6,8 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=nocona
 #SBATCH --time=0-04:00:00
-#SBATCH --output=/lustre/work/nmcclur/tess_blind_data/photometry/logs/%x.o%A_%a
-#SBATCH --error=/lustre/work/nmcclur/tess_blind_data/photometry/logs/%x.e%A_%a
+#SBATCH --output=/lustre/work/nimcclur/tess_blind_data/photometry/logs/%x.o%A_%a
+#SBATCH --error=/lustre/work/nimcclur/tess_blind_data/photometry/logs/%x.e%A_%a
 
 if [ -z "$1" ]; then
     echo "Usage: sbatch untar_all_slices_live.sbatch <sector_number>"
@@ -23,7 +23,7 @@ ccds=(1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4)
 CAM=${cams[$SLURM_ARRAY_TASK_ID]}
 CCD=${ccds[$SLURM_ARRAY_TASK_ID]}
 
-BASE_PATH="/lustre/work/nmcclur/tess_blind_data/tica/${SECTOR_DIR}/cam${CAM}-ccd${CCD}"
+BASE_PATH="/lustre/work/nimcclur/tess_blind_data/tica/${SECTOR_DIR}/cam${CAM}-ccd${CCD}"
 
 find "$BASE_PATH" -name "images.tar" -execdir echo "Extracting in {}" \; -execdir tar -xf images.tar \;
 

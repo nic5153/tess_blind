@@ -53,8 +53,8 @@ def main():
     parser.add_argument("--ccd", type=int, required=True)
     args = parser.parse_args()
 
-    work_base = "/lustre/work/nmcclur/tess_blind_data/photometry"
-    lustre_base = "/lustre/work/nmcclur/tess_blind_data/tica"
+    work_base = "/lustre/work/nimcclur/tess_blind_data/photometry"
+    lustre_base = "/lustre/work/nimcclur/tess_blind_data/tica"
     
     lustre_ccd_dir = f"{lustre_base}/s{args.sector:04}/cam{args.cam}-ccd{args.ccd}"
     work_ccd_dir = f"{work_base}/sector{args.sector}/cam{args.cam}_ccd{args.ccd}"

@@ -3,7 +3,7 @@
 # anything:   source setup_vars_local.sh
 #
 #   DATA_DIR      upstream products (the HPCC ISIS data directory's role)
-#   WORK_DIR      role of /home/nmcclur/work/TESS/photometry (sector*/ outputs);
+#   WORK_DIR      role of /home/nimcclur/work/TESS/photometry (sector*/ outputs);
 #                 run orbit_pipeline.sbatch from here
 #   TESS_CODE_DIR this repository (scripts are called from here, not copied)
 #

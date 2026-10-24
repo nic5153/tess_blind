@@ -35,7 +35,7 @@ else
 fi
 
 source "${SETUP_VARS:-/home/${USER}/setup_vars.sh}"
-logdir="${LOG_DIR:-/lustre/work/nmcclur/tess_blind_data/photometry/logs}"
+logdir="${LOG_DIR:-/lustre/work/nimcclur/tess_blind_data/photometry/logs}"
 mkdir -p "$logdir"
 
 sectoruse=$(printf "s%04d" "$sector")
@@ -175,7 +175,8 @@ rms_jobs=()
 for camccd in "${available_camccds[@]}"; do
     cam=${camccd%%:*}
     ccd=${camccd##*:}
-    rms_job=$(sbatch --parsable "$script_dir/make_rms_sbatch.sh" "$sector" "$cam" "$ccd" "$orbit")
+    rms_job=$(sbatch --parsable --output="${logdir}/%x.o%j" --error="${logdir}/%x.e%j" \
+        "$script_dir/make_rms_sbatch.sh" "$sector" "$cam" "$ccd" "$orbit")
     echo "  daily_rms cam${cam}_ccd${ccd}: $rms_job"
     rms_jobs+=("$rms_job")
 done
@@ -187,7 +188,8 @@ source_jobs=()
 for camccd in "${available_camccds[@]}"; do
     cam=${camccd%%:*}
     ccd=${camccd##*:}
-    source_job=$(sbatch --parsable --array=0-0 "$script_dir/source.sbatch" "$sector" "$cam" "$ccd" "$orbit")
+    source_job=$(sbatch --parsable --array=0-0 --output="${logdir}/%x.o%A_%a" --error="${logdir}/%x.e%A_%a" \
+        "$script_dir/source.sbatch" "$sector" "$cam" "$ccd" "$orbit")
     echo "  source cam${cam}_ccd${ccd}: $source_job"
     source_jobs+=("$source_job")
 done
@@ -276,7 +278,8 @@ done
 
 echo ""
 echo "[5/6] Running $orbit analysis/plot generation..."
-analysis_job=$(sbatch --parsable --cpus-per-task="$ANALYSIS_CPUS" "$script_dir/analysis.sbatch" "$sector" "$orbit")
+analysis_job=$(sbatch --parsable --cpus-per-task="$ANALYSIS_CPUS" --output="${logdir}/%x.o%j" \
+    --error="${logdir}/%x.e%j" "$script_dir/analysis.sbatch" "$sector" "$orbit")
 echo "  analysis job ID: $analysis_job"
 wait_for_jobs "analysis" "$analysis_job"
 

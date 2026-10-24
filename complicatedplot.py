@@ -34,7 +34,7 @@ parser.add_argument("--sector", type=int, required=True)
 parser.add_argument("--N", type=int, default=4)
 parser.add_argument("--rmsthresh", type=float, default=100.0)
 parser.add_argument("--orbit", default=None, help="Optional orbit filter, e.g. o1b")
-parser.add_argument("--data-dir", default=os.environ.get("DATA_DIR", "/lustre/work/nmcclur/tess_blind_data/tica"))
+parser.add_argument("--data-dir", default=os.environ.get("DATA_DIR", "/lustre/work/nimcclur/tess_blind_data/tica"))
 args = parser.parse_args()
 
 cam = int(args.photfile.replace("/phot.data", "").split("/")[-1][3])

@@ -20,9 +20,9 @@ Download and subtract the FFIs yourself (same code as the local version) under
 SLURM, instead of relying on someone else's ISIS products. Everything lives in
 one folder, laid out like the local D:\tess_blind_data:
 
-/lustre/work/nmcclur/tess_blind_data/tica        upstream products
-/lustre/work/nmcclur/tess_blind_data/raw_cache   downloads (deleted per slice)
-/lustre/work/nmcclur/tess_blind_data/photometry  sector*/ results; logs/ inside
+/lustre/work/nimcclur/tess_blind_data/tica        upstream products
+/lustre/work/nimcclur/tess_blind_data/raw_cache   downloads (deleted per slice)
+/lustre/work/nimcclur/tess_blind_data/photometry  sector*/ results; logs/ inside
 
 /lustre/work has a quota: each half-orbit's difference images are deleted once
 it is analysed (PURGE_IMAGES=1), and upstream checks the quota before starting

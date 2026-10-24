@@ -40,7 +40,7 @@ def sbatchARRAYbones(arraysize, cmdlist, jobname):
 
 source ~/setup_vars.sh
 
-folders=($(eval "ls -d /lustre/work/nmcclur/tess_blind_data/tica/s{sector:04}/cam{cam}-ccd{ccd}/o??/slice*/"))
+folders=($(eval "ls -d /lustre/work/nimcclur/tess_blind_data/tica/s{sector:04}/cam{cam}-ccd{ccd}/o??/slice*/"))
 for i in {{1..{arraysize}}}
 do
   if [[ $((i%50)) -eq $SLURM_ARRAY_TASK_ID ]]
@@ -110,7 +110,7 @@ os.chdir(dhome)
 with open(f"phot_s{sector:04}_cam{cam}-ccd{ccd}.sbatch","w") as f:
     f.write(phot2BATCHfile)
                     
-cmdlist = ["""source /home/nmcclur/scratch/rms_testing/do_phot_em2.sh""","""set +euo""",f"""copy_phot {sector:02} {cam} {ccd}""",f"""clean_phot {sector:02} {cam} {ccd}"""]
+cmdlist = ["""source /home/nimcclur/scratch/rms_testing/do_phot_em2.sh""","""set +euo""",f"""copy_phot {sector:02} {cam} {ccd}""",f"""clean_phot {sector:02} {cam} {ccd}"""]
 copycleanBATCHfile = sbatchBONES(cmdlist,"copyclean")
 with open(f"copyclean_s{sector:04}_cam{cam}-ccd{ccd}.sbatch","w") as f:
     f.write(copycleanBATCHfile)
