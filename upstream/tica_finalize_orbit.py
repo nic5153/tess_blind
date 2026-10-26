@@ -61,8 +61,10 @@ median_noise = float(np.nanmedian(noise)) if np.isfinite(noise).any() else np.na
 kept, excluded = [], []
 for name, (tjd, qual, conv_std, kscale) in frames.items():
     reasons = []
-    if qual & mask:
-        reasons.append(f"QUAL_BIT={qual}")
+    if qual & (1 << 30):  # set by tica_process_slice.py, not by TICA
+        reasons.append("mostly missing pixels")
+    if (qual & ~(1 << 30)) & mask:
+        reasons.append(f"QUAL_BIT={qual & ~(1 << 30)}")
     if np.isfinite(conv_std) and conv_std > max_noise * median_noise:
         reasons.append(f"conv_std={conv_std:.0f}>{max_noise:g}x{median_noise:.0f}")
     if np.isfinite(kscale) and abs(kscale - 1.0) > max_kdev:

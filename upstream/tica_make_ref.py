@@ -69,6 +69,12 @@ for name in candidates:
     if int(hdr.get("QUAL_BIT", 0)) != 0:
         print(f"  skip {name}: QUAL_BIT={hdr.get('QUAL_BIT')}")
         continue
+    # Frames with missing (non-finite) pixels look deceptively low-background
+    # and break Background2D; TICA does not always flag them.
+    finite = tc.finite_fraction(data)
+    if finite < tc.env_float("REF_MIN_FINITE", 0.99):
+        print(f"  skip {name}: only {100 * finite:.1f}% of science pixels are finite")
+        continue
     sci = data[tc.SCI_Y, tc.SCI_X][::8, ::8]
     _, med, _ = sigma_clipped_stats(sci, sigma=3.0)
     levels.append((med, name))
@@ -83,11 +89,17 @@ _, grid_hdr, _, _ = tc.load_frame(os.path.join(cache, grid_name), q)
 grid_wcs = tc.frame_wcs(grid_hdr)
 stack = []
 for name in chosen:
-    data, hdr, _, _ = tc.load_frame(os.path.join(cache, name), q)
-    bkg, _, _ = tc.science_background(data)
-    dx, dy = tc.wcs_shift(grid_wcs, tc.frame_wcs(hdr))
-    stack.append(tc.register(data - bkg, dx, dy))
+    try:
+        data, hdr, _, _ = tc.load_frame(os.path.join(cache, name), q)
+        bkg, _, _ = tc.science_background(data)
+        dx, dy = tc.wcs_shift(grid_wcs, tc.frame_wcs(hdr))
+        stack.append(tc.register(data - bkg, dx, dy))
+    except Exception as exc:  # one bad frame should not sink the reference
+        print(f"  skip {name}: {type(exc).__name__}: {exc}")
+        continue
     print(f"  {name}: shift=({dx:+.3f},{dy:+.3f}) px")
+if len(stack) < 3:
+    raise SystemExit(f"ERROR: only {len(stack)} usable reference frames")
 ref = np.median(np.array(stack), axis=0).astype(np.float32)
 del stack
 mask = np.zeros(ref.shape, bool)

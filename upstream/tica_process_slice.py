@@ -107,6 +107,14 @@ def prepare(name):
     path = tc.fetch_frame(args.sector, args.cam, args.ccd, name, cache)
     keep_fz = os.path.join(cache, name + ".fz") if (q is not None and keep_raw) else None
     data, hdr, raw_b, stored_b = tc.load_frame(path, q, keep_fz)
+    # Missing (non-finite) pixels: fill with the sky so registration and the
+    # kernel fit survive, zero them in the difference image below, and flag a
+    # frame that is mostly missing so it stays out of the RMS images.
+    finite = tc.finite_fraction(data)
+    badpix = tc.fill_nonfinite(data)
+    qual = int(hdr.get("QUAL_BIT", 0))
+    if finite < tc.env_float("MIN_FINITE_FRAC", 0.9):
+        qual |= 1 << 30
     dx, dy = tc.wcs_shift(ref_wcs, tc.frame_wcs(hdr))
     interp = tc.register(data, dx, dy)
     img = interp.copy()
@@ -117,7 +125,8 @@ def prepare(name):
         "interp": interp if interp_mode == "full" else None,
         "dx": dx, "dy": dy, "bkg_med": float(np.median(sky_mesh)),
         "raw_bytes": raw_b, "stored_bytes": stored_b,
-        "qual": int(hdr.get("QUAL_BIT", 0)), "tjd": float(hdr["STARTTJD"]),
+        "badpix": badpix if badpix.any() else None, "finite": finite,
+        "qual": qual, "tjd": float(hdr["STARTTJD"]),
     }
 
 
@@ -201,10 +210,19 @@ with tarfile.open(tar_tmp, "w") as tar:
     for i, f in enumerate(frames):
         diff, scale = difference(i)
         diff[~sci_mask] = 0.0
-        dbkg, _, diff_rms, diff_mesh = tc.science_background(diff, box=diff_box, return_mesh=True)
+        try:
+            dbkg, _, diff_rms, diff_mesh = tc.science_background(diff, box=diff_box, return_mesh=True)
+        except ValueError as exc:  # e.g. a frame Background2D cannot model at all
+            print(f"WARNING: {f['name']}: difference background failed ({exc}); frame flagged")
+            dbkg = np.zeros_like(diff)
+            diff_rms = float("nan")
+            diff_mesh = np.zeros((1, 1), np.float32)
+            f["qual"] |= 1 << 30
         diff -= dbkg
         diff[~sci_mask] = 0.0
         badcols = tc.clean_columns(diff) if col_clean else []
+        if f["badpix"] is not None:
+            diff[f["badpix"]] = 0.0
         _, _, resid = sigma_clipped_stats(diff[tc.SCI_Y, tc.SCI_X][::4, ::4], sigma=3.0)
 
         hdr = tc.replace_wcs(f["hdr"], ref_wcs_hdr)
@@ -215,6 +233,7 @@ with tarfile.open(tar_tmp, "w") as tar:
         hdr["SHIFTY"] = (round(f["dy"], 4), "y shift onto reference grid [pix]")
         hdr["BKGMED"] = (round(f["bkg_med"], 3), "median sky level of the frame [e-]")
         hdr["DIFFRMS"] = (round(diff_rms, 3), "median Background2D rms of difference [e-]")
+        hdr["FINITE"] = (round(f["finite"], 5), "fraction of finite science pixels in frame")
         if q is not None:
             hdr["COMPQ"] = (q, "fpack-style RICE quantize level applied")
 

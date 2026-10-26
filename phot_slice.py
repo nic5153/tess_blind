@@ -117,7 +117,7 @@ def annulus_flux(image, sel, model):
         yy, xx = np.mgrid[iy - r:iy + r + 1, ix - r:ix + r + 1]
         rad = np.hypot(xx - x, yy - y)
         ann = image[iy - r:iy + r + 1, ix - r:ix + r + 1][(rad >= bkg_rin) & (rad <= bkg_rout)]
-        ann = ann[np.isfinite(ann)]
+        ann = ann[np.isfinite(ann) & (ann != 0.0)]  # exact zeros: masked/missing pixels
         if ann.size < 10:
             continue
         med = np.median(ann)
@@ -133,6 +133,19 @@ def annulus_flux(image, sel, model):
     return flux, err
 
 
+def touches_masked(image, sel):
+    """True where a source's fit box contains exact zeros: pixels the upstream
+    step zeroed (missing data, noisy bleed/smear columns, outside the science
+    area). A real difference-image pixel is essentially never exactly 0."""
+    h = fit_size // 2
+    out = np.zeros(sel.sum(), bool)
+    for k, (x, y) in enumerate(zip(xs[sel], ys[sel])):
+        ix, iy = int(round(x)), int(round(y))
+        box = image[max(iy - h, 0):iy + h + 1, max(ix - h, 0):ix + h + 1]
+        out[k] = box.size == 0 or bool(np.any(box == 0.0))
+    return out
+
+
 def photometer(image, error, sel, model):
     phot = PSFPhotometry(model, (fit_size, fit_size), aperture_radius=aper)
     init = Table({"x": xs[sel], "y": ys[sel]})
@@ -141,7 +154,12 @@ def photometer(image, error, sel, model):
         res = phot(image, error=error, init_params=init)
     flux = np.asarray(res["flux_fit"], float)
     qfit = np.asarray(res["qfit"], float) if "qfit" in res.colnames else np.full(len(flux), np.nan)
-    return flux, formal_errors(error, sel, model), qfit
+    err = formal_errors(error, sel, model)
+    # No fake values from masked pixels: NaN for that frame (plots drop NaN rows).
+    masked = touches_masked(image, sel)
+    flux[masked] = np.nan
+    err[masked] = np.nan
+    return flux, err, qfit
 
 
 rows = {n: [] for n in names}

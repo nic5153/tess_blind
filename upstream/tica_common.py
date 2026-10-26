@@ -184,6 +184,21 @@ def load_frame(path, q=None, keep_compressed=None):
     return data, header, raw_bytes, stored_bytes
 
 
+def finite_fraction(data):
+    """Fraction of science pixels that are finite."""
+    return float(np.isfinite(data[SCI_Y, SCI_X]).mean())
+
+
+def fill_nonfinite(data):
+    """Replace non-finite pixels with the frame's median sky, in place, so
+    registration and fitting are not poisoned. Returns the mask of filled pixels."""
+    bad = ~np.isfinite(data)
+    if bad.any():
+        good = data[SCI_Y, SCI_X][~bad[SCI_Y, SCI_X]]
+        data[bad] = np.median(good) if good.size else 0.0
+    return bad
+
+
 def frame_wcs(header):
     import warnings
 
