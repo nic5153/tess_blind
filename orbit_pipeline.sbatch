@@ -325,10 +325,11 @@ bash "$script_dir/save_orbit_results.sh" "$sector" "$orbit"
 
 # Download-process-delete (local runs): once this orbit is analysed, the
 # difference-image tarballs (~18 MB per frame) are no longer needed. With
-# PURGE_IMAGES=1 (setup_vars_local.sh default; off on HPCC) delete them and mark
-# the orbit .purged so later runs skip it. dates, .quality/.stats.tsv,
-# rms_list_tica, the reference, and everything under sector*/ are kept. To
-# rebuild an orbit: delete its .purged file and rerun upstream with FORCE=1.
+# PURGE_IMAGES=1 (default in both setup_vars files) delete them, merge the slice
+# metadata into slice_all/, and mark the orbit .purged so later runs skip it.
+# dates, .quality/.stats.tsv (merged), rms_list_tica, the reference, and
+# everything under sector*/ are kept. To rebuild an orbit: delete its .purged
+# file and slice_all/ and rerun upstream.
 if [[ "${PURGE_IMAGES:-0}" == "1" ]]; then
     echo ""
     echo "[purge] Deleting $orbit difference-image tarballs (PURGE_IMAGES=1)..."
@@ -351,9 +352,21 @@ if [[ "${PURGE_IMAGES:-0}" == "1" ]]; then
         fi
         before=$(df -Pk "$orbit_dir" | awk 'NR==2 {print $4}')
         rm -f "$orbit_dir"/slice*/images.tar
+        # Each slice still holds ~8 small files/dirs (dates, .quality, .stats.tsv,
+        # .done, lc dirs): ~200k inodes per sector. Merge the metadata into one
+        # slice_all/ (still matched by the slice*/dates globs) and drop the rest.
+        keep="$orbit_dir/slice_all"
+        mkdir -p "$keep"
+        cat "$orbit_dir"/slice[0-9]*/dates > "$keep/dates" 2>/dev/null || true
+        cat "$orbit_dir"/slice[0-9]*/.quality > "$keep/.quality" 2>/dev/null || true
+        first_stats=$(ls "$orbit_dir"/slice[0-9]*/.stats.tsv 2>/dev/null | head -1)
+        if [[ -n "$first_stats" ]]; then
+            { head -1 "$first_stats"; tail -q -n +2 "$orbit_dir"/slice[0-9]*/.stats.tsv; } > "$keep/.stats.tsv"
+        fi
+        rm -rf "$orbit_dir"/slice[0-9]*
         touch "$orbit_dir/.purged"
         after=$(df -Pk "$orbit_dir" | awk 'NR==2 {print $4}')
-        echo "  cam${cam}_ccd${ccd}/$orbit: freed ~$(( (after - before) / 1024 / 1024 )) GB"
+        echo "  cam${cam}_ccd${ccd}/$orbit: freed ~$(( (after - before) / 1024 / 1024 )) GB; slice metadata merged into slice_all/"
     done
 fi
 

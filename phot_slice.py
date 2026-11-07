@@ -2,12 +2,17 @@
 PSFPhotometry with the per-tile ePSFs from upstream/tica_make_epsf.py) on the
 difference images of one slice, at the positions in the orbit's phot.data.
 
-Called by do_phot_em2.sbatch when PHOT_BACKEND=python. Writes, like phot2,
+Called by do_phot_em2.sbatch when PHOT_BACKEND=python. Unlike phot2, which
+wrote one small file per candidate per slice (2 x candidates x slices files,
+enough to exceed an HPCC file-count quota), it writes two files per slice:
 
-    <slice>/<lcdir>/lc_*.txt            difference-image light curves
-    <slice>/bkg_phot/<lcdir>/lc_*.txt   background light curves
+    <slice>/<lcdir>/lc_combined.tsv            difference-image photometry
+    <slice>/bkg_phot/<lcdir>/lc_combined.tsv   background photometry
 
-one row per frame, in the column layout the downstream scripts read:
+each line "<lc file name> <columns>". collect_phot.py (run by
+copy_phot_em2.sbatch) appends them to the usual per-candidate light curves
+sector*/camC_ccdD/<lcdir>/lc_*.txt and bkg_phot/<lcdir>/lc_*.txt, with one
+row per frame in the column layout the downstream scripts read:
 
     0  time [TJD, exposure start, from the slice's dates file]
     1  difference flux [e-], ISIS sign (reference minus image: brightening < 0)
@@ -202,7 +207,9 @@ with tarfile.open(os.path.join(slice_dir, "images.tar"), "r") as tar:
 for subdir, table in ((args.lcdir, rows), (os.path.join("bkg_phot", args.lcdir), bkg_rows)):
     outdir = os.path.join(slice_dir, subdir)
     os.makedirs(outdir, exist_ok=True)
-    for n, lines in table.items():
-        with open(os.path.join(outdir, n), "w") as f:
-            f.writelines(lines)
-print(f"phot_slice: {len(names)} sources x {len(frames)} frames -> {slice_dir}/{args.lcdir}")
+    tmp = os.path.join(outdir, "lc_combined.tsv.part")
+    with open(tmp, "w") as f:
+        for n, lines in table.items():
+            f.writelines(f"{n} {line}" for line in lines)
+    os.replace(tmp, os.path.join(outdir, "lc_combined.tsv"))
+print(f"phot_slice: {len(names)} sources x {len(frames)} frames -> {slice_dir}/{args.lcdir}/lc_combined.tsv")

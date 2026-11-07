@@ -29,6 +29,19 @@ echo "sector use: $sectoruse  cam: $cam  ccd: $ccd  orbit: $o  lcdir: $lcdir"
 mkdir -p "$dhome/sector${sector}/cam${cam}_ccd${ccd}/$lcdir"
 mkdir -p "$dhome/sector${sector}/cam${cam}_ccd${ccd}/bkg_phot/$lcdir"
 
+# Python photometry (PHOT_BACKEND=python) writes one lc_combined.tsv per slice
+# instead of a file per candidate; one task merges them into the light curves.
+if [[ "${PHOT_BACKEND:-isis}" == "python" ]]; then
+    if [[ "${SLURM_ARRAY_TASK_ID:-0}" != "${SLURM_ARRAY_TASK_MIN:-0}" ]]; then
+        echo "python photometry: array task ${SLURM_ARRAY_TASK_MIN:-0} collects all slices"
+        exit 0
+    fi
+    python "${TESS_CODE_DIR:-$dhome}/collect_phot.py" \
+        --orbit-dir "$duse/$sectoruse/cam${cam}-ccd${ccd}/$o" \
+        --outdir "$dhome/sector${sector}/cam${cam}_ccd${ccd}" --lcdir "$lcdir"
+    exit $?
+fi
+
 
 mapfile -t folders < <(ls -d "$duse/$sectoruse/cam${cam}-ccd${ccd}/$o/slice"*)
 nelements=${#folders[@]}
