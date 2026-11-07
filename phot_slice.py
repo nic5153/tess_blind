@@ -60,6 +60,13 @@ orbit_dir = os.path.dirname(slice_dir)
 ccd_dir = os.path.dirname(orbit_dir)
 photfile = args.photfile or os.path.join(orbit_dir, "phot.data")
 
+# PHOT_RESUME=1 (orbit_pipeline resume): keep a slice already measured.
+done_files = [os.path.join(slice_dir, sub, "lc_combined.tsv")
+              for sub in (args.lcdir, os.path.join("bkg_phot", args.lcdir))]
+if os.environ.get("PHOT_RESUME") == "1" and all(os.path.exists(p) for p in done_files):
+    print(f"phot_slice: {slice_dir} already measured; skipping (PHOT_RESUME=1)")
+    raise SystemExit(0)
+
 names, xs, ys = [], [], []
 with open(photfile) as f:
     for line in f:

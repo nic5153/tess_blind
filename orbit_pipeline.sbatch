@@ -213,17 +213,21 @@ for camccd in "${available_camccds[@]}"; do
     echo "  Preparing cam${cam}_ccd${ccd} $orbit"
     cp "$local_camccd/phot.data" "$orbit_dir/phot.data"
 
-    # Clear only this orbit's per-slice temporary LC products before rerunning it.
-    for slice_dir in "$orbit_dir"/slice*; do
-        [[ -d "$slice_dir" ]] || continue
-        clean_lc_contents "$slice_dir/$lcdir"
-        clean_lc_contents "$slice_dir/bkg_phot/$lcdir"
-    done
+    # Clear only this orbit's per-slice temporary LC products before rerunning
+    # it, unless resuming (PHOT_RESUME=1: keep slices whose photometry is
+    # complete, measure only the missing ones, then merge).
+    if [[ "${PHOT_RESUME:-0}" != "1" ]]; then
+        for slice_dir in "$orbit_dir"/slice*; do
+            [[ -d "$slice_dir" ]] || continue
+            clean_lc_contents "$slice_dir/$lcdir"
+            clean_lc_contents "$slice_dir/bkg_phot/$lcdir"
+        done
+    fi
 
     do_job=$(sbatch \
         --parsable \
         --array="$DO_PHOT_ARRAY" \
-        --time=0-00:30:00 \
+        --time="${DO_PHOT_TIME:-0-04:00:00}" \
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
         "$script_dir/do_phot_em2.sbatch" \
@@ -233,7 +237,7 @@ for camccd in "${available_camccds[@]}"; do
     copy_job=$(sbatch \
         --parsable \
         --array="$COPY_PHOT_ARRAY" \
-        --time=0-01:30:00 \
+        --time="${COPY_PHOT_TIME:-0-04:00:00}" \
         --output="${logdir}/%x.o%A_%a" \
         --error="${logdir}/%x.e%A_%a" \
         --dependency=afterany:"$do_job" \
